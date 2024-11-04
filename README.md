@@ -36,8 +36,8 @@ Vétérinaire: Son espace permet de remplir un rapport sur l'etat d'un animal, D
 
 -[Node.js] (https://nodejs.org/)
 -[Git](https://git-scm.com/)
--[Symfony](https://symfony.com) (version 
--[composer](https://getcomposer.org) 
+-[Symfony](https://symfony.com) (version 7.1)
+-[composer](https://getcomposer.org) (version 2.7.9)
 
 ### Etapes d'installations
 
@@ -64,8 +64,10 @@ cd Arcadia
       
 3. Configurer les variables d'envrionnement
 
-   
+   Modifier le fichier .env de Symfony en y ajoutant les variables nécessaire (URL de la base de donnée local)
 
+4. Lancer le serveur
 
+Taper "symfony server:start" sur le terminal de votre éditeur de code
 
 
