@@ -61,13 +61,21 @@ cd Arcadia
    ouvrez votre cmd et taper: "symfony new my_project_directory --version="7.1.*" "
 
    Front end:
+   - Initialiser NPM (npm install -g npm) et installer node.js(https://nodejs.org/en)
+   - Tapper les commandes de configuration de react(et Boostrap(npm i bootstrap@5.3.3)
+
+   
       
-3. Configurer les variables d'envrionnement
+4. Configurer les variables d'envrionnement
 
    Modifier le fichier .env de Symfony en y ajoutant les variables nécessaire (URL de la base de donnée local)
 
-4. Lancer le serveur
+5. Lancer le serveur
 
-Taper "symfony server:start" sur le terminal de votre éditeur de code
+Taper "symfony server:start" sur le terminal de votre éditeur de code pour avoir l'application en local
+
+###Utilisation
+
+
 
 
