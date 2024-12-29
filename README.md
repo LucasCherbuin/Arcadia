@@ -76,6 +76,64 @@ Taper "symfony server:start" sur le terminal de votre éditeur de code pour avoi
 
 ###Utilisation
 
+En tant que Visiteur
 
+- Parcourir les différents pages vitrines du sites
+- Promouvoir un avis aini qu'un demande de contact
 
+En tant qu'Admin
 
+- gestion Des données sous formes de CRUD (Utilisateur, animaux, habitats, horaires et service)
+- Consultation de dashboards comme le nombre de consultation d'un animal par un visiteur ainsi que les rapports vétérinaires
+
+En tant qu'Employé
+
+- Valider les avis soumis par les visiteurs
+- Indiquer le repas d'un animal en précisant son grammage ainsi que la date et l'heure indiquée
+- modifier les services du zoo
+
+En tant que Vétérinaire
+
+- Rendre un comptre rendu des animaux traités
+- Commenter un habitat si son état devrait être amélioré
+- Consulter les saisies des employés sur l'alimentation des animaux
+
+###Fonctionnalité 
+
+- Connexion utilisateur
+- Affichage d'articles (animaux, habitat, services
+- Utilisation de formulaires pour les différents acteurs
+- Tableau de bord pour suivre des statistiques et informtations
+
+###Structure du projet
+
+  config/
+     Package
+     routes
+     bundle
+     routes.yaml
+     service.yaml
+
+  src/
+     Controller
+     Entity
+     EventSubscriber
+     Form
+     Repository 
+     Twig
+  templates/ 
+     admin
+     employee
+     Pages_visiteurs
+     security
+     veterinaire
+     header.footer.html.twig
+###contribution
+
+   Pour contribuer au projet:
+
+   1. Forker le dépot
+   2. Cloner le fork localement
+   3. REALISER LES CONTRIBUTIONS SUR LES BRANCHES
+      exemple: git checkout -b feature/(nomDeLaFonctionnalité)
+      
