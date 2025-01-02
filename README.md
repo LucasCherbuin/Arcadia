@@ -1,7 +1,12 @@
-Aracadia
+Voici la version modifiée où **React** a été remplacé par **Bootstrap** :  
 
-Site web servant de vitrine pour le zoo Arcida ainsi que des espaces Utilisateurs pour la gestion des différents services du zoo et taches des metier.
+---
 
+# **Arcadia Zoo**
+
+Site web servant de vitrine pour le zoo Arcadia, offrant également des espaces utilisateurs pour la gestion des différents services et tâches associées au fonctionnement du zoo.
+
+## **Table des matières**
 - [Aperçu du projet](#aperçu-du-projet)
 - [Technologies utilisées](#technologies-utilisées)
 - [Installation](#installation)
@@ -12,128 +17,153 @@ Site web servant de vitrine pour le zoo Arcida ainsi que des espaces Utilisateur
 - [Licence](#licence)
 - [Auteurs](#auteurs)
 
-##appercue du projet
+---
 
-Le site web permet aux visiteurs de consulter les animaux et habitats du zoo et peux interagir avec le personnel via un formulaire de contact ou en laissant un avis.
-Du coté espace utilisateur, Ces derniers sont triés en 3 types: 
+## **Aperçu du projet**
 
-Admin: Il peut créer les utilisateurs en dessous, intéragire avec des entités sous form de CRUD, avoir un compte rendu des différents rapport du vétérinaire et consulter un dashboard avec un statistique sur le nombre de consulation dun animal.
+Le site web permet :
+- Aux visiteurs : de consulter les animaux et habitats du zoo, et d'interagir avec le personnel via un formulaire de contact ou en laissant un avis.
+- Aux utilisateurs connectés (administrateurs, employés et vétérinaires) : de gérer leurs tâches spécifiques via des espaces dédiés.
 
-Employé: Ses fontions permettent de vakider un avis d'un visiteur ou non. modifier un service et, le plus important, remplir un formulaire sur la consommation faite d'un animal en y indiquant la quantité fournie ainsi de la date de passage.
+### **Rôles des utilisateurs**
+- **Admin :** Gère les utilisateurs et les entités (CRUD), consulte des rapports vétérinaires et visualise des statistiques via un tableau de bord.
+- **Employé :** Valide les avis des visiteurs, enregistre les repas des animaux et gère les services du zoo.
+- **Vétérinaire :** Remplit des rapports sur les animaux, évalue les habitats, et consulte les données d'alimentation saisies par les employés.
 
-Vétérinaire: Son espace permet de remplir un rapport sur l'etat d'un animal, Donner son avis sur l'etat d'un Habitat, il a aussi un espace sur les informations de l'animal notamment du repas donnée par l'employé
+---
 
-##Technologie utilisée
+## **Technologies utilisées**
 
-- Front End: React, CSS, JavaScript
-- Back-end: PHP, Symfony
-- Base de données: MySQL
-- Maquettages: FE: Figma BE:  BDD:
+### **Front-end**
+- **Bootstrap :** Bootstrap simplifie le développement des interfaces avec des composants prêts à l’emploi et un design responsive natif.
 
-##Installation pour serveur local
+- **CSS et JavaScript :** Utilisés pour les styles et l’interactivité complémentaire au framework Bootstrap.
 
-### Prérequis
+### **Back-end**
+- **PHP** avec Symfony 7.1 :** Symfony offre une structure bien définie, une gestion simplifiée des dépendances via Composer, et une intégration native des outils de sécurité comme les jetons CSRF.
 
--[Node.js] (https://nodejs.org/)
--[Git](https://git-scm.com/)
--[Symfony](https://symfony.com) (version 7.1)
--[composer](https://getcomposer.org) (version 2.7.9)
+### **Base de données**
+- **MySQL :** MySQL est compatible avec Symfony, offre des performances optimales et est facile à gérer via des outils comme phpMyAdmin.
 
-### Etapes d'installations
+### **Outils de maquettage**
+- **Figma :** Utilisé pour créer des maquettes interactives de l'interface utilisateur, facilitant ainsi la collaboration avec les parties prenantes.
+- **PantUML :** Outil en ligne me permantant de maquetter les différents shémas et séquences coté Back End.
 
-1. Clonez le dépôt :
-'''bash
-git clone https://github.com/LucasCherbuin/Arcadia
-cd Arcadia
-'''
+---
 
-2. Installez les dépendances Front end et Back end
+## **Installation pour serveur local**
 
-   back end:
-   [composer]
-   - Installer XAMPP pour avoiR php 8.2
-   - Télécharger les dépendances de Composer(https://getcomposer.org/Composer-Setup.exe)
-   - Dans la fenêtre php qui s'ouvre, spécifier le chemin avec C:/xampp/php/php.exe
-   - Appuyez sur ctrl + r , écrivez "cmd" puis ok
-   - Taper la commande "composer"
-   
-   [symfony]
-   ouvrez votre cmd et taper: "symfony new my_project_directory --version="7.1.*" "
+### **Prérequis**
+- [Node.js](https://nodejs.org/)
+- [Git](https://git-scm.com/)
+- [Symfony](https://symfony.com) (version 7.1)
+- [Composer](https://getcomposer.org) (version 2.7.9)
+- **XAMPP** : Serveur local pour exécuter PHP et MySQL.
 
-   Front end:
-   - Initialiser NPM (npm install -g npm) et installer node.js(https://nodejs.org/en)
-   - Tapper les commandes de configuration de react(et Boostrap(npm i bootstrap@5.3.3)
+### **Étapes d'installation**
 
-   
-      
-4. Configurer les variables d'envrionnement
+1. **Cloner le dépôt :**
+   ```bash
+   git clone https://github.com/LucasCherbuin/Arcadia
+   cd Arcadia
+   ```
 
-   Modifier le fichier .env de Symfony en y ajoutant les variables nécessaire (URL de la base de donnée local)
+2. **Installer les dépendances :**
+   - **Back-end :**
+     - Installer Composer et Symfony, puis exécuter :
+       ```bash
+       composer install
+       ```
+   - **Front-end :**
+     - Inclure Bootstrap dans le projet :
+       ```bash
+       npm install bootstrap@5.3.3
+       ```
 
-5. Lancer le serveur
+3. **Configurer les variables d'environnement :**
+   - Modifier le fichier `.env` de Symfony avec l'URL de la base de données locale.
 
-Taper "symfony server:start" sur le terminal de votre éditeur de code pour avoir l'application en local
+4. **Lancer le serveur :**
+   - Exécuter la commande suivante dans votre terminal :
+     ```bash
+     symfony server:start
+     ```
 
-###Utilisation
+---
 
-En tant que Visiteur
+## **Utilisation**
 
-- Parcourir les différents pages vitrines du sites
-- Promouvoir un avis aini qu'un demande de contact
+### En tant que visiteur
+- Parcourir les pages vitrines du site.
+- Soumettre un avis ou une demande de contact.
 
-En tant qu'Admin
+### En tant qu'administrateur
+- Gérer les utilisateurs, les animaux, les habitats, les services et les horaires.
+- Consulter les statistiques et rapports vétérinaires.
 
-- gestion Des données sous formes de CRUD (Utilisateur, animaux, habitats, horaires et service)
-- Consultation de dashboards comme le nombre de consultation d'un animal par un visiteur ainsi que les rapports vétérinaires
+### En tant qu'employé
+- Valider les avis des visiteurs.
+- Enregistrer les repas des animaux.
+- Modifier les services.
 
-En tant qu'Employé
+### En tant que vétérinaire
+- Remplir des rapports sur les animaux.
+- Évaluer l'état des habitats.
+- Consulter les données d'alimentation.
 
-- Valider les avis soumis par les visiteurs
-- Indiquer le repas d'un animal en précisant son grammage ainsi que la date et l'heure indiquée
-- modifier les services du zoo
+---
 
-En tant que Vétérinaire
+## **Fonctionnalités**
+- Connexion utilisateur avec des rôles spécifiques.
+- Gestion des données via des formulaires adaptés à chaque rôle.
+- Tableau de bord statistique.
+- Système sécurisé pour gérer les interactions utilisateurs.
 
-- Rendre un comptre rendu des animaux traités
-- Commenter un habitat si son état devrait être amélioré
-- Consulter les saisies des employés sur l'alimentation des animaux
+---
 
-###Fonctionnalité 
+## **Structure du projet**
 
-- Connexion utilisateur
-- Affichage d'articles (animaux, habitat, services
-- Utilisation de formulaires pour les différents acteurs
-- Tableau de bord pour suivre des statistiques et informtations
+```
+Arcadia/
+│
+├── config/           # Configuration des routes et services
+├── src/              # Code source principal
+│   ├── Controller/   # Contrôleurs Symfony
+│   ├── Entity/       # Entités Doctrine
+│   ├── Form/         # Formulaires Symfony
+│   ├── Repository/   # Requêtes spécifiques à la base de données
+│   └── Twig/         # Templates Twig
+├── templates/        # Vues front-end
+│   ├── admin/        # Pages administratives
+│   ├── employee/     # Pages employé
+│   ├── veterinaire/  # Pages vétérinaire
+│   └── security/     # Pages de connexion et sécurité
+└── public/           # Fichiers accessibles publiquement
+```
 
-###Structure du projet
+---
 
-  config/
-     Package
-     routes
-     bundle
-     routes.yaml
-     service.yaml
+## **Contributions**
 
-  src/
-     Controller
-     Entity
-     EventSubscriber
-     Form
-     Repository 
-     Twig
-  templates/ 
-     admin
-     employee
-     Pages_visiteurs
-     security
-     veterinaire
-     header.footer.html.twig
-###contribution
+Pour contribuer :
+1. Forkez le dépôt.
+2. Clonez le fork localement.
+3. Créez une nouvelle branche pour vos modifications :
+   ```bash
+   git checkout -b feature/nomDeLaFonctionnalité
+   ```
 
-   Pour contribuer au projet:
+---
 
-   1. Forker le dépot
-   2. Cloner le fork localement
-   3. REALISER LES CONTRIBUTIONS SUR LES BRANCHES
-      exemple: git checkout -b feature/(nomDeLaFonctionnalité)
-      
+## **Licence**
+Ce projet est sous licence MIT. Voir le fichier [LICENCE](LICENCE) pour plus de détails.
+
+---
+
+## **Auteurs**
+- Lucas Cherbuin  
+- Contributeurs : Mentionnez-vous dans vos Pull Requests !  
+
+---
+
+Cela reflète l'utilisation de **Bootstrap** comme technologie principale pour le front-end.
