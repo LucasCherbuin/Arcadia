@@ -1,129 +1,141 @@
-Voici la version modifiée où **React** a été remplacé par **Bootstrap** :  
-
----
-
-# **Arcadia Zoo**
+#### Arcadia Zoo ####
 
 Site web servant de vitrine pour le zoo Arcadia, offrant également des espaces utilisateurs pour la gestion des différents services et tâches associées au fonctionnement du zoo.
 
-## **Table des matières**
-- [Aperçu du projet](#aperçu-du-projet)
-- [Technologies utilisées](#technologies-utilisées)
-- [Installation](#installation)
-- [Utilisation](#utilisation)
-- [Fonctionnalités](#fonctionnalités)
-- [Structure du projet](#structure-du-projet)
-- [Contributions](#contributions)
-- [Licence](#licence)
-- [Auteurs](#auteurs)
+### Table des matières ###
 
----
+1. Aperçu du projet
 
-## **Aperçu du projet**
+2. Mise en place de l'environnement de travail
+
+3. Technologies utilisées
+
+4. Installation
+
+5. Utilisation
+
+6. Structure du projet
+
+7. Contributions
+   
+8. Auteur
+
+# 1. Aperçu du projet #
 
 Le site web permet :
-- Aux visiteurs : de consulter les animaux et habitats du zoo, et d'interagir avec le personnel via un formulaire de contact ou en laissant un avis.
-- Aux utilisateurs connectés (administrateurs, employés et vétérinaires) : de gérer leurs tâches spécifiques via des espaces dédiés.
 
-### **Rôles des utilisateurs**
-- **Admin :** Gère les utilisateurs et les entités (CRUD), consulte des rapports vétérinaires et visualise des statistiques via un tableau de bord.
-- **Employé :** Valide les avis des visiteurs, enregistre les repas des animaux et gère les services du zoo.
-- **Vétérinaire :** Remplit des rapports sur les animaux, évalue les habitats, et consulte les données d'alimentation saisies par les employés.
+Aux visiteurs : de consulter les animaux et habitats du zoo, et d'interagir avec le personnel via un formulaire de contact ou en laissant un avis.
 
----
+Aux utilisateurs connectés (administrateurs, employés et vétérinaires) : de gérer leurs tâches spécifiques via des espaces dédiés.
 
-## **Technologies utilisées**
+Rôles des utilisateurs
 
-### **Front-end**
-- **Bootstrap :** Bootstrap simplifie le développement des interfaces avec des composants prêts à l’emploi et un design responsive natif.
+Admin : Gère les utilisateurs et les entités (CRUD), consulte des rapports vétérinaires et visualise des statistiques via un tableau de bord.
 
-- **CSS et JavaScript :** Utilisés pour les styles et l’interactivité complémentaire au framework Bootstrap.
+Employé : Valide les avis des visiteurs, enregistre les repas des animaux et gère les services du zoo.
 
-### **Back-end**
-- **PHP** avec Symfony 7.1 :** Symfony offre une structure bien définie, une gestion simplifiée des dépendances via Composer, et une intégration native des outils de sécurité comme les jetons CSRF.
+Vétérinaire : Remplit des rapports sur les animaux, évalue les habitats, et consulte les données d'alimentation saisies par les employés.
 
-### **Base de données**
-- **MySQL :** MySQL est compatible avec Symfony, offre des performances optimales et est facile à gérer via des outils comme phpMyAdmin.
+# 2. Mise en place de l'environnement de travail #
 
-### **Outils de maquettage**
-- **Figma :** Utilisé pour créer des maquettes interactives de l'interface utilisateur, facilitant ainsi la collaboration avec les parties prenantes.
-- **PantUML :** Outil en ligne me permantant de maquetter les différents shémas et séquences coté Back End.
+L'environnement de travail a été configuré en tenant compte des besoins de développement local et collaboratif :
 
----
+XAMPP : Serveur local pour exécuter PHP et MySQL.
 
-## **Installation pour serveur local**
+Symfony CLI : Pour gérer et démarrer facilement le serveur Symfony.
 
-### **Prérequis**
-- [Node.js](https://nodejs.org/)
-- [Git](https://git-scm.com/)
-- [Symfony](https://symfony.com) (version 7.1)
-- [Composer](https://getcomposer.org) (version 2.7.9)
-- **XAMPP** : Serveur local pour exécuter PHP et MySQL.
+Composer : Pour la gestion des dépendances PHP.
 
-### **Étapes d'installation**
+Node.js et npm : Pour inclure Bootstrap et gérer les dépendances front-end.
 
-1. **Cloner le dépôt :**
-   ```bash
-   git clone https://github.com/LucasCherbuin/Arcadia
-   cd Arcadia
-   ```
+Git : Pour la gestion du versionnement et la collaboration via GitHub.
 
-2. **Installer les dépendances :**
-   - **Back-end :**
-     - Installer Composer et Symfony, puis exécuter :
-       ```bash
-       composer install
-       ```
-   - **Front-end :**
-     - Inclure Bootstrap dans le projet :
-       ```bash
-       npm install bootstrap@5.3.3
-       ```
+Visual Studio Code : IDE choisi pour sa flexibilité, ses extensions dédiées au développement PHP et front-end.
 
-3. **Configurer les variables d'environnement :**
-   - Modifier le fichier `.env` de Symfony avec l'URL de la base de données locale.
+Ces outils assurent un workflow fluide, de la configuration initiale à la maintenance du projet.
 
-4. **Lancer le serveur :**
-   - Exécuter la commande suivante dans votre terminal :
-     ```bash
-     symfony server:start
-     ```
+# 3. Technologies utilisées #
 
----
+## Front-end ##
+Bootstrap :
+Framework open-source sous licence MIT, accessible gratuitement et compatible avec tout type de projet web. Bootstrap offre une bibliothèque de composants et de styles CSS préconçus, ce qui simplifie la création d'interfaces utilisateurs réactives et modernes. Il permet de gagner du temps dans le développement tout en garantissant une expérience utilisateur uniforme sur tous les appareils.
 
-## **Utilisation**
+CSS et JavaScript natifs :
+Langages standard pris en charge par tous les navigateurs modernes sans restrictions de licence. Ces langages sont utilisés pour personnaliser d'avantage les styles et l'interactivité, complétant les fonctionnalités offertes par Bootstrap pour répondre à des besoins spécifiques.
 
-### En tant que visiteur
-- Parcourir les pages vitrines du site.
-- Soumettre un avis ou une demande de contact.
+## Back-end ##
+Symfony 7.1 (PHP) :
+Framework open-source sous licence MIT, bien adapté aux projets commerciaux et non commerciaux. Symfony fournit une structure solide pour le développement back-end, avec des outils intégrés pour la sécurité, les bases de données, et la gestion des API. Il est également largement documenté et soutenu par une communauté active, ce qui facilite la résolution de problèmes.
 
-### En tant qu'administrateur
-- Gérer les utilisateurs, les animaux, les habitats, les services et les horaires.
-- Consulter les statistiques et rapports vétérinaires.
+Composer :
+Conditions d'utilisation : Gestionnaire de dépendances open-source pour PHP, sous licence MIT.
+Pourquoi ce choix : Composer simplifie l'installation et la mise à jour des bibliothèques nécessaires, garantissant ainsi la compatibilité et la cohérence des dépendances tout au long du projet.
 
-### En tant qu'employé
-- Valider les avis des visiteurs.
-- Enregistrer les repas des animaux.
-- Modifier les services.
+Base de données
 
-### En tant que vétérinaire
-- Remplir des rapports sur les animaux.
-- Évaluer l'état des habitats.
-- Consulter les données d'alimentation.
+MySQL :
 
----
+Système de gestion de bases de données open-source sous licence GPL (pour les usages communautaires) ou commerciale. MySQL est performant, fiable, et bien intégré avec Symfony. Il permet de gérer efficacement les relations complexes entre les données tout en offrant une compatibilité avec des outils tels que phpMyAdmin pour une administration simplifiée.
 
-## **Fonctionnalités**
-- Connexion utilisateur avec des rôles spécifiques.
-- Gestion des données via des formulaires adaptés à chaque rôle.
-- Tableau de bord statistique.
-- Système sécurisé pour gérer les interactions utilisateurs.
+## Outils de développement ##
 
----
+XAMPP :
 
-## **Structure du projet**
+Conditions d'utilisation : Distribution gratuite comprenant Apache, PHP, et MySQL.
+Pourquoi ce choix : XAMPP fournit un environnement de serveur local facile à configurer, permettant de tester le site web en local avant son déploiement en production.
 
-```
+Git :
+Système de gestion de version open-source sous licence GPL.
+Git permet un suivi précis des modifications du code, favorise la collaboration entre développeurs, et facilite le déploiement grâce à une intégration fluide avec des plateformes comme GitHub.
+
+## Outils de maquettage et conception ##
+Figma :
+Conditions d'utilisation : Application en ligne gratuite pour des projets de petite envergure, avec des abonnements payants pour des fonctionnalités avancées.
+Figma permet de créer des maquettes interactives, offrant une visualisation claire du design avant le développement, et favorisant la collaboration avec les parties prenantes.
+
+PlantUML :
+Outil open-source pour la création de diagrammes, compatible avec une utilisation locale ou en ligne. PlantUML est utilisé pour concevoir des diagrammes de séquence et d'architecture, facilitant ainsi la planification et la documentation des flux de données dans le projet.
+
+Configurer les variables d'environnement :
+
+Modifier le fichier .env de Symfony avec l'URL de la base de données locale.
+
+Lancer le serveur :
+
+symfony server:start
+
+# 5. Utilisation #
+
+En tant que visiteur
+
+Parcourir les pages vitrines du site.
+
+Soumettre un avis ou une demande de contact.
+
+En tant qu'administrateur
+
+Gérer les utilisateurs, les animaux, les habitats, les services et les horaires.
+
+Consulter les statistiques et rapports vétérinaires.
+
+En tant qu'employé
+
+Valider les avis des visiteurs.
+
+Enregistrer les repas des animaux.
+
+Modifier les services.
+
+En tant que vétérinaire
+
+Remplir des rapports sur les animaux.
+
+Évaluer l'état des habitats.
+
+Consulter les données d'alimentation.
+
+# 6. Structure du projet #
+
 Arcadia/
 │
 ├── config/           # Configuration des routes et services
@@ -139,31 +151,21 @@ Arcadia/
 │   ├── veterinaire/  # Pages vétérinaire
 │   └── security/     # Pages de connexion et sécurité
 └── public/           # Fichiers accessibles publiquement
-```
 
----
-
-## **Contributions**
+# 7. Contributions #
 
 Pour contribuer :
-1. Forkez le dépôt.
-2. Clonez le fork localement.
-3. Créez une nouvelle branche pour vos modifications :
-   ```bash
-   git checkout -b feature/nomDeLaFonctionnalité
-   ```
 
----
+Forkez le dépôt.
 
-## **Licence**
-Ce projet est sous licence MIT. Voir le fichier [LICENCE](LICENCE) pour plus de détails.
+Clonez le fork localement.
 
----
+Créez une nouvelle branche pour vos modifications :
 
-## **Auteurs**
-- Lucas Cherbuin  
-- Contributeurs : Mentionnez-vous dans vos Pull Requests !  
+git checkout -b feature/nomDeLaFonctionnalité
 
----
+# 8. Auteur #
 
-Cela reflète l'utilisation de **Bootstrap** comme technologie principale pour le front-end.
+Lucas Cherbuin
+
+Contributeurs : Mentionnez-vous dans vos Pull Requests !
