@@ -1,0 +1,51 @@
+{{ form_start(form, {'attr': {'class': 'form-group'}}) }}
+
+    <!-- Champs générés automatiquement par Symfony -->
+    {{ form_errors(form) }} {# Affiche les erreurs globales du formulaire #}
+
+    <!-- Choix de l'animal -->
+    <div class="mb-3">
+        {{ form_label(form.animal, 'Animal', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.animal, {
+            'attr': {
+                'class': 'form-select',
+                'id': 'choix-animal',
+                'aria-label': 'Choix animal'
+            }
+        }) }}
+        {{ form_errors(form.animal) }}
+    </div>
+
+    <!-- Champ Nourriture -->
+    <div class="form-floating mb-3">
+        {{ form_widget(form.nourriture, {
+            'attr': {
+                'class': 'form-control',
+                'placeholder': 'Type de nourriture',
+                'id': 'floatingTextarea'
+            }
+        }) }}
+        {{ form_label(form.nourriture, 'Type de nourriture', {'label_attr': {'for': 'floatingTextarea'}}) }}
+        {{ form_errors(form.nourriture) }}
+    </div>
+
+    <!-- Champ Date -->
+    <div class="mb-3">
+        {{ form_label(form.date, 'Date', {'label_attr': {'class': 'form-label', 'for': 'nourriture-date'}}) }}
+        {{ form_widget(form.date, {
+            'attr': {
+                'class': 'form-control',
+                'id': 'nourriture-date'
+            }
+        }) }}
+        {{ form_errors(form.date) }}
+    </div>
+
+    <!-- Bouton de soumission -->
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">
+            {{ button_label|default('Save') }}
+        </button>
+    </div>
+
+{{ form_end(form) }}

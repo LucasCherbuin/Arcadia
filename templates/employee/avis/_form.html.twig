@@ -1,0 +1,72 @@
+{% block body %}
+
+<form id="animalTypeForm" method="POST">
+    <div class="form-floating">
+        {{ form_widget(form.prenom, {
+            'attr': {
+                'class': 'form-control',
+                'placeholder': 'prenom de l\'animal',
+                'id': 'floatingNom'
+            }
+        }) }}
+        {{ form_label(form.prenom, 'prenom de l\'animal', {'label_attr': {'for': 'floatingNom'}}) }}
+        {{ form_errors(form.prenom) }}
+    </div>
+
+
+    <div class="form-floating">
+        {{ form_label(form.race.label, 'race', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.race.label, {
+            'attr': {
+                'class': 'form-control',
+                'id': 'exampleFormControlFile1'
+            }
+        }) }}
+        {{ form_errors(form.race.label) }}
+    </div>
+
+
+    <div class="form-floating">
+        {{ form_label(form.habitat.nom, 'habitat', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.habitat, {
+            'attr': {
+                'class': 'form-control',
+                'id': 'exampleFormControlFile1'
+            }
+        }) }}
+        {{ form_errors(form.habitat) }}
+    </div>
+</form>
+
+
+<script>
+    document.getElementById('animalTypeForm').addEventListener('submit', function(event) {
+        event.preventDefault();  // Empêcher la soumission classique du formulaire
+
+        const formData = new FormData(this);
+        const data = {
+            prenom: formData.get('animalType[prenom]') // Utilisez ici le nom du champ du formulaire
+        };
+
+        fetch('{{ path('api_animal_new') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === 'Animal type added') {
+                alert('Animal type ajouté avec succès');
+            } else {
+                alert('Erreur: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Une erreur s\'est produite');
+        });
+    });
+</script>
+{% endblock %}
