@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {# Fichiers CSS nécessaires #}
+    {% block stylesheets %}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+        <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ asset('styles/headerFooter.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <div class="wrapper d-flex"> 
+            <!-- Sidebar -->
+            <nav id="sidenav">
+                <div class="sidebar-header p-3 d-flex justify-content-between align-items-center">
+                    <button id="close-button" class="btn btn-outline-light" onclick="toggleNav()" style="display: none;">
+                        <i class="ph ph-list"></i>
+                    </button>
+                </div>
+                <ul class="list-unstyled components mt-3">
+                    <li><a href="{{ path('app_accueil') }}" class="text-light">Accueil</a></li>
+                    <li><a href="{{ path('app_service_visiteur') }}" class="text-light">Service</a></li>
+                    <li><a href="{{ path('app_habitat_visiteur') }}" class="text-light">Habitats</a></li>
+                    <li>
+                        {% if app.user %}
+                            <a href="{{ path('app_logout') }}" style="color: red;" class="text-light">Déconnexion</a>
+                        {% else %}
+                            <a href="{{ path('app_login') }}" style="color: blue;" class="text-light">Connexion</a>
+                        {% endif %}
+                    </li>
+                    <li><a href="{{ path('app_contact') }}" class="text-light">Contact</a></li>
+                </ul>
+            </nav>
+            <!-- Page Content -->
+            <div id="content" class="w-100">
+                <!-- Navbar -->
+                <nav class="header-container d-flex align-items-center">
+                    <div class="container-fluid d-flex justify-content-between align-items-center">
+                        <button id="open-button" class="btn me-3" onclick="toggleNav()">
+                            <i class="ph ph-list"></i>
+                        </button>
+                        <h1 class="zoo-title">Arcadia</h1>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+
+    {# Contenu principal #}
+    <main>
+        {% block body %}{% endblock %}
+    </main>
+
+    {# Footer #}
+    <footer>
+        <div class="container">
+            <div class="footer-section">
+                <ul class="social-links vertical">
+                    <li><a href="#!" class="text-body"><i class="ph ph-facebook-logo"></i></a></li>
+                    <li><a href="#!" class="text-body"><i class="ph ph-youtube-logo"></i></a></li>
+                    <li><a href="#!" class="text-body"><i class="ph ph-instagram-logo"></i></a></li>
+                    <li><a href="#!" class="text-body"><i class="ph ph-twitter-logo"></i></a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h5 class="text-uppercase">Horaires</h5>
+                <ul>
+                    {% for horaire in get_horaires() %}
+                        <li>{{ horaire.jour }} : {{ horaire.ouverture }} - {{ horaire.fermeture }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="footer-section">
+                <ul class="footer-links">
+                    <li><a href="{{ path('app_accueil') }}">Accueil</a></li>
+                    <li><a href="{{ path('app_service_visiteur') }}">Service</a></li>
+                    <li><a href="{{ path('app_habitat_visiteur') }}">Habitats</a></li>
+                    <li><a href="{{ path('app_contact') }}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    {# Scripts JS nécessaires #}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script>
+        function toggleNav() {
+            const sidenav = document.getElementById("sidenav");
+            const openButton = document.getElementById("open-button");
+            const closeButton = document.getElementById("close-button");
+
+            if (sidenav.classList.contains("open")) {
+                sidenav.classList.remove("open");
+                closeButton.style.display = "none";
+                openButton.style.display = "block";
+            } else {
+                sidenav.classList.add("open");
+                closeButton.style.display = "block";
+                openButton.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
