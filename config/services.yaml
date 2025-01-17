@@ -1,0 +1,59 @@
+parameters:
+    animaux_images_directory: '%env(ANIMAUX_IMAGES_DIRECTORY)%'
+    habitats_images_directory: '%env(HABITATS_IMAGES_DIRECTORY)%'
+    services_images_directory: '%env(SERVICES_IMAGES_DIRECTORY)%'
+
+services:
+    _defaults:
+        autowire: true      # Active l'autowiring pour toutes les classes
+        autoconfigure: true # Active la configuration automatique des services
+        public: false       # Par défaut, les services ne sont pas publics
+
+    # Rendre les classes de src/ disponibles en tant que services
+    App\:
+        resource: '../src/'  # Déclare le répertoire src/ comme ressource
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/{Entity,Migrations,Tests}'
+
+    # Configuration explicite pour les contrôleurs
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    # Configuration explicite pour l'extension Twig HeaderFooterExtension
+    App\Twig\HeaderFooterExtension:
+        arguments:
+            $horaireRepository: '@App\Repository\HoraireRepository'
+        tags: ['twig.extension']
+
+    # Service pour la gestion des uploads d'images
+    App\Service\ImageUploadService:
+        arguments:
+            $directories:
+                animaux: '%animaux_images_directory%'
+                habitats: '%habitats_images_directory%'
+                services: '%services_images_directory%'
+
+    # Configuration pour Redis (si vous utilisez snc/redis-bundle, ne le redéfinissez pas ici)
+    snc_redis.session.handler:
+        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler
+        arguments:
+            - '@snc_redis.client'  # Le client Redis configuré
+
+    # Client Redis (avec DSN)
+    Predis\Client:
+        class: Predis\Client
+        arguments:
+            - '%env(REDIS_DSN)%'
+
+    # Définition du service PredisService
+    App\Service\PredisService:
+        arguments:
+            $redis: '@Predis\Client'
+
+    App\Service\MailerService:
+        arguments:
+            $mailer: '@mailer.mailer' # Injecte le MailerInterface automatiquement

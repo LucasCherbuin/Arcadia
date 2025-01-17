@@ -1,0 +1,30 @@
+security:
+    password_hashers:
+        App\Entity\Utilisateur:
+            algorithm: bcrypt
+
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\Utilisateur
+                property: email
+
+    firewalls:
+        main:
+            pattern: ^/()
+            provider: app_user_provider
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                username_parameter: email
+                password_parameter: password
+            logout:
+                path: app_logout
+                invalidate_session: true
+
+
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/employee, roles: ROLE_EMPLOYEE }
+        - { path: ^/veterinaire, roles: ROLE_VETERINAIRE }
+         

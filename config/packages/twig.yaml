@@ -1,0 +1,11 @@
+twig:
+    file_name_pattern: '*.twig' # Optionnel, si vous avez des templates avec des extensions spécifiques
+    debug: '%kernel.debug%'     # Active le mode debug selon l'environnement
+    strict_variables: '%kernel.debug%' # Lève des erreurs pour les variables non définies en mode debug
+    paths: ['%kernel.project_dir%/templates'] # Chemin principal des templates
+    default_path: '%kernel.project_dir%/templates' # Chemin par défaut pour les templates Twig
+
+
+when@test:
+    twig:
+        strict_variables: true # Assure que les tests révèlent toutes les variables non définies

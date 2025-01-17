@@ -1,0 +1,328 @@
+# Route pour l'accueil
+app_accueil:
+  path: /
+  controller: App\Controller\PagesController::accueil
+  methods: [GET, POST]
+
+HeaderFooter:
+  path: /HeaderFooter
+  controller: App\Controller\HeaderFooterController::HeaderFooter
+  methods: [GET]
+# Route pour la page de contact
+app_contact:
+  path: /contact
+  controller: App\Controller\PagesController::contact
+  methods: [GET, POST]
+
+
+# Routes pour les visiteurs
+app_habitat_visiteur:
+  path: /habitatVisiteur
+  controller: App\Controller\PagesController::habitatVisiteur
+  methods: [GET]
+
+app_animal_visiteur:
+  path: /habitatVisiteur/{id}/animal
+  controller: App\Controller\PagesController::animalVisiteur
+  methods: [GET]
+
+app_service_visiteur:
+  path: /serviceVisiteur
+  controller: App\Controller\PagesController::serviceVisiteur
+  methods: [GET]
+
+# Route pour la page de connexion
+app_login:
+  path: /login
+  controller: App\Controller\SecurityController::login
+  methods: [GET, POST]
+
+# Route pour la déconnexion
+app_logout:
+  path: /logout
+  controller: App\Controller\SecurityController::logout
+  methods: [GET]
+
+admin_menu:
+  path: /admin
+  controller: App\Controller\MenuController::admin
+  methods: [GET]
+
+employee_menu:
+  path: /employee
+  controller: App\Controller\MenuController::employee
+  methods: [GET] 
+
+veterinaire_menu:
+  path: /veterinaire
+  controller: App\Controller\MenuController::veterinaire
+  methods: [GET] 
+
+
+# Routes pour les animaux
+app_animal_index:
+  path: /admin/animal
+  controller: App\Controller\AnimalController::index
+  methods: [GET]
+
+app_animal_show:
+  path: /admin/animal/{id}
+  controller: App\Controller\AnimalController::show
+  requirements:
+    id: '\d+'
+  methods: [GET]
+
+app_animal_new:
+  path: /admin/animal/new
+  controller: App\Controller\AnimalController::new
+  methods: [GET, POST]
+
+app_animal_edit:
+  path: /admin/animal/{id}/edit
+  controller: App\Controller\AnimalController::edit
+  requirements:
+    id: '\d+'
+  methods: [GET, POST]
+
+app_animal_delete:
+  path: /admin/animal/{id}/delete
+  controller: App\Controller\AnimalController::delete
+  requirements:
+    id: '\d+'
+  methods: [POST]
+
+  # Routes pour les animaux
+app_horaire_index:
+  path: /admin/horaire
+  controller: App\Controller\HoraireController::index
+  methods: [GET]
+
+app_horaire_show:
+  path: /admin/horaire/{id}
+  controller: App\Controller\HoraireController::show
+  requirements:
+    id: '\d+'
+  methods: [GET]
+
+app_horaire_new:
+  path: /admin/horaire/new
+  controller: App\Controller\HoraireController::new
+  methods: [GET, POST]
+
+app_horaire_edit:
+  path: /admin/horaire/{id}/edit
+  controller: App\Controller\HoraireController::edit
+  requirements:
+    id: '\d+'
+  methods: [GET, POST]
+
+app_horaire_delete:
+  path: /admin/horaire/{id}/delete
+  controller: App\Controller\HoraireController::delete
+  requirements:
+    id: '\d+'
+  methods: [POST]
+
+# Routes pour les avis
+app_avis_index:
+  path: /avis
+  controller: App\Controller\AvisController::index
+  methods: [GET]
+
+app_avis_show:
+  path: /avis/{id}
+  controller: App\Controller\AvisController::show
+  requirements:
+    id: '\d+'
+  methods: [GET]
+
+app_avis_new:
+  path: /avis/new
+  controller: App\Controller\AvisController::new
+  methods: [POST]
+
+app_avis_edit:
+  path: /avis/{id}/edit
+  controller: App\Controller\AvisController::edit
+  requirements:
+    id: '\d+'
+  methods: [GET, POST]
+
+app_avis_delete:
+  path: /avis/{id}/delete
+  controller: App\Controller\AvisController::delete
+  requirements:
+    id: '\d+'
+  methods: [POST]
+
+app_avis_validate:
+  path: /{id}/validate
+  controller: App\Controller\AvisController::validate
+
+app_employeeRepas_show:
+  path: /employee/employeRepas/{id}
+  controller: App\Controller\EmployeeController::show
+  requirements:
+    id: '\d+'
+  methods: [GET]
+
+app_employeeRepas_new:
+  path: /employee/employeeRepas
+  controller: App\Controller\EmployeeController::new
+  methods: [GET, POST]
+
+
+# Routes pour les habitats
+app_habitat_index:
+  path: /habitat
+  controller: App\Controller\HabitatController::index
+  methods: [GET]
+
+app_habitat_show:
+  path: admin/habitat/{id}
+  controller: App\Controller\HabitatController::show
+  requirements:
+    id: '\d+'
+  methods: [GET]
+
+app_habitat_new:
+  path: admin/habitat/new
+  controller: App\Controller\HabitatController::new
+  methods: [GET, POST]
+
+app_habitat_edit:
+  path: admin/habitat/{id}/edit
+  controller: App\Controller\HabitatController::edit
+  requirements:
+    id: '\d+'
+  methods: [GET, POST]
+
+app_habitat_delete:
+  path: admin/habitat/{id}/delete
+  controller: App\Controller\HabitatController::delete
+  requirements:
+    id: '\d+'
+  methods: [POST]
+
+# Routes pour les services
+app_service_index:
+  path: admin/service
+  controller: App\Controller\ServiceController::index
+  methods: [GET]
+
+app_service_show:
+  path: admin/service/{id}
+  controller: App\Controller\ServiceController::show
+  requirements:
+    id: '\d+'
+  methods: [GET]
+
+app_service_new:
+  path: admin/service/new
+  controller: App\Controller\ServiceController::new
+  methods: [GET, POST]
+
+app_service_edit:
+  path: /service/{id}/edit
+  controller: App\Controller\ServiceController::edit
+  requirements:
+    id: '\d+'
+  methods: [GET, POST]
+
+app_service_delete:
+  path: admin/service/{id}/delete
+  controller: App\Controller\ServiceController::delete
+  requirements:
+    id: '\d+'
+  methods: [POST]
+
+  # Routes pour les utilisateurs
+app_utilisateur_index:
+  path: admin/utilisateur
+  controller: App\Controller\UtilisateurController::index
+  methods: [GET]
+
+app_utilisateur_show:
+  path: admin/utilisateur/{id}
+  controller: App\Controller\UtilisateurController::show
+  requirements:
+    id: '\d+'
+  methods: [GET]
+
+app_utilisateur_new:
+  path: admin/utilisateur/new
+  controller: App\Controller\UtilisateurController::new
+  methods: [GET, POST]
+
+app_utilisateur_edit:
+  path: admin/utilisateur/{id}/edit
+  controller: App\Controller\UtilisateurController::edit
+  requirements:
+    id: '\d+'
+  methods: [GET, POST]
+
+app_utilisateur_delete:
+  path: admin/utilisateur/{id}/delete
+  controller: App\Controller\UtilisateurController::delete
+  requirements:
+    id: '\d+'
+  methods: [POST]
+
+  # Routes pour les employés
+
+app_veterinaire_show:
+  path: /veterinaire/RapportVeterinaire/{id}
+  controller: App\Controller\VeterinaireController::show
+  requirements:
+    id: '\d+'
+  methods: [GET]
+
+app_veterinaire_new:
+  path: /veterinaire/RapportVeterinaire/new
+  controller: App\Controller\VeterinaireController::new
+  methods: [GET, POST]
+
+app_commentaire_new:
+  path: /veterinaire/Commentaire
+  controller: App\Controller\VeterinaireController::commentaire
+  methods: [GET, POST]
+
+# Routes spécifiques
+app_consultation:
+  path: /admin/consultation
+  controller: App\Controller\DashboardController::consultation
+  methods: [GET]
+
+app_dashboard_animal:
+  path: /veterinaire/dashboardAnimal
+  controller: App\Controller\DashboardController::dashboardAnimal
+  methods: [GET]
+
+app_compte_rendu_veterinaire:
+  path: /admin/compteRendu
+  controller: App\Controller\DashboardController::compteRendu
+  methods: [GET]
+
+app_EmailTest:
+  path: /test-mailtrap
+  controller: App\Controller\TestEmailController::testMailtrap
+
+app_admin_create:
+  path: /create
+  controller: App\Controller\AdminUtilisateurController::createAdmin
+
+app_admin_success:
+  path: /adminSuccess/{id}
+  controller: App\Controller\AdminUtilisateurController::success
+
+app_serviceEmployee_index:
+  path: employee/serviceEdit
+  controller: App\Controller\ServiceController::indexEmployee
+  methods: [GET]
+
+app_serviceEmployee_edit:
+  path: employee/serviceEdit/{id}/edit
+  controller: App\Controller\ServiceController::editEmployee
+  requirements:
+    id: '\d+'
+  methods: [GET, POST]
