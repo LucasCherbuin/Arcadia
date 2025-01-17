@@ -1,0 +1,27 @@
+.AccordionVeterinaireBody{
+    background-color: white;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.AccordionVeterinaireHeader{
+    background-color: white;
+    border-radius: 50px;
+    justify-content: space-between;
+}
+
+.AccoridionTitleVeterinaire{
+    font-style: white;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+@media (max-width: 768px) {
+    .consultation-header, .consultation-item {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

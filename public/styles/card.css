@@ -1,0 +1,112 @@
+/* Conteneur principal de la carte */
+.card {
+    width: 200px;
+    background: #fff;
+    border: 2px dashed #2a9d8f; /* Bordure en pointillé */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Section de l'image */
+.card img {
+    width: 100%;
+    height: auto;
+    border-bottom: 2px solid #2a9d8f;
+}
+
+/* Section des informations */
+.card-info {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Label pour les propriétés (Nom, Race, etc.) */
+.card-info span {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #264653;
+}
+
+/* Icônes pour modifier ou afficher */
+.card-actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.card-actions a {
+    text-decoration: none;
+    background: #2a9d8f;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    transition: background 0.3s;
+}
+
+.card-actions a:hover {
+    background: #21867a;
+}
+
+/* Style du conteneur contenant l'icône */
+.ph.ph-plus-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px; /* Taille du bouton (largeur) */
+    height: 50px; /* Taille du bouton (hauteur) */
+    border: 2px solid #008000; /* Bordure verte */
+    border-radius: 50%; /* Cercle parfait */
+    text-decoration: none; /* Supprime la décoration (pour un lien) */
+    transition: all 0.3s ease; /* Animation douce au survol */
+    color: #008000; /* Couleur de l'icône */
+    font-size: 24px; /* Taille de l'icône */
+}
+
+/* Effet au survol */
+.ph.ph-plus-circle:hover {
+    background-color: #008000; /* Fond vert */
+    color: #ffffff; /* Icône blanche */
+}
+
+.button-group {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #e0e0e0;
+    color: #000;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.button.selected {
+    background-color: #4caf50;
+    color: white;
+}
+
+
+
+@media (max-width: 768px) {
+    .consultation-header, .consultation-item {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

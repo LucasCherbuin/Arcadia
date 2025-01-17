@@ -1,0 +1,77 @@
+/* Styles généraux */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    margin: 10px 0;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles spécifiques */
+.commentaire {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    color: #333;
+}
+
+.pseudo {
+    background-color: #154F2B;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Boutons et validation */
+.validation {
+    text-align: right;
+    margin-top: 10px;
+}
+
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Bouton supprimer */
+button.delete {
+    background-color: #f44336;
+}
+
+button.delete:hover {
+    background-color: #d32f2f;
+}
+
+@media (max-width: 768px) {
+    .consultation-header, .consultation-item {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

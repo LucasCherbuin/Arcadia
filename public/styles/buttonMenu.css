@@ -1,0 +1,21 @@
+.button-container {
+    display: inline-block;
+    margin: 16px;
+}
+
+.button{
+    background-color: white;
+    stroke: black;
+    box-shadow: black, 25%;
+}
+
+.button-ajout {
+    background-color: white;
+}
+
+@media (max-width: 768px) {
+    .consultation-header, .consultation-item {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

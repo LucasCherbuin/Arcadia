@@ -1,0 +1,144 @@
+/* accordion.css */
+.accordion {
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.accordion-item {
+    border: none;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, height 0.3s ease, background 0.3s ease;
+    background-size: cover;
+    background-position: center;
+}
+
+.accordion-item.closed {
+    background-color: #222; /* Fond par défaut */
+}
+
+.accordion-item.open {
+    background-color: rgba(0, 0, 0, 0.6); /* Si aucune image */
+}
+
+.accordion-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    height: 150px;
+    color: #fff;
+    font-weight: bold;
+    padding: 20px;
+    font-size: 24px;
+    transition: background-color 0.3s ease;
+    z-index: 1;
+    background-size: cover;
+    background-position: center;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.accordion-body {
+    display: none; /* Caché par défaut */
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 0 0 15px 15px;
+    z-index: 2;
+    position: relative;
+}
+
+.accordion-body img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.accordion-body p {
+    margin: 15px 0;
+    line-height: 1.5;
+}
+
+.accordion-body a {
+    display: inline-block;
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-body a:hover {
+    background-color: #45a049;
+}
+
+.ph.ph-plus-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px; /* Taille du bouton (largeur) */
+    height: 50px; /* Taille du bouton (hauteur) */
+    background-color: #ffffff; /* Fond blanc pour le cercle */
+    border: 2px solid #008000; /* Bordure verte */
+    border-radius: 50%; /* Cercle parfait */
+    text-decoration: none; /* Supprime la décoration (pour un lien) */
+    transition: all 0.3s ease; /* Animation douce au survol */
+    color: #008000; /* Couleur de l'icône */
+    font-size: 24px; /* Taille de l'icône */
+}
+
+/* Effet au survol */
+.ph.ph-plus-circle:hover {
+    background-color: #008000; /* Fond vert */
+    color: #ffffff; /* Icône blanche */
+}
+
+.button-group {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #e0e0e0;
+    color: #000;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.button.selected {
+    background-color: #4caf50;
+    color: white;
+}
+
+.horizontal-container {
+    display: flex;
+    gap: 20px; /* Espacement entre les paragraphes */
+}
+
+.horizontal-container p {
+    margin: 0; /* Supprime les marges par défaut des paragraphes */
+}
+
+
+
+@media (max-width: 768px) {
+    .consultation-header, .consultation-item {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

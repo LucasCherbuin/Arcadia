@@ -1,0 +1,36 @@
+.repas_table-striped{
+    justify-content: space-between;
+}
+
+.table_dashboard{
+    background-color: white;
+    border-radius: 50%;
+}
+
+.consultation_body{
+    border-radius: 50%;
+    justify-content: space-around;
+}
+
+.consultation_header{
+    background-color: #154F2B;
+    font-size: white;
+}
+
+.table_consulation{
+    background-color: white;
+
+}
+.accordion_open {
+    background-color: white;
+    border-radius: 50%;
+    justify-content: center;
+    align-content: center;
+}
+
+@media (max-width: 768px) {
+    .consultation-header, .consultation-item {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
