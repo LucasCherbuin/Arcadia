@@ -1,0 +1,168 @@
+
+{% extends 'headerFooter.html.twig' %}
+{% block stylesheets %}
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('styles/accueil.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/Form.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/headerFooter.css') }}">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="zoo-home-page">
+
+                <p class="text-block">
+                    Bienvenue sur le site du zoo Arcadia, un lieu où la nature et la modernité se rencontrent. 
+                    Découvrez nos animaux du monde entier dans des habitats conçus pour leur bien-être, tout en sachant que notre parc fonctionne entièrement grâce à des énergies renouvelables. 
+                    Le parc propose de nombreuses activités, comme une visite en petit train électrique ou en compagnie d’un guide. 
+                    Nous offrons également un restaurant écoresponsable avec des options adaptées à tous les régimes alimentaires. <br/>
+                    Vous avez un avis ou une suggestion ? Partagez-le avec nous via les formulaires en ligne. Nous sommes à l’écoute !
+                </p>
+
+            <!-- Carrousel des animaux -->
+            <div id="animalCarousel" class="carousel slide" data-bs-ride="carousel" aria-label="Carrousel des animaux">
+                <div class="carousel-inner">
+                    {% for animal in animals %}
+                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                            {% if animal.image %}
+                                <img src="{{ asset('uploads/animaux/' ~ animal.image) }}" alt="Image de {{ animal.prenom }}" class="d-block w-100">
+                            {% endif %}
+                            <div class="carousel-caption">
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- Contrôles -->
+                <a class="carousel-control-prev" href="#animalCarousel" role="button" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden"><i class="ph ph-caret-left"></i></span>
+                </a>
+                <a class="carousel-control-next" href="#animalCarousel" role="button" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden"><i class="ph ph-caret-right"></i></span>
+                </a>
+            </div>
+
+            <p class="text-block">
+                Le parc abrite une incroyable diversité d’animaux venus des quatre coins du monde, chacun vivant dans un environnement soigneusement adapté à ses besoins naturels.
+            </p>
+
+
+            <!-- Carrousel des habitats -->
+            <div id="habitatCarousel" class="carousel slide mt-4" data-bs-ride="carousel" aria-label="Carrousel des habitats">
+                <div class="carousel-inner">
+                    {% for habitat in habitats %}
+                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                            {% if habitat.image %}
+                                <img src="{{ asset('uploads/habitats/' ~ habitat.image) }}" alt="{{ habitat.nom }}" class="d-block w-100">
+                            {% endif %}
+                            <div class="carousel-caption">
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- Contrôles -->
+                <a class="carousel-control-prev" href="#habitatCarousel" role="button" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden"><i class="ph ph-caret-left"></i></span>
+                </a>
+                <a class="carousel-control-next" href="#habitatCarousel" role="button" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden"><i class="ph ph-caret-right"></i></span>
+                </a>
+            </div>
+
+            
+            <p class="text-block">
+                Plongez dans les différents habitats où vivent nos animaux et découvrez leurs histoires fascinantes, leurs comportements uniques et leurs secrets surprenants. 
+                Le parc s'engage pour la planète : son fonctionnement est alimenté par l'énergie propre des barrages hydroélectriques.
+            </p>
+
+
+
+            <!-- Carrousel des services -->
+            <div id="serviceCarousel" class="carousel slide mt-4" data-bs-ride="carousel" aria-label="Carrousel des services">
+                <div class="carousel-inner">
+                    {% for service in services %}
+                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                            {% if service.image %}
+                                <img src="{{ asset('uploads/services/' ~ service.image) }}" alt="{{ service.nom }}" class="d-block w-100">
+                            {% endif %}
+                            <div class="carousel-caption">
+                        </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- Contrôles -->
+                <a class="carousel-control-prev" href="#serviceCarousel" role="button" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden"><i class="ph ph-caret-left"></i></span>
+                </a>
+                <a class="carousel-control-next" href="#serviceCarousel" role="button" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden"><i class="ph ph-caret-right"></i></span>
+                </a>
+            </div>
+            <div class="text-block">
+                <p>
+                    Une petite faim ? Besoin de conseils ou envie de découvrir le parc de façon originale ? 
+                    Profitez de nos services adaptés à tous vos besoins. 
+                    Notre restaurant propose des plats pour tous les goûts et régimes alimentaires, 
+                    préparés avec des produits locaux et respectueux de l'environnement.
+                </p>
+            </div>
+
+
+            <!-- Liste des avis -->
+            <div class="avis-section">
+            <h3 class="mt-5">Avis des visiteurs</h3>
+            <div id="avisCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for avis in avis %}
+                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                            <div class="avisCarrousel">
+                                <div class="card">
+                                    <div class="card-body">
+                                    {% if avis.is_visible %}
+                                        <h5 class="card-title">{{ avis.pseudo }}</h5>
+                                        <p class="card-text">{{ avis.commentaire }}</p>
+                                    {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#avisCarousel" role="button" data-bs-slide="prev">
+                    <i class="ph ph-caret-left"></i>
+                </a>
+                <a class="carousel-control-next" href="#avisCarousel" role="button" data-bs-slide="next">
+                    <i class="ph ph-caret-right"></i>
+                </a>
+            </div>
+        </div>
+
+            
+        <!-- Formulaire d'avis -->
+        {{ form_start(form) }}
+        <div class="container d-flex justify-content-center align-items-center vh-100">
+            <div class="w-50" style="max-width: 500px;">
+                <form method="POST" action="{{ path('app_accueil') }}">
+                    <div class="form-floating mb-3">
+                        {{ form_row(form.pseudo) }}
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{ form_row(form.commentaire) }}
+                    </div>
+                    {{ form_rest(form) }}
+                    <button type="submit" class="btn btn-primary w-100">Envoyer</button>
+                </form>
+        </div>
+        {{ form_end(form) }}
+
+{% endblock %}
