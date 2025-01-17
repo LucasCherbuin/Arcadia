@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Tests\Entity;
+
+use App\Entity\Utilisateur;
+use PHPUnit\Framework\TestCase;
+
+class UtilisateurTest extends TestCase
+{
+    public function testGettersAndSetters()
+    {
+        $utilisateur = new Utilisateur();
+        $utilisateur ->setEmail('email');
+        $utilisateur ->setPassword('mot de passe');
+
+        $this->assertEquals('Test Prenom', $utilisateur->getEmail());
+        $this->assertEquals('Test Description', $utilisateur->getRoles());
+        $this->assertEquals('Test Description', $utilisateur->getPassword());
+    }
+}

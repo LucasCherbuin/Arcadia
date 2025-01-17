@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Tests\Entity;
+
+use App\Entity\Animal;
+use PHPUnit\Framework\TestCase;
+
+class AnimalTest extends TestCase
+{
+    public function testGettersAndSetters()
+    {
+        $animal = new Animal();
+        $animal->setPrenom('Test Prenom');
+        $animal->setEtat('Test etat');
+ 
+
+        $this->assertEquals('Test Prenom', $animal->getPrenom());
+        $this->assertEquals('Test etat', $animal->getEtat());
+     
+    }
+}

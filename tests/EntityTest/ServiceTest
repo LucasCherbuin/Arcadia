@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Tests\Entity;
+
+use App\Entity\Service;
+use PHPUnit\Framework\TestCase;
+
+class ServiceTest extends TestCase
+{
+    public function testGettersAndSetters()
+    {
+        $service = new Service();
+        $service ->setNom('nom');
+        $service ->setDescription('descript');
+
+        $this->assertEquals('Test Prenom', $service->getNom());
+        $this->assertEquals('Test Description', $service->getDescription());
+     
+    }
+}

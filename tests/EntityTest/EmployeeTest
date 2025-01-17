@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Tests\Entity;
+
+use App\Entity\Employee;
+use PHPUnit\Framework\TestCase;
+
+class EmployeeTest extends TestCase
+{
+    public function testGettersAndSetters()
+    {
+        $employee = new Employee();
+        $employee->setNourriture('Test Nourriture');
+        $employee->setQuantite('1');
+        $employee->setDate(new \DateTime);
+
+        $this->assertEquals('Test Prenom', $employee->getNourriture());
+        $this->assertEquals('Test Nombre de cliques', $employee->getQuantite());
+        $this->assertEquals('Test Nombre de cliques', $employee->getDate());
+     
+    }
+}

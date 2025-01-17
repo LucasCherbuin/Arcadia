@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Tests\Entity;
+
+use App\Entity\Consultation;
+use PHPUnit\Framework\TestCase;
+
+class ConsulationTest extends TestCase
+{
+    public function testGettersAndSetters()
+    {
+        $animal = new Consultation();
+        $animal->setPrenom('Test Prenom');
+        $animal->setClique('Test Nombre de cliques');
+ 
+
+        $this->assertEquals('Test Prenom', $animal->getPrenom());
+        $this->assertEquals('Test Nombre de cliques', $animal->getClique());
+     
+    }
+}

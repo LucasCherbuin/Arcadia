@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Tests\Entity;
+
+use App\Entity\Horaire;
+use PHPUnit\Framework\TestCase;
+
+class HoraireTest extends TestCase
+{
+    public function testGettersAndSetters()
+    {
+        $horaire = new Horaire();
+        $horaire->setOuverture(new \DateTime);
+        $horaire->setFermeture(new \DateTime);
+        $horaire->setJour('Test Jour');
+
+        $this->assertEquals('Test Prenom', $horaire->getOuverture());
+        $this->assertEquals('Test Nombre de cliques', $horaire->getFermeture());
+        $this->assertEquals('Test Nombre de cliques', $horaire->getJour());
+     
+    }
+}

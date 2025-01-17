@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Tests\Entity;
+
+use App\Entity\Race;
+use PHPUnit\Framework\TestCase;
+
+class RaceTest extends TestCase
+{
+    public function testGettersAndSetters()
+    {
+        $race = new Race();
+        $race->setLabel('Race');
+
+
+        $this->assertEquals('Test Prenom', $race->getLabel());
+
+     
+    }
+}

@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Tests\Entity;
+
+use App\Entity\Image;
+use PHPUnit\Framework\TestCase;
+
+class ImageTest extends TestCase
+{
+    public function testGettersAndSetters()
+    {
+        $image = new Image();
+        $image->setPath('images.png');
+
+
+        $this->assertEquals('Test Prenom', $image->getPath());
+
+     
+    }
+}

@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Tests\Entity;
+
+use App\Entity\Avis;
+use PHPUnit\Framework\TestCase;
+
+class AvisTest extends TestCase
+{
+    public function testGettersAndSetters()
+    {
+        $avis = new Avis();
+        $avis->setPseudo('Test Pseudo');
+        $avis->setCommentaire('Test Commentaire');
+        
+
+        $this->assertEquals('Test Prenom', $avis->getPseudo());
+        $this->assertEquals('Test etat', $avis->getCommentaire());
+     
+    }
+}

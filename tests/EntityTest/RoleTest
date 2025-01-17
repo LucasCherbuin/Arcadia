@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Tests\Entity;
+
+use App\Entity\Role;
+use PHPUnit\Framework\TestCase;
+
+class RoleTest extends TestCase
+{
+    public function testGettersAndSetters()
+    {
+        $role = new Role();
+        $role->setRole('Role');
+
+
+        $this->assertEquals('Test Prenom', $role->getRole());
+
+     
+    }
+}

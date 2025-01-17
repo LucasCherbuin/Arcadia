@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Tests\Entity;
+
+use App\Entity\Veterinaire;
+use PHPUnit\Framework\TestCase;
+
+class VeterinaireTest extends TestCase
+{
+    public function testGettersAndSetters()
+    {
+        $veterinaire = new Veterinaire();
+        $veterinaire ->setDate(new \DateTime);
+        $veterinaire ->setDetail('detail');
+ 
+
+        $this->assertEquals('Test Prenom', $veterinaire->getDate());
+        $this->assertEquals('Test Description', $veterinaire->getDetail());
+    }
+}
