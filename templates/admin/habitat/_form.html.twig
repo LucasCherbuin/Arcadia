@@ -1,0 +1,56 @@
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/assets/styles/Form.css') }}">
+{% endblock %}
+
+{{ form_start(form, {'attr': {'class': 'form-group'}}) }}
+
+    <!-- Gestion des erreurs globales -->
+    {{ form_errors(form) }}
+
+    <!-- Champ Nom -->
+    <div class="form-floating">
+        {{ form_widget(form.nom, {
+            'attr': {
+                'class': 'form-control',
+                'placeholder': 'Nom de l\'habitat',
+                'id': 'floatingNom'
+            }
+        }) }}
+        {{ form_label(form.nom, 'Nom de l\'habitat', {'label_attr': {'for': 'floatingNom'}}) }}
+        {{ form_errors(form.nom) }}
+    </div>
+
+    <!-- Champ Description -->
+    <div class="form-floating">
+        {{ form_widget(form.description, {
+            'attr': {
+                'class': 'form-control',
+                'placeholder': 'Description de l\'habitat',
+                'id': 'floatingDescription'
+            }
+        }) }}
+        {{ form_label(form.description, 'Description de l\'habitat', {'label_attr': {'for': 'floatingDescription'}}) }}
+        {{ form_errors(form.description) }}
+    </div>
+
+    <!-- Champ Image -->
+    <div class="form-floating">
+        {{ form_label(form.image, 'Image de l\'habitat', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.image, {
+            'attr': {
+                'class': 'form-control',
+                'id': 'exampleFormControlFile1'
+            }
+        }) }}
+        {{ form_errors(form.image) }}
+    </div>
+
+    <!-- Bouton de soumission -->
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">
+            {{ button_label|default('Enregistrer') }}
+        </button>
+    </div>
+
+{{ form_end(form) }}

@@ -1,0 +1,48 @@
+{{ form_start(form, {'attr': {'class': 'form-group'}}) }}
+
+    <!-- Nom du service -->
+    <div class="form-floating mb-3">
+        {{ form_widget(form.nom, {
+            'attr': {
+                'class': 'form-control',
+                'placeholder': 'Nom du service',
+                'id': 'floatingNom'
+            }
+        }) }}
+        {{ form_label(form.nom, 'Nom du service', {'label_attr': {'for': 'floatingNom'}}) }}
+        {{ form_errors(form.nom) }}
+    </div>
+
+    <!-- Description -->
+    <div class="form-floating mb-3">
+        {{ form_widget(form.description, {
+            'attr': {
+                'class': 'form-control',
+                'placeholder': 'Description du service',
+                'id': 'floatingDescription'
+            }
+        }) }}
+        {{ form_label(form.description, 'Description du service', {'label_attr': {'for': 'floatingDescription'}}) }}
+        {{ form_errors(form.description) }}
+    </div>
+
+    <!-- Image -->
+    <div class="mb-3">
+        {{ form_label(form.image, 'Image', {'label_attr': {'for': 'exampleFormControlFile1'}}) }}
+        {{ form_widget(form.image, {
+            'attr': {
+                'class': 'form-control',
+                'id': 'exampleFormControlFile1'
+            }
+        }) }}
+        {{ form_errors(form.image) }}
+    </div>
+
+    <!-- Bouton de soumission -->
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">
+            {{ button_label|default('Enregistrer') }}
+        </button>
+    </div>
+
+{{ form_end(form) }}

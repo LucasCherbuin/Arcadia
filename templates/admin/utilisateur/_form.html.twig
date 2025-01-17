@@ -1,0 +1,66 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/styles/form.css') }}">
+{% endblock %}
+
+
+{{ form_start(form, {'attr': {'class': 'form-group'}}) }}
+
+    <!-- Champ Mot de passe -->
+    <div class="compte">
+        <div class="form-floating mb-3">
+            {{ form_widget(form.password, {
+                'attr': {
+                    'class': 'form-control',
+                    'placeholder': 'Mot de passe',
+                    'id': 'password'
+                }
+            }) }}
+            {{ form_label(form.password, 'Mot de passe', {'label_attr': {'for': 'password'}}) }}
+            {{ form_errors(form.password) }}
+        </div>
+    </div>
+
+    <!-- Champ Email de connexion -->
+    <div class="compte">
+        <div class="form-floating mb-3">
+            {{ form_widget(form.email, {
+                'attr': {
+                    'class': 'form-control',
+                    'placeholder': 'Email de connexion',
+                    'id': 'email'
+                }
+            }) }}
+            {{ form_label(form.email, 'Email de connexion', {'label_attr': {'for': 'email'}}) }}
+            {{ form_errors(form.email) }}
+        </div>
+    </div>
+
+    <!-- Champ Métier (Rôle) -->
+    <div class="métier mb-3">
+        {{ form_widget(form.role, {
+            'attr': {
+                'class': 'form-select',
+                'id': 'role'
+            }
+        }) }}
+        {{ form_label(form.role, 'Corps de métier', {'label_attr': {'for': 'role'}}) }}
+        {{ form_errors(form.role) }}
+    </div>
+
+    <!-- Champ Email personnel -->
+    <div class="form-floating mb-3">
+        {{ form_widget(form.emailPersonnel, {
+            'attr': {
+                'class': 'form-control',
+                'placeholder': 'Email personnel',
+                'id': 'emailPersonnel'
+            }
+        }) }}
+        {{ form_label(form.emailPersonnel, 'Email personnel de l\'employé', {'label_attr': {'for': 'emailPersonnel'}}) }}
+        {{ form_errors(form.emailPersonnel) }}
+    </div>
+
+    <!-- Bouton Envoyer -->
+    <button class="btn btn-primary" type="submit">{{ button_label|default('Envoyer') }}</button>
+
+{{ form_end(form) }}

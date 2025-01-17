@@ -1,0 +1,34 @@
+{{ form_start(form, {'attr': {'class': 'form-group'}}) }}
+
+    <!-- Champs gérés automatiquement -->
+    {{ form_errors(form) }}
+
+    <!-- Jour de la semaine -->
+    <div class="mb-3">
+        {{ form_label(form.jour, 'Jour de la semaine', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.jour, {'attr': {'class': 'form-select'}}) }}
+        {{ form_errors(form.jour) }}
+    </div>
+
+    <!-- Heure d'ouverture -->
+    <div class="mb-3">
+        {{ form_label(form.ouverture|date('Y-m-d H:i'), 'Heure d\'ouverture', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.ouverture|date('Y-m-d H:i'), {'attr': {'class': 'form-control', 'id': 'heure-ouverture'}}) }}
+        {{ form_errors(form.ouverture|date('Y-m-d H:i')) }}
+    </div>
+
+    <!-- Heure de fermeture -->
+    <div class="mb-3">
+        {{ form_label(form.fermeture|date('Y-m-d H:i'), 'Heure de fermeture', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.fermeture|date('Y-m-d H:i'), {'attr': {'class': 'form-control', 'id': 'heure-fermeture'}}) }}
+        {{ form_errors(form.fermeture|date('Y-m-d H:i')) }}
+    </div>
+
+    <!-- Bouton de soumission -->
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">
+            {{ button_label|default('Enregistrer') }}
+        </button>
+    </div>
+
+{{ form_end(form) }}
