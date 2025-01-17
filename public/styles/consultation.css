@@ -1,0 +1,74 @@
+/* Encapsulation avec la classe parent .consultation-page */
+.consultation-page {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.consultation-page .consultation-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.consultation-page .consultation-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.consultation-page .consultation-head {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #2a6e8e;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.consultation-page .consultation-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.consultation-page .consultation-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eaeaea;
+    font-size: 14px;
+    color: #333333;
+}
+
+.consultation-page .consultation-item:last-child {
+    border-bottom: none;
+}
+
+.consultation-page .animal-name {
+    font-weight: bold;
+}
+
+.consultation-page .consultation-count {
+    color: #555555;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .consultation-page .consultation-header, 
+    .consultation-page .consultation-item {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

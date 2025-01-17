@@ -1,0 +1,119 @@
+/* Conteneur principal */
+.image-container {
+    position: relative; /* Nécessaire pour positionner le formulaire */
+    width: 100%; /* Largeur de la page */
+    height: 100vh; /* Hauteur de l'écran */
+    background-size: cover; /* Recouvre toute la zone */
+    background-position: center; /* Centrer l'image */
+    display: flex; /* Flexbox pour centrer les éléments enfants */
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+}
+
+/* Style du conteneur du formulaire */
+.form-container {
+    display: flex;
+    flex-direction: column; /* Dispose les éléments en colonne */
+    justify-content: center;
+    align-items: center;
+    width: 90%; /* Largeur par défaut pour petits écrans */
+    max-width: 600px; /* Largeur maximale */
+    padding: 20px; /* Espacement interne */
+    background: rgba(255, 255, 255, 0.9); /* Arrière-plan semi-transparent */
+    border-radius: 15px; /* Coins arrondis */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Ombre douce */
+    box-sizing: border-box; /* Inclus padding et border dans width */
+}
+
+/* Champs de formulaire */
+.form-floating input,
+.form-floating textarea {
+    width: 100%; /* Champs prennent toute la largeur */
+    padding: 15px; /* Espacement interne */
+    margin-bottom: 15px; /* Espacement entre les champs */
+    font-size: 16px; /* Taille de police confortable */
+    border: 1px solid #ccc; /* Bordure légère */
+    border-radius: 8px; /* Coins arrondis */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+/* Effet de focus sur les champs */
+.form-floating input:focus,
+.form-floating textarea:focus {
+    border-color: #154F2B; /* Couleur de la bordure en focus */
+    outline: none;
+    background-color: #fff;
+}
+
+/* Style des labels */
+.form-floating label {
+    margin-bottom: 5px; /* Espace entre le label et l'input */
+    font-size: 14px;
+    color: #666;
+    text-align: left;
+    width: 100%; /* Alignement par rapport au champ */
+}
+
+/* Style du bouton */
+button.btn-primary {
+    background-color: #154F2B;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    max-width: 200px; /* Taille maximale du bouton */
+    align-self: center; /* Centre le bouton */
+}
+
+/* Effet hover sur le bouton */
+button.btn-primary:hover {
+    background-color: #0e381f;
+    transform: scale(1.05); /* Léger zoom */
+}
+
+.select2-container .select2-selection--single {
+    height: calc(2.5rem + 2px); /* Aligner avec Bootstrap */
+    line-height: 2.5rem;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #495057; /* Couleur du texte */
+}
+
+/* Style du conteneur contenant l'icône */
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .form-container {
+        width: 95%; /* Réduction de la largeur pour petits écrans */
+        padding: 15px;
+    }
+    .form-floating input,
+    .form-floating textarea {
+        font-size: 14px; /* Ajustement de la taille des champs */
+    }
+    button.btn-primary {
+        font-size: 16px; /* Ajustement de la taille du bouton */
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        border-radius: 10px; /* Coins plus arrondis */
+        padding: 10px;
+    }
+    .form-floating input,
+    .form-floating textarea {
+        font-size: 12px; /* Réduction de la taille des champs */
+    }
+    button.btn-primary {
+        font-size: 14px; /* Ajustement pour très petits écrans */
+        max-width: 150px; /* Réduction de la largeur max */
+    }
+}

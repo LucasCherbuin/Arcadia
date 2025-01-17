@@ -1,0 +1,107 @@
+/* Style du conteneur contenant l'icône */
+.ph.ph-plus-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px; /* Taille du bouton (largeur) */
+    height: 50px; /* Taille du bouton (hauteur) */
+    background-color: #ffffff; /* Fond blanc pour le cercle */
+    border: 2px solid #008000; /* Bordure verte */
+    border-radius: 50%; /* Cercle parfait */
+    text-decoration: none; /* Supprime la décoration (pour un lien) */
+    transition: all 0.3s ease; /* Animation douce au survol */
+    color: #008000; /* Couleur de l'icône */
+    font-size: 24px; /* Taille de l'icône */
+}
+
+/* Effet au survol */
+.ph.ph-plus-circle:hover {
+    background-color: #008000; /* Fond vert */
+    color: #ffffff; /* Icône blanche */
+}
+
+
+.button-switch {
+    display: flex;
+    margin-bottom: 1rem;
+}
+.button-switch .btn {
+    flex: 1;
+    border-radius: 0;
+}
+.button-switch .btn:first-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.button-switch .btn:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.button-switch .btn.selected {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Styles pour le tableau */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+thead tr {
+    background-color: #4caf50;
+    color: white;
+    text-align: left;
+    font-weight: bold;
+}
+
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+td, th {
+    padding: 12px 15px;
+}
+
+/* Styles pour le switch */
+.button-group {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #e0e0e0;
+    color: #000;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.button.selected {
+    background-color: #4caf50;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .consultation-header, .consultation-item {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

@@ -1,0 +1,80 @@
+body {
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    align-items: center;
+    background-color: #8CB093; /* Couleur de fond */
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+}
+
+.contact-container {
+    background-color: #ffffff; /* Fond blanc pour le formulaire */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; /* Limite la largeur du formulaire */
+}
+
+.contact-container h1 {
+    color: #333333; /* Couleur du texte du titre */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contact-container .form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.contact-container .form-control:focus {
+    border-color: #4CAF50; /* Couleur de bordure au focus */
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5); /* Ombre au focus */
+}
+
+.contact-container textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+.contact-container button {
+    background-color: #4CAF50; /* Couleur du bouton */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-container button:hover {
+    background-color: #45a049; /* Couleur du bouton au survol */
+}
+
+.contact-container button:active {
+    background-color: #3e8e41; /* Couleur du bouton lorsque cliqué */
+}
+
+@media (max-width: 600px) {
+    .contact-container {
+        padding: 20px;
+    }
+
+    .contact-container h1 {
+        font-size: 24px;
+    }
+
+    .contact-container .form-control,
+    .contact-container button {
+        font-size: 14px;
+    }
+}

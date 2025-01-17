@@ -1,0 +1,67 @@
+/* Conteneur principal du menu utilisateur */
+#root {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Deux colonnes */
+    gap: 20px;
+    max-width: 800px; /* Largeur maximale du menu */
+    margin: 0 auto; /* Centrer le menu horizontalement */
+    text-align: center;
+    padding: 20px;
+}
+
+/* Boutons dans le menu utilisateur */
+#root .button-menu {
+    text-decoration: none;
+    background: #fff;
+    color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Icônes dans les boutons du menu utilisateur */
+#root .button-menu i {
+    font-size: 2rem; /* Taille des icônes */
+    margin-bottom: 10px;
+    color: #4a7023; /* Couleur verte des icônes */
+}
+
+/* Description sous les icônes dans le menu utilisateur */
+#root .button-menu span {
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* Effet hover sur les boutons du menu utilisateur */
+#root .button-menu:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Dernier bouton spécifique du menu utilisateur */
+#root .button-menu:last-child {
+    grid-column: span 2; /* Occupe toute la ligne */
+    background: #ffefc3;
+    color: #333;
+}
+
+/* Responsive design pour petits écrans */
+@media (max-width: 768px) {
+    #root {
+        grid-template-columns: 1fr; /* Une seule colonne sur petits écrans */
+        padding: 10px;
+    }
+
+    #root .button-menu {
+        padding: 15px;
+    }
+
+    #root .button-menu i {
+        font-size: 1.5rem;
+    }
+}

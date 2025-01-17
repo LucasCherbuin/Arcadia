@@ -1,0 +1,139 @@
+body {
+  margin: 120px;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  color: #333;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Jersey 10', sans-serif;
+}
+
+
+title {
+  display: flex;
+  text-align: center;
+}
+
+.avis {
+  background-color: #8CB093;
+}
+
+.zoo-home-page {
+  display: block; /* S'assurer que la page se comporte comme un élément en bloc */
+  margin: 0;
+  padding: 0;
+}
+
+.text-block {
+  border-radius: 5%;  /* Pour un bouton rond */
+  padding: 70px;
+  background-color: #8CB093;  
+  margin: 20px auto;
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 900px;
+}
+
+.carousel img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+
+.avis-section {
+  margin: 20px auto;
+  max-width: 500px;
+}
+
+.card {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.card-body {
+  text-align: left;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 1rem;
+}
+
+/* Le conteneur du carrousel */
+.carousel {
+  position: relative; /* Positionner les flèches par rapport au carrousel */
+  margin-top: 20px; /* Ajouter un espace si nécessaire */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 50%; /* Centrer verticalement */
+  transform: translateY(-50%); /* Centrer avec précision */
+  background-color: #ADAE46;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  z-index: 10; /* Assurez-vous qu'elles sont au-dessus */
+}
+
+.carousel-control-prev {
+  top: 10px; /* Ajustez la distance par rapport au haut */
+  left: 10px; /* Ajustez la distance par rapport à la gauche */
+  bottom: auto; /* Supprime la position par défaut */
+  transform: none; /* Désactive les transformations par défaut */
+  z-index: 10; /* Assurez-vous que la flèche reste au-dessus des images */
+}
+
+.carousel-control-next {
+  top: 10px; /* Ajustez la distance par rapport au haut */
+  right: 10px; /* Ajustez la distance par rapport à la droite */
+  bottom: auto; /* Supprime la position par défaut */
+  transform: none; /* Désactive les transformations par défaut */
+  z-index: 10; /* Assurez-vous que la flèche reste au-dessus des images */
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background-color: #6D6E30; /* Effet au survol */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  display: block;
+  width: 30px; /* Ajustez la largeur de l'icône */
+  height: 30px; /* Ajustez la hauteur de l'icône */
+  background-size: 100%; /* Assurez-vous que l'icône s'adapte bien */
+}
+
+
+.avisCarrousel, .card {
+ background-color: #8CB093;
+}
+
+@media (max-width: 768px) {
+  .consultation-header, .consultation-item {
+      font-size: 14px;
+      padding: 10px;
+  }
+}
