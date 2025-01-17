@@ -1,0 +1,27 @@
+{{ form_start(form, {'attr': {'class': 'form-group'}}) }}
+
+    <!-- Champs gérés automatiquement -->
+    {{ form_errors(form) }}
+
+    <!-- habitat -->
+    <div class="mb-3">
+        {{ form_label(form.habitat, 'habitat', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.habitat, {'attr': {'class': 'form-select'}}) }}
+        {{ form_errors(form.habitat) }}
+    </div>
+
+    <!-- commentaire -->
+    <div class="mb-3">
+        {{ form_label(form.commentaire, 'commentaire', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.commentaire, {'attr': {'class': 'form-control', 'id': 'heure-ouverture'}}) }}
+        {{ form_errors(form.commentaire) }}
+    </div>
+
+    <!-- Bouton de soumission -->
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">
+            {{ button_label|default('Enregistrer') }}
+        </button>
+    </div>
+
+{{ form_end(form) }}

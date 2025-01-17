@@ -1,0 +1,51 @@
+{% extends 'headerFooter.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/headerFooter.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/tableau.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="w-100" style="max-width: 800px;"> <!-- Augmenté max-width pour plus de colonnes -->
+        <!-- Tableau combiné pour les animaux et les employés -->
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Nom de l'animal</th>
+                        <th>Race</th>
+                        <th>Nourriture</th>
+                        <th>Quantité</th>
+                        <th>Date</th>
+                        <th>Email utilisateur</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for animal in preparedAnimal %}
+                        <tr>
+                            <td>{{ animal.prenom }}</td>
+                            <td>{{ animal.race.label }}</td>
+                            {% set employee = preparedEmployee[loop.index0] %}
+                            <td>{{ employee.nourriture }}</td>
+                            <td>{{ employee.quantite }}</td>
+                            <td>{{ employee.date }}</td>
+                            <td>{{ employee.utilisateur.email }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
