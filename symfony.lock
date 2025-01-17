@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "doctrine/annotations": {
         "version": "2.0",
         "recipe": {
@@ -8,6 +9,8 @@
             "ref": "64d8583af5ea57b7afa4aba4b159907f3a148b05"
         }
     },
+=======
+>>>>>>> 82979460f8a084802515ce4ce31cbaac6128233c
     "doctrine/doctrine-bundle": {
         "version": "2.13",
         "recipe": {
@@ -22,6 +25,7 @@
             "./src/Repository/.gitignore"
         ]
     },
+<<<<<<< HEAD
     "doctrine/doctrine-fixtures-bundle": {
         "version": "4.0",
         "recipe": {
@@ -34,6 +38,8 @@
             "./src/DataFixtures/AppFixtures.php"
         ]
     },
+=======
+>>>>>>> 82979460f8a084802515ce4ce31cbaac6128233c
     "doctrine/doctrine-migrations-bundle": {
         "version": "3.3",
         "recipe": {
@@ -47,6 +53,7 @@
             "./migrations/.gitignore"
         ]
     },
+<<<<<<< HEAD
     "nelmio/cors-bundle": {
         "version": "2.5",
         "recipe": {
@@ -59,6 +66,8 @@
             "./config/packages/nelmio_cors.yaml"
         ]
     },
+=======
+>>>>>>> 82979460f8a084802515ce4ce31cbaac6128233c
     "phpunit/phpunit": {
         "version": "9.6",
         "recipe": {
@@ -73,6 +82,7 @@
             "./tests/bootstrap.php"
         ]
     },
+<<<<<<< HEAD
     "snc/redis-bundle": {
         "version": "4.8",
         "recipe": {
@@ -85,6 +95,8 @@
             "./config/packages/snc_redis.yaml"
         ]
     },
+=======
+>>>>>>> 82979460f8a084802515ce4ce31cbaac6128233c
     "symfony/asset-mapper": {
         "version": "7.1",
         "recipe": {
@@ -155,6 +167,7 @@
             "./src/Kernel.php"
         ]
     },
+<<<<<<< HEAD
     "symfony/google-mailer": {
         "version": "7.1",
         "recipe": {
@@ -164,6 +177,8 @@
             "ref": "f8fd4ddb9b477510f8f4bce2b9c054ab428c0120"
         }
     },
+=======
+>>>>>>> 82979460f8a084802515ce4ce31cbaac6128233c
     "symfony/mailer": {
         "version": "7.1",
         "recipe": {
@@ -262,6 +277,7 @@
             "./config/routes/security.yaml"
         ]
     },
+<<<<<<< HEAD
     "symfony/sendgrid-mailer": {
         "version": "7.1",
         "recipe": {
@@ -271,6 +287,8 @@
             "ref": "224aedffb66812dc2b0965dabc14d5f800941da6"
         }
     },
+=======
+>>>>>>> 82979460f8a084802515ce4ce31cbaac6128233c
     "symfony/stimulus-bundle": {
         "version": "2.20",
         "recipe": {

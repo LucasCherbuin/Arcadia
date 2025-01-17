@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Route pour l'accueil
 app_accueil:
   path: /
@@ -326,3 +327,10 @@ app_serviceEmployee_edit:
   requirements:
     id: '\d+'
   methods: [GET, POST]
+=======
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+>>>>>>> 82979460f8a084802515ce4ce31cbaac6128233c

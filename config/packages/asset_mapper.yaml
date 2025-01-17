@@ -2,4 +2,8 @@ framework:
     asset_mapper:
         # The paths to make available to the asset mapper.
         paths:
+<<<<<<< HEAD
             - public/styles/
+=======
+            - assets/
+>>>>>>> 82979460f8a084802515ce4ce31cbaac6128233c
