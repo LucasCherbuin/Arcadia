@@ -3,6 +3,7 @@
 
 >>>>>>> 82979460f8a084802515ce4ce31cbaac6128233c
 ###> symfony/framework-bundle ###
+/.env
 /.env.local
 /.env.local.php
 /.env.*.local
