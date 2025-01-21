@@ -1,18 +1,10 @@
-/* headerFooter.css */
-html {
-    font-family: 'Jersey 10', sans-serif;
-}
-/* Styles du header */
-
 header {
     background: linear-gradient(to right, #5CADD6, #305A70);
     padding: 1rem;
     position: relative; /* Centrer le texte */
 }
 
-body {
-    font-family: 'Jersey 10', sans-serif; /* Applique la police à tout le document */
-}
+
 
 header, footer, main {
     font-family: inherit; /* Hérite de la police définie dans le body */
@@ -175,6 +167,19 @@ footer .footer-links a:hover {
 .social-links {
     flex-direction: row; /* Par défaut, horizontal */
 }
+@font-face {
+    font-family: 'Jersey 10';
+    src: url('/fonts/jersey10.woff2') format('woff2'),
+         url('/fonts/jersey10.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Jersey 10', sans-serif;
+}
+
+
 
 /* Réseaux sociaux verticaux sur petits écrans */
 @media (max-width: 768px) {

@@ -691,7 +691,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.lzctaKh"/>
+      <argument type="service" id=".service_locator.fJy2UNC"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3637,7 +3637,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.lzctaKh"/>
+      <argument type="service" id=".service_locator.fJy2UNC"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -8674,6 +8674,30 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.6QoW8jy" method="withContext"/>
     </service>
+    <service id=".service_locator.PuhjwKK" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="serviceRepository" type="service_closure" id="App\Repository\ServiceRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.PuhjwKK.App\Controller\PagesController::serviceVisiteur()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\PagesController::serviceVisiteur()"/>
+      <argument>App\Controller\PagesController::serviceVisiteur()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.PuhjwKK" method="withContext"/>
+    </service>
+    <service id=".service_locator.yrnANkn" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="mailerService" type="service_closure" id="App\Service\MailerService"/>
+      </argument>
+    </service>
+    <service id=".service_locator.yrnANkn.App\Controller\PagesController::contact()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\PagesController::contact()"/>
+      <argument>App\Controller\PagesController::contact()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.yrnANkn" method="withContext"/>
+    </service>
     <service id=".service_locator.mXDaS5b" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8790,7 +8814,7 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.P.blNFL" method="withContext"/>
     </service>
-    <service id=".service_locator.lzctaKh" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.fJy2UNC" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.4wc4Ag1.kernel::registerContainerConfiguration()"/>
@@ -8826,6 +8850,8 @@
         <argument key="App\Controller\PagesController::habitatVisiteur" type="service_closure" id=".service_locator.O5x8RWD.App\Controller\PagesController::habitatVisiteur()"/>
         <argument key="App\Controller\PagesController::animalVisiteur" type="service_closure" id=".service_locator.HplWhsb.App\Controller\PagesController::animalVisiteur()"/>
         <argument key="App\Controller\PagesController::incrementClick" type="service_closure" id=".service_locator.6QoW8jy.App\Controller\PagesController::incrementClick()"/>
+        <argument key="App\Controller\PagesController::serviceVisiteur" type="service_closure" id=".service_locator.PuhjwKK.App\Controller\PagesController::serviceVisiteur()"/>
+        <argument key="App\Controller\PagesController::contact" type="service_closure" id=".service_locator.yrnANkn.App\Controller\PagesController::contact()"/>
         <argument key="App\Controller\SecurityController::login" type="service_closure" id=".service_locator.mXDaS5b.App\Controller\SecurityController::login()"/>
         <argument key="App\Controller\ServiceController::show" type="service_closure" id=".service_locator.HQ6Z48r.App\Controller\ServiceController::show()"/>
         <argument key="App\Controller\ServiceController::edit" type="service_closure" id=".service_locator.HQ6Z48r.App\Controller\ServiceController::edit()"/>
@@ -8871,6 +8897,8 @@
         <argument key="App\Controller\PagesController:habitatVisiteur" type="service_closure" id=".service_locator.O5x8RWD.App\Controller\PagesController::habitatVisiteur()"/>
         <argument key="App\Controller\PagesController:animalVisiteur" type="service_closure" id=".service_locator.HplWhsb.App\Controller\PagesController::animalVisiteur()"/>
         <argument key="App\Controller\PagesController:incrementClick" type="service_closure" id=".service_locator.6QoW8jy.App\Controller\PagesController::incrementClick()"/>
+        <argument key="App\Controller\PagesController:serviceVisiteur" type="service_closure" id=".service_locator.PuhjwKK.App\Controller\PagesController::serviceVisiteur()"/>
+        <argument key="App\Controller\PagesController:contact" type="service_closure" id=".service_locator.yrnANkn.App\Controller\PagesController::contact()"/>
         <argument key="App\Controller\SecurityController:login" type="service_closure" id=".service_locator.mXDaS5b.App\Controller\SecurityController::login()"/>
         <argument key="App\Controller\ServiceController:show" type="service_closure" id=".service_locator.HQ6Z48r.App\Controller\ServiceController::show()"/>
         <argument key="App\Controller\ServiceController:edit" type="service_closure" id=".service_locator.HQ6Z48r.App\Controller\ServiceController::edit()"/>
@@ -11180,7 +11208,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.lzctaKh"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.fJy2UNC"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -11245,6 +11273,8 @@
     <service id=".service_locator.N2zfAud" alias=".service_locator.M1tMNMd"/>
     <service id=".service_locator.m8yEyiY" alias=".service_locator.O5x8RWD"/>
     <service id=".service_locator.9RpNYkw" alias=".service_locator.HplWhsb"/>
+    <service id=".service_locator.XmOAYGv" alias=".service_locator.PuhjwKK"/>
+    <service id=".service_locator.BUov7AK" alias=".service_locator.yrnANkn"/>
     <service id=".service_locator...2Ndi3" alias=".service_locator.mXDaS5b"/>
     <service id=".service_locator.qPCyw9l" alias=".service_locator.HQ6Z48r"/>
     <service id=".service_locator.CKuCekY" alias=".service_locator..V3RrT8"/>

@@ -233,4 +233,60 @@ class PagesController extends AbstractController
 
         return new JsonResponse(['clicks' => $clicks]);
     }
+
+    #[Route('/serviceVisiteur', name: 'app_service_visiteur', methods: ['GET'])]
+    public function serviceVisiteur(ServiceRepository $serviceRepository): Response
+    {
+        $services = $serviceRepository->findAll();
+        $preparedServices = array_map(fn($service) => [
+            'id' => $service->getId(),
+            'nom' => $service->getNom(),
+            'description' => $service->getDescription(),
+            'image' => $service->getImage()->getPath(),
+        ], $services);
+
+        return $this->render('pages_visiteurs/services.html.twig', [
+            'services' => $preparedServices,
+        ]);
+    }
+
+    #[Route('/contact', name: 'app_contact', methods: ['GET', 'POST'])]
+    public function contact(Request $request, MailerService $mailerService): Response
+    {
+        $form = $this->createForm(ContactType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            try {
+                $mailerService->sendEmail(
+                    $data['email'],
+                    'arcadiazoo@outlook.fr',
+                    $data['Titre'],
+                    textBody: $data['votre_demande']
+                );
+
+                $mailerService->sendEmail(
+                    'arcadiazoo@outlook.fr',
+                    $data['email'],
+                    'Confirmation de votre demande de contact',
+                    htmlBody: "<p>Madame, Monsieur,</p>
+                            <p>Votre demande concernant : <strong>{$data['Titre']}</strong> a bien été envoyée.</p>
+                            <p>Nous vous remercions de nous avoir contacté. Notre équipe reviendra vers vous dès que possible.</p>
+                            <p>Cordialement,<br>L'équipe du Zoo d'Arcadia</p>"
+                );
+
+                $this->addFlash('success', 'Votre demande a été envoyée avec succès.');
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'Une erreur est survenue lors de l\'envoi de votre demande.');
+            }
+
+            return $this->redirectToRoute('app_contact');
+        }
+
+        return $this->render('pages_visiteurs/contact.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 }

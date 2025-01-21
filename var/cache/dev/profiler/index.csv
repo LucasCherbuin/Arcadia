@@ -43,3 +43,12 @@ abe514,127.0.0.1,POST,http://127.0.0.1:8000/animal/click/2,1737464728,,200,reque
 874d6d,127.0.0.1,GET,http://127.0.0.1:8000/admin,1737464744,,200,request
 b5ec8c,127.0.0.1,GET,http://127.0.0.1:8000/admin/compteRendu,1737464747,,200,request
 91a2d7,127.0.0.1,GET,http://127.0.0.1:8000/admin/consultation,1737464749,,200,request
+3f133b,127.0.0.1,GET,http://127.0.0.1:8000/,1737465686,,200,request
+dd8528,127.0.0.1,GET,http://127.0.0.1:8000/serviceVisiteur,1737465695,92eebb,500,request
+92eebb,127.0.0.1,GET,http://127.0.0.1:8000/serviceVisiteur,1737465695,,500,request
+b17adf,127.0.0.1,GET,http://127.0.0.1:8000/,1737465699,,200,request
+1fee16,127.0.0.1,GET,http://127.0.0.1:8000/habitatVisiteur,1737465702,,200,request
+74a9eb,127.0.0.1,GET,http://127.0.0.1:8000/contact,1737465704,dfdc1a,500,request
+dfdc1a,127.0.0.1,GET,http://127.0.0.1:8000/contact,1737465704,,500,request
+2cba45,127.0.0.1,GET,http://127.0.0.1:8000/contact,1737465808,,200,request
+6a6e84,127.0.0.1,GET,http://127.0.0.1:8000/serviceVisiteur,1737465813,,200,request
