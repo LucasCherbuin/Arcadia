@@ -62,7 +62,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
 
     // Vérifier si l'utilisateur a des rôles
     if ($user instanceof Utilisateur) {
-        $roles = $user->getRoles();
+        $roles = $user->getRole();
     } else {
         $roles = [];
     }

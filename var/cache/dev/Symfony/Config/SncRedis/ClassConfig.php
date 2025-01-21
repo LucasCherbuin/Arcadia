@@ -22,7 +22,7 @@ class ClassConfig
     private $dataCollector;
     private $monologHandler;
     private $_usedProperties = [];
-    
+
     /**
      * @default 'Predis\\Client'
      * @param ParamConfigurator|mixed $value
@@ -32,10 +32,10 @@ class ClassConfig
     {
         $this->_usedProperties['client'] = true;
         $this->client = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default 'Predis\\Configuration\\Options'
      * @param ParamConfigurator|mixed $value
@@ -45,10 +45,10 @@ class ClassConfig
     {
         $this->_usedProperties['clientOptions'] = true;
         $this->clientOptions = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default 'Predis\\Connection\\Parameters'
      * @param ParamConfigurator|mixed $value
@@ -58,10 +58,10 @@ class ClassConfig
     {
         $this->_usedProperties['connectionParameters'] = true;
         $this->connectionParameters = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default 'Snc\\RedisBundle\\Client\\Predis\\Connection\\ConnectionFactory'
      * @param ParamConfigurator|mixed $value
@@ -71,10 +71,10 @@ class ClassConfig
     {
         $this->_usedProperties['connectionFactory'] = true;
         $this->connectionFactory = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default 'Snc\\RedisBundle\\Client\\Predis\\Connection\\ConnectionWrapper'
      * @param ParamConfigurator|mixed $value
@@ -84,10 +84,10 @@ class ClassConfig
     {
         $this->_usedProperties['connectionWrapper'] = true;
         $this->connectionWrapper = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default 'Redis'
      * @param ParamConfigurator|mixed $value
@@ -97,10 +97,10 @@ class ClassConfig
     {
         $this->_usedProperties['phpredisClient'] = true;
         $this->phpredisClient = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default 'Relay\\Relay'
      * @param ParamConfigurator|mixed $value
@@ -110,10 +110,10 @@ class ClassConfig
     {
         $this->_usedProperties['relayClient'] = true;
         $this->relayClient = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default 'RedisCluster'
      * @param ParamConfigurator|mixed $value
@@ -123,10 +123,10 @@ class ClassConfig
     {
         $this->_usedProperties['phpredisClusterclient'] = true;
         $this->phpredisClusterclient = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default 'Snc\\RedisBundle\\Logger\\RedisLogger'
      * @param ParamConfigurator|mixed $value
@@ -136,10 +136,10 @@ class ClassConfig
     {
         $this->_usedProperties['logger'] = true;
         $this->logger = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default 'Snc\\RedisBundle\\DataCollector\\RedisDataCollector'
      * @param ParamConfigurator|mixed $value
@@ -149,10 +149,10 @@ class ClassConfig
     {
         $this->_usedProperties['dataCollector'] = true;
         $this->dataCollector = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default 'Monolog\\Handler\\RedisHandler'
      * @param ParamConfigurator|mixed $value
@@ -162,10 +162,10 @@ class ClassConfig
     {
         $this->_usedProperties['monologHandler'] = true;
         $this->monologHandler = $value;
-    
+
         return $this;
     }
-    
+
     public function __construct(array $value = [])
     {
         if (array_key_exists('client', $value)) {
@@ -173,72 +173,72 @@ class ClassConfig
             $this->client = $value['client'];
             unset($value['client']);
         }
-    
+
         if (array_key_exists('client_options', $value)) {
             $this->_usedProperties['clientOptions'] = true;
             $this->clientOptions = $value['client_options'];
             unset($value['client_options']);
         }
-    
+
         if (array_key_exists('connection_parameters', $value)) {
             $this->_usedProperties['connectionParameters'] = true;
             $this->connectionParameters = $value['connection_parameters'];
             unset($value['connection_parameters']);
         }
-    
+
         if (array_key_exists('connection_factory', $value)) {
             $this->_usedProperties['connectionFactory'] = true;
             $this->connectionFactory = $value['connection_factory'];
             unset($value['connection_factory']);
         }
-    
+
         if (array_key_exists('connection_wrapper', $value)) {
             $this->_usedProperties['connectionWrapper'] = true;
             $this->connectionWrapper = $value['connection_wrapper'];
             unset($value['connection_wrapper']);
         }
-    
+
         if (array_key_exists('phpredis_client', $value)) {
             $this->_usedProperties['phpredisClient'] = true;
             $this->phpredisClient = $value['phpredis_client'];
             unset($value['phpredis_client']);
         }
-    
+
         if (array_key_exists('relay_client', $value)) {
             $this->_usedProperties['relayClient'] = true;
             $this->relayClient = $value['relay_client'];
             unset($value['relay_client']);
         }
-    
+
         if (array_key_exists('phpredis_clusterclient', $value)) {
             $this->_usedProperties['phpredisClusterclient'] = true;
             $this->phpredisClusterclient = $value['phpredis_clusterclient'];
             unset($value['phpredis_clusterclient']);
         }
-    
+
         if (array_key_exists('logger', $value)) {
             $this->_usedProperties['logger'] = true;
             $this->logger = $value['logger'];
             unset($value['logger']);
         }
-    
+
         if (array_key_exists('data_collector', $value)) {
             $this->_usedProperties['dataCollector'] = true;
             $this->dataCollector = $value['data_collector'];
             unset($value['data_collector']);
         }
-    
+
         if (array_key_exists('monolog_handler', $value)) {
             $this->_usedProperties['monologHandler'] = true;
             $this->monologHandler = $value['monolog_handler'];
             unset($value['monolog_handler']);
         }
-    
+
         if ([] !== $value) {
             throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
         }
     }
-    
+
     public function toArray(): array
     {
         $output = [];
@@ -275,7 +275,7 @@ class ClassConfig
         if (isset($this->_usedProperties['monologHandler'])) {
             $output['monolog_handler'] = $this->monologHandler;
         }
-    
+
         return $output;
     }
 

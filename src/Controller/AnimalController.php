@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 
@@ -37,7 +38,7 @@ class AnimalController extends AbstractController
     }
 
     #[Route(path: '/new', name: 'app_animal_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, ImageUploadService $imageUploadService): Response
     {
         $animal = new Animal();
         $form = $this->createForm(AnimalType::class, $animal);
@@ -63,7 +64,7 @@ class AnimalController extends AbstractController
             if ($imageFile) {
                 try {
                     // Charger le fichier et récupérer le chemin relatif
-                    $filePath = $this->imageUploadService->upload($imageFile, 'animaux');
+                    $filePath = $imageUploadService->upload($imageFile, 'animaux');
             
                     // Créer une nouvelle entité Image
                     $image = new Image();
@@ -76,7 +77,6 @@ class AnimalController extends AbstractController
                     $this->addFlash('error', 'Erreur lors du téléchargement de l\'image');
                 }
             }
-            
 
             // Sauvegarde de l'animal
             $entityManager->persist($animal);
@@ -90,6 +90,8 @@ class AnimalController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
 
     #[Route(path: '/{id}', name: 'app_animal_show', methods: ['GET'])]
     public function show(Animal $animal): Response

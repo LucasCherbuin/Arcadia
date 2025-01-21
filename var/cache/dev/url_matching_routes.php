@@ -91,27 +91,30 @@ return [
                     .'|employeRepas/(\\d+)(*:498)'
                     .'|serviceEdit/(\\d+)/edit(*:528)'
                 .')'
-                .'|/admin(?'
-                    .'|/(?'
-                        .'|habitat/(?'
-                            .'|(\\d+)(*:566)'
-                            .'|(\\d+)/edit(*:584)'
-                            .'|(\\d+)/delete(*:604)'
+                .'|/a(?'
+                    .'|dmin(?'
+                        .'|/(?'
+                            .'|habitat/(?'
+                                .'|(\\d+)(*:569)'
+                                .'|(\\d+)/edit(*:587)'
+                                .'|(\\d+)/delete(*:607)'
+                            .')'
+                            .'|service/(?'
+                                .'|(\\d+)(*:632)'
+                                .'|(\\d+)/delete(*:652)'
+                            .')'
+                            .'|utilisateur/(?'
+                                .'|(\\d+)(*:681)'
+                                .'|(\\d+)/edit(*:699)'
+                                .'|(\\d+)/delete(*:719)'
+                            .')'
                         .')'
-                        .'|service/(?'
-                            .'|(\\d+)(*:629)'
-                            .'|(\\d+)/delete(*:649)'
-                        .')'
-                        .'|utilisateur/(?'
-                            .'|(\\d+)(*:678)'
-                            .'|(\\d+)/edit(*:696)'
-                            .'|(\\d+)/delete(*:716)'
-                        .')'
+                        .'|Success/([^/]++)(*:745)'
                     .')'
-                    .'|Success/([^/]++)(*:742)'
+                    .'|nimal/click/([^/]++)(*:774)'
                 .')'
-                .'|/service/(\\d+)/edit(*:770)'
-                .'|/veterinaire/RapportVeterinaire/(\\d+)(*:815)'
+                .'|/service/(\\d+)/edit(*:802)'
+                .'|/veterinaire/RapportVeterinaire/(\\d+)(*:847)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -136,17 +139,18 @@ return [
         459 => [[['_route' => 'app_avis_validate', '_controller' => 'App\\Controller\\AvisController::validate'], ['id'], null, null, false, false, null]],
         498 => [[['_route' => 'app_employeeRepas_show', '_controller' => 'App\\Controller\\EmployeeController::show'], ['id'], ['GET' => 0], null, false, true, null]],
         528 => [[['_route' => 'app_serviceEmployee_edit', '_controller' => 'App\\Controller\\ServiceController::editEmployee'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        566 => [[['_route' => 'app_habitat_show', '_controller' => 'App\\Controller\\HabitatController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        584 => [[['_route' => 'app_habitat_edit', '_controller' => 'App\\Controller\\HabitatController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        604 => [[['_route' => 'app_habitat_delete', '_controller' => 'App\\Controller\\HabitatController::delete'], ['id'], ['POST' => 0], null, false, false, null]],
-        629 => [[['_route' => 'app_service_show', '_controller' => 'App\\Controller\\ServiceController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        649 => [[['_route' => 'app_service_delete', '_controller' => 'App\\Controller\\ServiceController::delete'], ['id'], ['POST' => 0], null, false, false, null]],
-        678 => [[['_route' => 'app_utilisateur_show', '_controller' => 'App\\Controller\\UtilisateurController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        696 => [[['_route' => 'app_utilisateur_edit', '_controller' => 'App\\Controller\\UtilisateurController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        716 => [[['_route' => 'app_utilisateur_delete', '_controller' => 'App\\Controller\\UtilisateurController::delete'], ['id'], ['POST' => 0], null, false, false, null]],
-        742 => [[['_route' => 'app_admin_success', '_controller' => 'App\\Controller\\AdminUtilisateurController::success'], ['id'], null, null, false, true, null]],
-        770 => [[['_route' => 'app_service_edit', '_controller' => 'App\\Controller\\ServiceController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        815 => [
+        569 => [[['_route' => 'app_habitat_show', '_controller' => 'App\\Controller\\HabitatController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        587 => [[['_route' => 'app_habitat_edit', '_controller' => 'App\\Controller\\HabitatController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        607 => [[['_route' => 'app_habitat_delete', '_controller' => 'App\\Controller\\HabitatController::delete'], ['id'], ['POST' => 0], null, false, false, null]],
+        632 => [[['_route' => 'app_service_show', '_controller' => 'App\\Controller\\ServiceController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        652 => [[['_route' => 'app_service_delete', '_controller' => 'App\\Controller\\ServiceController::delete'], ['id'], ['POST' => 0], null, false, false, null]],
+        681 => [[['_route' => 'app_utilisateur_show', '_controller' => 'App\\Controller\\UtilisateurController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        699 => [[['_route' => 'app_utilisateur_edit', '_controller' => 'App\\Controller\\UtilisateurController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        719 => [[['_route' => 'app_utilisateur_delete', '_controller' => 'App\\Controller\\UtilisateurController::delete'], ['id'], ['POST' => 0], null, false, false, null]],
+        745 => [[['_route' => 'app_admin_success', '_controller' => 'App\\Controller\\AdminUtilisateurController::success'], ['id'], null, null, false, true, null]],
+        774 => [[['_route' => 'animal_click', '_controller' => 'App\\Controller\\PagesController::incrementClick'], ['id'], null, null, false, true, null]],
+        802 => [[['_route' => 'app_service_edit', '_controller' => 'App\\Controller\\ServiceController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        847 => [
             [['_route' => 'app_veterinaire_show', '_controller' => 'App\\Controller\\VeterinaireController::show'], ['id'], ['GET' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

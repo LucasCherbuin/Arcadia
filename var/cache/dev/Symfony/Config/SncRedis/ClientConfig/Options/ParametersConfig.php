@@ -18,7 +18,7 @@ class ParametersConfig
     private $logging;
     private $sslContext;
     private $_usedProperties = [];
-    
+
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -28,10 +28,10 @@ class ParametersConfig
     {
         $this->_usedProperties['database'] = true;
         $this->database = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -41,10 +41,10 @@ class ParametersConfig
     {
         $this->_usedProperties['username'] = true;
         $this->username = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -54,10 +54,10 @@ class ParametersConfig
     {
         $this->_usedProperties['password'] = true;
         $this->password = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -67,10 +67,10 @@ class ParametersConfig
     {
         $this->_usedProperties['sentinelUsername'] = true;
         $this->sentinelUsername = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -80,10 +80,10 @@ class ParametersConfig
     {
         $this->_usedProperties['sentinelPassword'] = true;
         $this->sentinelPassword = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default true
      * @param ParamConfigurator|bool $value
@@ -93,10 +93,10 @@ class ParametersConfig
     {
         $this->_usedProperties['logging'] = true;
         $this->logging = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -107,10 +107,10 @@ class ParametersConfig
     {
         $this->_usedProperties['sslContext'] = true;
         $this->sslContext = $value;
-    
+
         return $this;
     }
-    
+
     public function __construct(array $value = [])
     {
         if (array_key_exists('database', $value)) {
@@ -118,48 +118,48 @@ class ParametersConfig
             $this->database = $value['database'];
             unset($value['database']);
         }
-    
+
         if (array_key_exists('username', $value)) {
             $this->_usedProperties['username'] = true;
             $this->username = $value['username'];
             unset($value['username']);
         }
-    
+
         if (array_key_exists('password', $value)) {
             $this->_usedProperties['password'] = true;
             $this->password = $value['password'];
             unset($value['password']);
         }
-    
+
         if (array_key_exists('sentinel_username', $value)) {
             $this->_usedProperties['sentinelUsername'] = true;
             $this->sentinelUsername = $value['sentinel_username'];
             unset($value['sentinel_username']);
         }
-    
+
         if (array_key_exists('sentinel_password', $value)) {
             $this->_usedProperties['sentinelPassword'] = true;
             $this->sentinelPassword = $value['sentinel_password'];
             unset($value['sentinel_password']);
         }
-    
+
         if (array_key_exists('logging', $value)) {
             $this->_usedProperties['logging'] = true;
             $this->logging = $value['logging'];
             unset($value['logging']);
         }
-    
+
         if (array_key_exists('ssl_context', $value)) {
             $this->_usedProperties['sslContext'] = true;
             $this->sslContext = $value['ssl_context'];
             unset($value['ssl_context']);
         }
-    
+
         if ([] !== $value) {
             throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
         }
     }
-    
+
     public function toArray(): array
     {
         $output = [];
@@ -184,7 +184,7 @@ class ParametersConfig
         if (isset($this->_usedProperties['sslContext'])) {
             $output['ssl_context'] = $this->sslContext;
         }
-    
+
         return $output;
     }
 

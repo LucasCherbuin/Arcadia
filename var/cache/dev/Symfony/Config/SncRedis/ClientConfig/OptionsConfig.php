@@ -27,7 +27,7 @@ class OptionsConfig
     private $slaveFailover;
     private $parameters;
     private $_usedProperties = [];
-    
+
     /**
      * @return $this
      */
@@ -35,10 +35,10 @@ class OptionsConfig
     {
         $this->_usedProperties['commands'] = true;
         $this->commands[$name] = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default false
      * @param ParamConfigurator|bool $value
@@ -48,10 +48,10 @@ class OptionsConfig
     {
         $this->_usedProperties['connectionAsync'] = true;
         $this->connectionAsync = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default false
      * @param ParamConfigurator|bool $value
@@ -61,10 +61,10 @@ class OptionsConfig
     {
         $this->_usedProperties['connectionPersistent'] = true;
         $this->connectionPersistent = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default 5
      * @param ParamConfigurator|mixed $value
@@ -74,10 +74,10 @@ class OptionsConfig
     {
         $this->_usedProperties['connectionTimeout'] = true;
         $this->connectionTimeout = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -87,10 +87,10 @@ class OptionsConfig
     {
         $this->_usedProperties['readWriteTimeout'] = true;
         $this->readWriteTimeout = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default false
      * @param ParamConfigurator|bool $value
@@ -100,10 +100,10 @@ class OptionsConfig
     {
         $this->_usedProperties['iterableMultibulk'] = true;
         $this->iterableMultibulk = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default true
      * @param ParamConfigurator|bool $value
@@ -113,10 +113,10 @@ class OptionsConfig
     {
         $this->_usedProperties['throwErrors'] = true;
         $this->throwErrors = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default 'default'
      * @param ParamConfigurator|mixed $value
@@ -126,10 +126,10 @@ class OptionsConfig
     {
         $this->_usedProperties['serialization'] = true;
         $this->serialization = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -139,10 +139,10 @@ class OptionsConfig
     {
         $this->_usedProperties['cluster'] = true;
         $this->cluster = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -152,10 +152,10 @@ class OptionsConfig
     {
         $this->_usedProperties['prefix'] = true;
         $this->prefix = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default null
      * @param ParamConfigurator|true|'predis'|'sentinel' $value
@@ -165,10 +165,10 @@ class OptionsConfig
     {
         $this->_usedProperties['replication'] = true;
         $this->replication = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -178,10 +178,10 @@ class OptionsConfig
     {
         $this->_usedProperties['service'] = true;
         $this->service = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default null
      * @param ParamConfigurator|'none'|'error'|'distribute'|'distribute_slaves' $value
@@ -191,10 +191,10 @@ class OptionsConfig
     {
         $this->_usedProperties['slaveFailover'] = true;
         $this->slaveFailover = $value;
-    
+
         return $this;
     }
-    
+
     public function parameters(array $value = []): \Symfony\Config\SncRedis\ClientConfig\Options\ParametersConfig
     {
         if (null === $this->parameters) {
@@ -203,10 +203,10 @@ class OptionsConfig
         } elseif (0 < \func_num_args()) {
             throw new InvalidConfigurationException('The node created by "parameters()" has already been initialized. You cannot pass values the second time you call parameters().');
         }
-    
+
         return $this->parameters;
     }
-    
+
     public function __construct(array $value = [])
     {
         if (array_key_exists('commands', $value)) {
@@ -214,90 +214,90 @@ class OptionsConfig
             $this->commands = $value['commands'];
             unset($value['commands']);
         }
-    
+
         if (array_key_exists('connection_async', $value)) {
             $this->_usedProperties['connectionAsync'] = true;
             $this->connectionAsync = $value['connection_async'];
             unset($value['connection_async']);
         }
-    
+
         if (array_key_exists('connection_persistent', $value)) {
             $this->_usedProperties['connectionPersistent'] = true;
             $this->connectionPersistent = $value['connection_persistent'];
             unset($value['connection_persistent']);
         }
-    
+
         if (array_key_exists('connection_timeout', $value)) {
             $this->_usedProperties['connectionTimeout'] = true;
             $this->connectionTimeout = $value['connection_timeout'];
             unset($value['connection_timeout']);
         }
-    
+
         if (array_key_exists('read_write_timeout', $value)) {
             $this->_usedProperties['readWriteTimeout'] = true;
             $this->readWriteTimeout = $value['read_write_timeout'];
             unset($value['read_write_timeout']);
         }
-    
+
         if (array_key_exists('iterable_multibulk', $value)) {
             $this->_usedProperties['iterableMultibulk'] = true;
             $this->iterableMultibulk = $value['iterable_multibulk'];
             unset($value['iterable_multibulk']);
         }
-    
+
         if (array_key_exists('throw_errors', $value)) {
             $this->_usedProperties['throwErrors'] = true;
             $this->throwErrors = $value['throw_errors'];
             unset($value['throw_errors']);
         }
-    
+
         if (array_key_exists('serialization', $value)) {
             $this->_usedProperties['serialization'] = true;
             $this->serialization = $value['serialization'];
             unset($value['serialization']);
         }
-    
+
         if (array_key_exists('cluster', $value)) {
             $this->_usedProperties['cluster'] = true;
             $this->cluster = $value['cluster'];
             unset($value['cluster']);
         }
-    
+
         if (array_key_exists('prefix', $value)) {
             $this->_usedProperties['prefix'] = true;
             $this->prefix = $value['prefix'];
             unset($value['prefix']);
         }
-    
+
         if (array_key_exists('replication', $value)) {
             $this->_usedProperties['replication'] = true;
             $this->replication = $value['replication'];
             unset($value['replication']);
         }
-    
+
         if (array_key_exists('service', $value)) {
             $this->_usedProperties['service'] = true;
             $this->service = $value['service'];
             unset($value['service']);
         }
-    
+
         if (array_key_exists('slave_failover', $value)) {
             $this->_usedProperties['slaveFailover'] = true;
             $this->slaveFailover = $value['slave_failover'];
             unset($value['slave_failover']);
         }
-    
+
         if (array_key_exists('parameters', $value)) {
             $this->_usedProperties['parameters'] = true;
             $this->parameters = new \Symfony\Config\SncRedis\ClientConfig\Options\ParametersConfig($value['parameters']);
             unset($value['parameters']);
         }
-    
+
         if ([] !== $value) {
             throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
         }
     }
-    
+
     public function toArray(): array
     {
         $output = [];
@@ -343,7 +343,7 @@ class OptionsConfig
         if (isset($this->_usedProperties['parameters'])) {
             $output['parameters'] = $this->parameters->toArray();
         }
-    
+
         return $output;
     }
 

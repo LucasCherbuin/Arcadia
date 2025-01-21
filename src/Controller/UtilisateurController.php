@@ -63,7 +63,7 @@ public function new(Request $request, UserPasswordHasherInterface $passwordHashe
         $emailPersonnel = $form->get('emailPersonnel')->getData();
         try {
             $mailerService->sendEmail(
-                'zooarcadiareponse@gmail.com',
+                'arcadiazoo@outlook.fr',
                 $emailPersonnel,
                 'Votre compte Arcadia Zoo est prêt !',
                 '<p>Bonjour,</p><p>Votre compte sur Arcadia Zoo est maintenant prêt. Vous pouvez vous connecter avec l\'email associé à votre compte.</p>'

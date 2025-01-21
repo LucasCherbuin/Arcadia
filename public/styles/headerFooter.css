@@ -6,7 +6,6 @@ html {
 
 header {
     background: linear-gradient(to right, #5CADD6, #305A70);
-    font-family: "Jersey 10", sans-serif;
     padding: 1rem;
     position: relative; /* Centrer le texte */
 }
@@ -59,8 +58,6 @@ footer {
     background: linear-gradient(to right, #5CADD6, #305A70);
     color: white; /* Utiliser une couleur claire pour correspondre au mockup */
     padding: 2rem 1rem;
-    font-family: 'Jersey 10', sans-serif;
-
 }
 
 footer .container {

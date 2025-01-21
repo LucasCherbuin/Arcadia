@@ -7,7 +7,7 @@ namespace Proxies\__CG__\App\Entity;
  */
 class Habitat extends \App\Entity\Habitat implements \Doctrine\ORM\Proxy\InternalProxy
 {
-     use \Symfony\Component\VarExporter\LazyGhostTrait {
+    use \Symfony\Component\VarExporter\LazyGhostTrait {
         initializeLazyObject as private;
         setLazyObjectAsInitialized as public __setInitialized;
         isLazyObjectInitialized as private;
@@ -34,7 +34,7 @@ class Habitat extends \App\Entity\Habitat implements \Doctrine\ORM\Proxy\Interna
         'id' => [parent::class, 'id', null],
         'image' => [parent::class, 'image', null],
         'nom' => [parent::class, 'nom', null],
-    ];
+    ];
 
     public function __isInitialized(): bool
     {

@@ -7,7 +7,7 @@ namespace Proxies\__CG__\App\Entity;
  */
 class Veterinaire extends \App\Entity\Veterinaire implements \Doctrine\ORM\Proxy\InternalProxy
 {
-     use \Symfony\Component\VarExporter\LazyGhostTrait {
+    use \Symfony\Component\VarExporter\LazyGhostTrait {
         initializeLazyObject as private;
         setLazyObjectAsInitialized as public __setInitialized;
         isLazyObjectInitialized as private;
@@ -32,7 +32,7 @@ class Veterinaire extends \App\Entity\Veterinaire implements \Doctrine\ORM\Proxy
         'detail' => [parent::class, 'detail', null],
         'id' => [parent::class, 'id', null],
         'utilisateur' => [parent::class, 'utilisateur', null],
-    ];
+    ];
 
     public function __isInitialized(): bool
     {

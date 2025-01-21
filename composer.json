@@ -9,7 +9,6 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
-<<<<<<< HEAD
         "ext-redis": "*",
         "doctrine/annotations": "*",
         "doctrine/dbal": "^3",
@@ -23,34 +22,19 @@
         "phpstan/phpdoc-parser": "^1.32",
         "predis/predis": "^2.3",
         "snc/redis-bundle": "*",
-=======
-        "doctrine/dbal": "^3",
-        "doctrine/doctrine-bundle": "^2.13",
-        "doctrine/doctrine-migrations-bundle": "^3.3",
-        "doctrine/orm": "^3.2",
-        "phpdocumentor/reflection-docblock": "^5.4",
-        "phpstan/phpdoc-parser": "^1.32",
->>>>>>> 82979460f8a084802515ce4ce31cbaac6128233c
         "symfony/asset": "7.1.*",
         "symfony/asset-mapper": "7.1.*",
         "symfony/console": "7.1.*",
         "symfony/doctrine-messenger": "7.1.*",
         "symfony/dotenv": "7.1.*",
-<<<<<<< HEAD
         "symfony/event-dispatcher": "7.1.*",
-=======
->>>>>>> 82979460f8a084802515ce4ce31cbaac6128233c
         "symfony/expression-language": "7.1.*",
         "symfony/flex": "^2",
         "symfony/form": "7.1.*",
         "symfony/framework-bundle": "7.1.*",
-<<<<<<< HEAD
         "symfony/google-mailer": "7.1.*",
         "symfony/http-client": "7.1.*",
         "symfony/http-foundation": "7.1.*",
-=======
-        "symfony/http-client": "7.1.*",
->>>>>>> 82979460f8a084802515ce4ce31cbaac6128233c
         "symfony/intl": "7.1.*",
         "symfony/mailer": "7.1.*",
         "symfony/mime": "7.1.*",
@@ -59,17 +43,12 @@
         "symfony/process": "7.1.*",
         "symfony/property-access": "7.1.*",
         "symfony/property-info": "7.1.*",
-<<<<<<< HEAD
         "symfony/routing": "7.1.*",
         "symfony/runtime": "7.1.*",
         "symfony/security-bundle": "7.1.*",
         "symfony/security-core": "7.1.*",
         "symfony/security-http": "7.1.*",
         "symfony/sendgrid-mailer": "7.1.*",
-=======
-        "symfony/runtime": "7.1.*",
-        "symfony/security-bundle": "7.1.*",
->>>>>>> 82979460f8a084802515ce4ce31cbaac6128233c
         "symfony/serializer": "7.1.*",
         "symfony/stimulus-bundle": "^2.20",
         "symfony/string": "7.1.*",
@@ -79,10 +58,7 @@
         "symfony/validator": "7.1.*",
         "symfony/web-link": "7.1.*",
         "symfony/yaml": "7.1.*",
-<<<<<<< HEAD
         "twig/cssinliner-extra": "^3.18",
-=======
->>>>>>> 82979460f8a084802515ce4ce31cbaac6128233c
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },
@@ -137,22 +113,14 @@
         }
     },
     "require-dev": {
-<<<<<<< HEAD
         "doctrine/doctrine-fixtures-bundle": "*",
         "fakerphp/faker": "*",
         "phpunit/phpunit": "^11.5",
-=======
-        "phpunit/phpunit": "^9.5",
->>>>>>> 82979460f8a084802515ce4ce31cbaac6128233c
         "symfony/browser-kit": "7.1.*",
         "symfony/css-selector": "7.1.*",
         "symfony/debug-bundle": "7.1.*",
         "symfony/maker-bundle": "^1.0",
-<<<<<<< HEAD
         "symfony/phpunit-bridge": "^7.2",
-=======
-        "symfony/phpunit-bridge": "^7.1",
->>>>>>> 82979460f8a084802515ce4ce31cbaac6128233c
         "symfony/stopwatch": "7.1.*",
         "symfony/web-profiler-bundle": "7.1.*"
     }

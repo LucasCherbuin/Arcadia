@@ -7,7 +7,7 @@ namespace Proxies\__CG__\App\Entity;
  */
 class Race extends \App\Entity\Race implements \Doctrine\ORM\Proxy\InternalProxy
 {
-     use \Symfony\Component\VarExporter\LazyGhostTrait {
+    use \Symfony\Component\VarExporter\LazyGhostTrait {
         initializeLazyObject as private;
         setLazyObjectAsInitialized as public __setInitialized;
         isLazyObjectInitialized as private;
@@ -28,7 +28,7 @@ class Race extends \App\Entity\Race implements \Doctrine\ORM\Proxy\InternalProxy
         'animals' => [parent::class, 'animals', null],
         'id' => [parent::class, 'id', null],
         'label' => [parent::class, 'label', null],
-    ];
+    ];
 
     public function __isInitialized(): bool
     {

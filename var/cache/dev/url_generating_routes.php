@@ -72,4 +72,5 @@ return [
     'app_admin_success' => [['id'], ['_controller' => 'App\\Controller\\AdminUtilisateurController::success'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/adminSuccess']], [], [], []],
     'app_serviceEmployee_index' => [[], ['_controller' => 'App\\Controller\\ServiceController::indexEmployee'], [], [['text', '/employee/serviceEdit']], [], [], []],
     'app_serviceEmployee_edit' => [['id'], ['_controller' => 'App\\Controller\\ServiceController::editEmployee'], ['id' => '\\d+'], [['text', '/edit'], ['variable', '/', '\\d+', 'id', true], ['text', '/employee/serviceEdit']], [], [], []],
+    'animal_click' => [['id'], ['_controller' => 'App\\Controller\\PagesController::incrementClick'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/animal/click']], [], [], []],
 ];

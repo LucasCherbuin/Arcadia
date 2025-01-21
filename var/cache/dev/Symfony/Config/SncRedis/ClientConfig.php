@@ -18,7 +18,7 @@ class ClientConfig
     private $dsns;
     private $options;
     private $_usedProperties = [];
-    
+
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -28,10 +28,10 @@ class ClientConfig
     {
         $this->_usedProperties['type'] = true;
         $this->type = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -41,10 +41,10 @@ class ClientConfig
     {
         $this->_usedProperties['alias'] = true;
         $this->alias = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default true
      * @param ParamConfigurator|bool $value
@@ -54,10 +54,10 @@ class ClientConfig
     {
         $this->_usedProperties['logging'] = true;
         $this->logging = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @param ParamConfigurator|list<ParamConfigurator|mixed>|string $value
      *
@@ -67,10 +67,10 @@ class ClientConfig
     {
         $this->_usedProperties['dsns'] = true;
         $this->dsns = $value;
-    
+
         return $this;
     }
-    
+
     /**
      * @default {"commands":[],"connection_async":false,"connection_persistent":false,"connection_timeout":5,"read_write_timeout":null,"iterable_multibulk":false,"throw_errors":true,"serialization":"default","cluster":null,"prefix":null,"service":null}
     */
@@ -82,10 +82,10 @@ class ClientConfig
         } elseif (0 < \func_num_args()) {
             throw new InvalidConfigurationException('The node created by "options()" has already been initialized. You cannot pass values the second time you call options().');
         }
-    
+
         return $this->options;
     }
-    
+
     public function __construct(array $value = [])
     {
         if (array_key_exists('type', $value)) {
@@ -93,36 +93,36 @@ class ClientConfig
             $this->type = $value['type'];
             unset($value['type']);
         }
-    
+
         if (array_key_exists('alias', $value)) {
             $this->_usedProperties['alias'] = true;
             $this->alias = $value['alias'];
             unset($value['alias']);
         }
-    
+
         if (array_key_exists('logging', $value)) {
             $this->_usedProperties['logging'] = true;
             $this->logging = $value['logging'];
             unset($value['logging']);
         }
-    
+
         if (array_key_exists('dsns', $value)) {
             $this->_usedProperties['dsns'] = true;
             $this->dsns = $value['dsns'];
             unset($value['dsns']);
         }
-    
+
         if (array_key_exists('options', $value)) {
             $this->_usedProperties['options'] = true;
             $this->options = new \Symfony\Config\SncRedis\ClientConfig\OptionsConfig($value['options']);
             unset($value['options']);
         }
-    
+
         if ([] !== $value) {
             throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
         }
     }
-    
+
     public function toArray(): array
     {
         $output = [];
@@ -141,7 +141,7 @@ class ClientConfig
         if (isset($this->_usedProperties['options'])) {
             $output['options'] = $this->options->toArray();
         }
-    
+
         return $output;
     }
 

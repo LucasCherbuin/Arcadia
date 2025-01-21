@@ -7,7 +7,7 @@ namespace Proxies\__CG__\App\Entity;
  */
 class Image extends \App\Entity\Image implements \Doctrine\ORM\Proxy\InternalProxy
 {
-     use \Symfony\Component\VarExporter\LazyGhostTrait {
+    use \Symfony\Component\VarExporter\LazyGhostTrait {
         initializeLazyObject as private;
         setLazyObjectAsInitialized as public __setInitialized;
         isLazyObjectInitialized as private;
@@ -32,7 +32,7 @@ class Image extends \App\Entity\Image implements \Doctrine\ORM\Proxy\InternalPro
         'id' => [parent::class, 'id', null],
         'path' => [parent::class, 'path', null],
         'service' => [parent::class, 'service', null],
-    ];
+    ];
 
     public function __isInitialized(): bool
     {

@@ -7,7 +7,7 @@ namespace Proxies\__CG__\App\Entity;
  */
 class Animal extends \App\Entity\Animal implements \Doctrine\ORM\Proxy\InternalProxy
 {
-     use \Symfony\Component\VarExporter\LazyGhostTrait {
+    use \Symfony\Component\VarExporter\LazyGhostTrait {
         initializeLazyObject as private;
         setLazyObjectAsInitialized as public __setInitialized;
         isLazyObjectInitialized as private;
@@ -36,7 +36,7 @@ class Animal extends \App\Entity\Animal implements \Doctrine\ORM\Proxy\InternalP
         'prenom' => [parent::class, 'prenom', null],
         'race' => [parent::class, 'race', null],
         'veterinaire' => [parent::class, 'veterinaire', null],
-    ];
+    ];
 
     public function __isInitialized(): bool
     {

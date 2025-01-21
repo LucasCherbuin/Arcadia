@@ -4,13 +4,14 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use App\Service\PredisService;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\AnimalRepository;
 use App\Repository\EmployeeRepository;
 use App\Repository\ConsultationRepository;
 use App\Repository\VeterinaireRepository;
 use App\Repository\CommentaireRepository;
-use App\Service\PredisService;
+use Doctrine\ORM\EntityManagerInterface;
 
 class DashboardController extends AbstractController
 {
@@ -66,16 +67,6 @@ class DashboardController extends AbstractController
         return $consultations;
     }
 
-    #[Route('/animal/click/{id}', name: 'increment_click', methods: ['POST'])]
-    public function incrementClick(int $id): Response
-    {
-        $key = "animal:click:{$id}";
-        $newClickCount = $this->predisService->incrementClick($key); // Utilisation de PredisService
-
-        return $this->json([
-            'clicks' => $newClickCount,
-        ]);
-    }
 
 
     #[Route('/veterinaire/dashboardAnimal', name: 'app_dashboard_animal')]
@@ -109,6 +100,7 @@ class DashboardController extends AbstractController
         $commentaires = $this->commentaireRepository->findAll();
 
         $preparedVeterinaire = array_map(fn($veterinaire) => [
+            'id' => $veterinaire->getId(),
             'animal' => $veterinaire->getAnimal(),
             'date' => $veterinaire->getDate()?->format('d/m/Y') ?? 'Non définie',
             'detail' => $veterinaire->getDetail(),
@@ -116,6 +108,7 @@ class DashboardController extends AbstractController
         ], $veterinaires);
 
         $preparedCommentaires = array_map(fn($commentaire) => [
+            'id' => $commentaire->getId(),
             'habitat' => $commentaire->getHabitat(),
             'commentaire' => $commentaire->getCommentaire(),
             'utilisateur' => $commentaire->getUtilisateur(),

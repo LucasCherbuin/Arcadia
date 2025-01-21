@@ -1,5 +1,6 @@
 {% extends 'headerFooter.html.twig' %}
 
+
 {% block stylesheets %}
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="stylesheet" href="{{ asset('styles/compteRendu.css') }}">
@@ -32,17 +33,18 @@
                         <td>{{ veterinaire.animal.prenom }}</td>
                         <td>{{ veterinaire.date }}</td>
                         <td>
-                            <button class="rapport-button" data-target="#veterinaire-rapport-{{ loop.index }}" onclick="toggleReport(this)">
+                            <button class="rapport-button" data-target="#rapport-veterinaire-1" onclick="toggleReport(this)">
                                 Rapport ▼
                             </button>
-                            <div class="rapport-content d-none" id="veterinaire-rapport-{{ loop.index }}">
+                            <div class="rapport-content d-none" id="rapport-veterinaire-1">
                                 <p>{{ veterinaire.detail }}</p>
                                 <span>{{ veterinaire.utilisateur.email }}</span>
                             </div>
+
                         </td>
                     </tr>
                 {% endfor %}
-            </tbody>
+             </tbody>
         </table>
 
         <table class="compte-rendu-table" id="compteRenduTable2">
@@ -59,14 +61,13 @@
                         <td>{{ commentaire.habitat.nom }}</td>
                         <td><span>{{ commentaire.utilisateur.email }}</span></td>
                         <td>
-                            <button class="rapport-button" data-target="#commentaire-rapport-{{ loop.index }}" onclick="toggleReport(this)">
+                            <button class="rapport-button" data-target="#rapport-commentaire-{{ commentaire.id }}" onclick="toggleReport(this)">
                                 Rapport ▼
                             </button>
-                            <div class="rapport-content d-none" id="commentaire-rapport-{{ loop.index }}">
+                            <div class="rapport-content d-none" id="rapport-commentaire-{{ commentaire.id }}">
                                 <p>{{ commentaire.commentaire }}</p>
                                 <span>{{ commentaire.utilisateur.email }}</span>
                             </div>
-
                         </td>
                     </tr>
                 {% endfor %}
@@ -79,21 +80,29 @@
 
     <script>
     function toggleReport(button) {
-    // Récupère l'élément cible à partir de l'attribut "data-target"
+    // Récupérer l'ID du rapport à afficher ou masquer
     const targetId = button.getAttribute('data-target');
+
+    // Trouver l'élément correspondant dans le DOM
     const content = document.querySelector(targetId);
 
     if (content) {
-        // Ajoute ou enlève la classe "d-none" pour afficher ou cacher le rapport
+        // Alterner l'affichage de la section rapport
+        content.classList.toggle('d-none');
+
+        // Modifier le texte du bouton
         if (content.classList.contains('d-none')) {
-            content.classList.remove('d-none'); // Montre le contenu
-            button.textContent = "Rapport ▲";  // Change le texte du bouton
+            button.textContent = "Rapport ▼";
         } else {
-            content.classList.add('d-none');  // Cache le contenu
-            button.textContent = "Rapport ▼"; // Change le texte du bouton
+            button.textContent = "Rapport ▲";
         }
+    } else {
+        console.error(`Impossible de trouver un élément avec l'ID : ${targetId}`);
     }
 }
+
+
+
 
     let sortOrder = 'asc'; // Par défaut, tri croissant
 

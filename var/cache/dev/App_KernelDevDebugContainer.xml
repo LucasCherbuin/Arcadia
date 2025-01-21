@@ -19,13 +19,11 @@
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="TwigBundle">Symfony\Bundle\TwigBundle\TwigBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
-      <parameter key="StimulusBundle">Symfony\UX\StimulusBundle\StimulusBundle</parameter>
       <parameter key="TurboBundle">Symfony\UX\Turbo\TurboBundle</parameter>
       <parameter key="TwigExtraBundle">Twig\Extra\TwigExtraBundle\TwigExtraBundle</parameter>
       <parameter key="SecurityBundle">Symfony\Bundle\SecurityBundle\SecurityBundle</parameter>
       <parameter key="MonologBundle">Symfony\Bundle\MonologBundle\MonologBundle</parameter>
       <parameter key="MakerBundle">Symfony\Bundle\MakerBundle\MakerBundle</parameter>
-      <parameter key="NelmioCorsBundle">Nelmio\CorsBundle\NelmioCorsBundle</parameter>
       <parameter key="DoctrineFixturesBundle">Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle</parameter>
       <parameter key="SncRedisBundle">Snc\RedisBundle\SncRedisBundle</parameter>
     </parameter>
@@ -54,10 +52,6 @@
         <parameter key="path">C:\Users\Administrateur\Arcadia\vendor\symfony\web-profiler-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\WebProfilerBundle</parameter>
       </parameter>
-      <parameter key="StimulusBundle" type="collection">
-        <parameter key="path">C:\Users\Administrateur\Arcadia\vendor\symfony\stimulus-bundle</parameter>
-        <parameter key="namespace">Symfony\UX\StimulusBundle</parameter>
-      </parameter>
       <parameter key="TurboBundle" type="collection">
         <parameter key="path">C:\Users\Administrateur\Arcadia\vendor\symfony\ux-turbo</parameter>
         <parameter key="namespace">Symfony\UX\Turbo</parameter>
@@ -75,12 +69,8 @@
         <parameter key="namespace">Symfony\Bundle\MonologBundle</parameter>
       </parameter>
       <parameter key="MakerBundle" type="collection">
-        <parameter key="path">C:\Users\Administrateur\Arcadia\vendor\symfony\maker-bundle\src</parameter>
+        <parameter key="path">C:\Users\Administrateur\Arcadia\vendor\symfony\maker-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\MakerBundle</parameter>
-      </parameter>
-      <parameter key="NelmioCorsBundle" type="collection">
-        <parameter key="path">C:\Users\Administrateur\Arcadia\vendor\nelmio\cors-bundle</parameter>
-        <parameter key="namespace">Nelmio\CorsBundle</parameter>
       </parameter>
       <parameter key="DoctrineFixturesBundle" type="collection">
         <parameter key="path">C:\Users\Administrateur\Arcadia\vendor\doctrine\doctrine-fixtures-bundle</parameter>
@@ -96,6 +86,7 @@
     <parameter key="animaux_images_directory">%env(ANIMAUX_IMAGES_DIRECTORY)%</parameter>
     <parameter key="habitats_images_directory">%env(HABITATS_IMAGES_DIRECTORY)%</parameter>
     <parameter key="services_images_directory">%env(SERVICES_IMAGES_DIRECTORY)%</parameter>
+    <parameter key="consultation_json_file_path">C:\Users\Administrateur\Arcadia/data/consultations.json</parameter>
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>
@@ -247,40 +238,22 @@
     <parameter key="security.logout_uris" type="collection"/>
     <parameter key="monolog.use_microseconds">true</parameter>
     <parameter key="monolog.swift_mailer.handlers" type="collection"/>
-    <parameter key="monolog.handlers_to_channels" type="collection"/>
-    <parameter key="nelmio_cors.map" type="collection">
-      <parameter key="^/" type="collection"/>
+    <parameter key="monolog.handlers_to_channels" type="collection">
+      <parameter key="monolog.handler.console" type="collection">
+        <parameter key="type">exclusive</parameter>
+        <parameter key="elements" type="collection">
+          <parameter>event</parameter>
+          <parameter>doctrine</parameter>
+          <parameter>console</parameter>
+        </parameter>
+      </parameter>
+      <parameter key="monolog.handler.main" type="collection">
+        <parameter key="type">exclusive</parameter>
+        <parameter key="elements" type="collection">
+          <parameter>event</parameter>
+        </parameter>
+      </parameter>
     </parameter>
-    <parameter key="nelmio_cors.defaults" type="collection">
-      <parameter key="allow_origin" type="collection">
-        <parameter>%env(CORS_ALLOW_ORIGIN)%</parameter>
-      </parameter>
-      <parameter key="allow_credentials">false</parameter>
-      <parameter key="allow_headers" type="collection">
-        <parameter>content-type</parameter>
-        <parameter>authorization</parameter>
-      </parameter>
-      <parameter key="allow_private_network">false</parameter>
-      <parameter key="expose_headers" type="collection">
-        <parameter>Link</parameter>
-      </parameter>
-      <parameter key="allow_methods" type="collection">
-        <parameter>GET</parameter>
-        <parameter>OPTIONS</parameter>
-        <parameter>POST</parameter>
-        <parameter>PUT</parameter>
-        <parameter>PATCH</parameter>
-        <parameter>DELETE</parameter>
-      </parameter>
-      <parameter key="max_age">3600</parameter>
-      <parameter key="hosts" type="collection"/>
-      <parameter key="origin_regex">true</parameter>
-      <parameter key="forced_allow_origin_value">null</parameter>
-      <parameter key="skip_same_as_origin">true</parameter>
-    </parameter>
-    <parameter key="nelmio_cors.cors_listener.class">Nelmio\CorsBundle\EventListener\CorsListener</parameter>
-    <parameter key="nelmio_cors.options_resolver.class">Nelmio\CorsBundle\Options\Resolver</parameter>
-    <parameter key="nelmio_cors.options_provider.config.class">Nelmio\CorsBundle\Options\ConfigProvider</parameter>
     <parameter key="snc_redis.client.class">Predis\Client</parameter>
     <parameter key="snc_redis.client_options.class">Predis\Configuration\Options</parameter>
     <parameter key="snc_redis.connection_parameters.class">Predis\Connection\Parameters</parameter>
@@ -426,14 +399,6 @@
         <argument type="service" id=".service_locator.QaaoWjx.App\Controller\AvisController"/>
       </call>
     </service>
-    <service id="App\Controller\BaseController" class="App\Controller\BaseController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <argument type="service" id="debug.serializer"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.QaaoWjx.App\Controller\BaseController"/>
-      </call>
-    </service>
     <service id="App\Controller\DashboardController" class="App\Controller\DashboardController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -489,6 +454,7 @@
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <argument type="service" id="debug.serializer"/>
       <argument type="service" id="mailer.mailer"/>
+      <argument type="service" id="App\Service\PredisService"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.QaaoWjx.App\Controller\PagesController"/>
       </call>
@@ -585,9 +551,6 @@
       <tag name="container.hot_path"/>
       <argument type="service" id="App\Repository\HoraireRepository"/>
     </service>
-    <service id="App\EventSubscriber\ImageUploadService" class="App\EventSubscriber\ImageUploadService" autowire="true" autoconfigure="true">
-      <tag name="container.error" message="The autoloader expected class &quot;App\EventSubscriber\ImageUploadService&quot; to be defined in file &quot;C:\Users\Administrateur\Arcadia\vendor\composer/../../src\EventSubscriber\ImageUploadService.php&quot;. The file was found but the class was not in it, the class name or namespace probably has a typo."/>
-    </service>
     <service id="App\Form\AdminType" class="App\Form\AdminType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -612,9 +575,6 @@
     <service id="App\Form\HoraireType" class="App\Form\HoraireType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Form\RapportVeterinaireType" class="App\Form\RapportVeterinaireType" autowire="true" autoconfigure="true">
-      <tag name="form.type"/>
-    </service>
     <service id="App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -623,10 +583,6 @@
     </service>
     <service id="App\Form\VeterinaireType" class="App\Form\VeterinaireType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
-    </service>
-    <service id="App\Repository\AdminRepository" class="App\Repository\AdminRepository" autowire="true" autoconfigure="true">
-      <tag name="doctrine.repository_service"/>
-      <argument type="service" id="doctrine"/>
     </service>
     <service id="App\Repository\AnimalRepository" class="App\Repository\AnimalRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
@@ -735,7 +691,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.2HFWJXb"/>
+      <argument type="service" id=".service_locator.lzctaKh"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -881,6 +837,8 @@
         <argument key="cache.security_is_csrf_token_valid_attribute_expression_language" type="service" id="cache.security_is_csrf_token_valid_attribute_expression_language" on-invalid="ignore_uninitialized"/>
         <argument key="debug.security.firewall" type="service" id="debug.security.firewall" on-invalid="ignore_uninitialized"/>
         <argument key="debug.security.firewall.authenticator.main" type="service" id="debug.security.firewall.authenticator.main" on-invalid="ignore_uninitialized"/>
+        <argument key="monolog.handler.main" type="service" id="monolog.handler.main" on-invalid="ignore_uninitialized"/>
+        <argument key="monolog.handler.console" type="service" id="monolog.handler.console" on-invalid="ignore_uninitialized"/>
         <argument key="debug.security.event_dispatcher.main" type="service" id="debug.security.event_dispatcher.main" on-invalid="ignore_uninitialized"/>
         <argument key=".debug.http_client" type="service" id=".debug.http_client" on-invalid="ignore_uninitialized"/>
       </argument>
@@ -977,6 +935,12 @@
           <argument>reset</argument>
         </argument>
         <argument key="debug.security.firewall.authenticator.main" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="monolog.handler.main" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="monolog.handler.console" type="collection">
           <argument>reset</argument>
         </argument>
         <argument key="debug.security.event_dispatcher.main" type="collection">
@@ -1659,7 +1623,6 @@
         <argument>App\Form\EmployeeType</argument>
         <argument>App\Form\HabitatType</argument>
         <argument>App\Form\HoraireType</argument>
-        <argument>App\Form\RapportVeterinaireType</argument>
         <argument>App\Form\RegistrationFormType</argument>
         <argument>App\Form\ServiceType</argument>
         <argument>App\Form\VeterinaireType</argument>
@@ -2029,14 +1992,10 @@
     <service id="asset_mapper.repository" class="Symfony\Component\AssetMapper\AssetMapperRepository">
       <argument type="collection">
         <argument key="C:\Users\Administrateur\Arcadia\vendor\symfony\ux-turbo\src\DependencyInjection/../../assets/dist">@symfony/ux-turbo</argument>
-        <argument key="C:\Users\Administrateur\Arcadia\vendor\symfony\stimulus-bundle\src\DependencyInjection/../../assets/dist">@symfony/stimulus-bundle</argument>
         <argument key="public/styles/"></argument>
       </argument>
       <argument>C:\Users\Administrateur\Arcadia</argument>
-      <argument type="collection">
-        <argument>#^(?=[^\.]).*\.d\.ts$#</argument>
-        <argument>#^(?=[^\.]).*.*/(?=[^\.])controllers\.json$#</argument>
-      </argument>
+      <argument type="collection"/>
       <argument>true</argument>
       <argument>true</argument>
     </service>
@@ -2704,13 +2663,11 @@
           <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\debug-bundle/translations</argument>
           <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\twig-bundle/translations</argument>
           <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\web-profiler-bundle/translations</argument>
-          <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\stimulus-bundle/translations</argument>
           <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\ux-turbo/translations</argument>
           <argument>C:\Users\Administrateur\Arcadia\vendor\twig\extra-bundle/translations</argument>
           <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\security-bundle/translations</argument>
           <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\monolog-bundle/translations</argument>
-          <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\maker-bundle\src/translations</argument>
-          <argument>C:\Users\Administrateur\Arcadia\vendor\nelmio\cors-bundle/translations</argument>
+          <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\maker-bundle/translations</argument>
           <argument>C:\Users\Administrateur\Arcadia\vendor\doctrine\doctrine-fixtures-bundle/translations</argument>
           <argument>C:\Users\Administrateur\Arcadia\vendor\snc\redis-bundle\src/translations</argument>
         </argument>
@@ -2726,13 +2683,11 @@
             <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\debug-bundle/translations</argument>
             <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\twig-bundle/translations</argument>
             <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\web-profiler-bundle/translations</argument>
-            <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\stimulus-bundle/translations</argument>
             <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\ux-turbo/translations</argument>
             <argument>C:\Users\Administrateur\Arcadia\vendor\twig\extra-bundle/translations</argument>
             <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\security-bundle/translations</argument>
             <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\monolog-bundle/translations</argument>
-            <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\maker-bundle\src/translations</argument>
-            <argument>C:\Users\Administrateur\Arcadia\vendor\nelmio\cors-bundle/translations</argument>
+            <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\maker-bundle/translations</argument>
             <argument>C:\Users\Administrateur\Arcadia\vendor\doctrine\doctrine-fixtures-bundle/translations</argument>
             <argument>C:\Users\Administrateur\Arcadia\vendor\snc\redis-bundle\src/translations</argument>
           </argument>
@@ -3056,7 +3011,7 @@
       <argument>-1</argument>
       <argument>true</argument>
       <argument>true</argument>
-      <argument>null</argument>
+      <argument type="service" id="monolog.logger.deprecation"/>
     </service>
     <service id="debug.debug_handlers_listener" class="Symfony\Component\HttpKernel\EventListener\DebugHandlersListener">
       <tag name="kernel.event_subscriber"/>
@@ -3093,6 +3048,14 @@
         <argument>0</argument>
       </call>
       <call method="addListener">
+        <argument>console.command</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="doctrine_migrations.schema_filter_listener"/>
+          <argument>onConsoleCommand</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
         <argument>Symfony\Component\Security\Http\Event\CheckPassportEvent</argument>
         <argument type="collection">
           <argument type="service_closure" id="security.listener.user_provider"/>
@@ -3107,30 +3070,6 @@
           <argument>onKernelResponse</argument>
         </argument>
         <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>kernel.request</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="nelmio_cors.cors_listener"/>
-          <argument>onKernelRequest</argument>
-        </argument>
-        <argument>250</argument>
-      </call>
-      <call method="addListener">
-        <argument>kernel.response</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="nelmio_cors.cors_listener"/>
-          <argument>onKernelResponse</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>kernel.response</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="nelmio_cors.cacheable_response_vary_listener"/>
-          <argument>onResponse</argument>
-        </argument>
-        <argument>-10</argument>
       </call>
       <call method="addListener">
         <argument>kernel.controller</argument>
@@ -3629,6 +3568,22 @@
         <argument>0</argument>
       </call>
       <call method="addListener">
+        <argument>console.command</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="monolog.handler.console"/>
+          <argument>onCommand</argument>
+        </argument>
+        <argument>255</argument>
+      </call>
+      <call method="addListener">
+        <argument>console.terminate</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="monolog.handler.console"/>
+          <argument>onTerminate</argument>
+        </argument>
+        <argument>-255</argument>
+      </call>
+      <call method="addListener">
         <argument>console.error</argument>
         <argument type="collection">
           <argument type="service_closure" id="maker.console_error_listener"/>
@@ -3682,7 +3637,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.2HFWJXb"/>
+      <argument type="service" id=".service_locator.lzctaKh"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -4201,7 +4156,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.iLMHmKx"/>
+      <argument type="service" id=".service_locator.RUGNveU"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -5312,6 +5267,9 @@
       <call method="setSchemaManagerFactory">
         <argument type="service" id="doctrine.dbal.legacy_schema_manager_factory"/>
       </call>
+      <call method="setSchemaAssetsFilter">
+        <argument type="service" id="doctrine.dbal.default_schema_asset_filter_manager"/>
+      </call>
       <call method="setMiddlewares">
         <argument type="collection">
           <argument type="service" id="doctrine.dbal.logging_middleware.default"/>
@@ -5381,7 +5339,7 @@
     </service>
     <service id="doctrine.dbal.default_connection" class="Doctrine\DBAL\Connection" public="true">
       <argument type="collection">
-        <argument key="url">%env(resolve:DATABASE_URL)%</argument>
+        <argument key="url">%env(DATABASE_URL)%</argument>
         <argument key="use_savepoints">true</argument>
         <argument key="driver">pdo_mysql</argument>
         <argument key="idle_connection_ttl">600</argument>
@@ -5482,7 +5440,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.LdQyU49"/>
+      <argument type="service" id=".service_locator.Ap5YJ7H"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -5950,6 +5908,12 @@
         <argument>Manually add and delete migration versions from the version table.</argument>
       </call>
     </service>
+    <service id="doctrine_migrations.schema_filter_listener" class="Doctrine\Bundle\MigrationsBundle\EventListener\SchemaFilterListener">
+      <tag name="doctrine.dbal.schema_filter"/>
+      <tag name="kernel.event_listener" event="console.command" method="onConsoleCommand"/>
+      <tag name="container.no_preload"/>
+      <argument>doctrine_migration_versions</argument>
+    </service>
     <service id="doctrine.migrations.storage.table_storage" class="Doctrine\Migrations\Metadata\Storage\TableMetadataStorageConfiguration"/>
     <service id="twig.extension.dump" class="Symfony\Bridge\Twig\Extension\DumpExtension">
       <tag name="twig.extension"/>
@@ -6150,16 +6114,10 @@
         <argument type="service" id="twig.extension.code"/>
       </call>
       <call method="addExtension">
-        <argument type="service" id="stimulus.ux_controllers_twig_extension"/>
-      </call>
-      <call method="addExtension">
         <argument type="service" id="turbo.twig.extension"/>
       </call>
       <call method="addExtension">
         <argument type="service" id="twig.extension.cssinliner"/>
-      </call>
-      <call method="addExtension">
-        <argument type="service" id="stimulus.twig_extension"/>
       </call>
       <call method="addGlobal">
         <argument>app</argument>
@@ -6242,11 +6200,11 @@
         <argument>!Doctrine</argument>
       </call>
       <call method="addPath">
-        <argument>C:\Users\Administrateur\Arcadia\vendor\doctrine\doctrine-migrations-bundle/Resources/views</argument>
+        <argument>C:\Users\Administrateur\Arcadia\vendor\doctrine\doctrine-migrations-bundle/templates</argument>
         <argument>DoctrineMigrations</argument>
       </call>
       <call method="addPath">
-        <argument>C:\Users\Administrateur\Arcadia\vendor\doctrine\doctrine-migrations-bundle/Resources/views</argument>
+        <argument>C:\Users\Administrateur\Arcadia\vendor\doctrine\doctrine-migrations-bundle/templates</argument>
         <argument>!DoctrineMigrations</argument>
       </call>
       <call method="addPath">
@@ -6280,6 +6238,14 @@
       <call method="addPath">
         <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\security-bundle/Resources/views</argument>
         <argument>!Security</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\maker-bundle/templates</argument>
+        <argument>Maker</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\Administrateur\Arcadia\vendor\symfony\maker-bundle/templates</argument>
+        <argument>!Maker</argument>
       </call>
       <call method="addPath">
         <argument>C:\Users\Administrateur\Arcadia\vendor\snc\redis-bundle\src/Resources/views</argument>
@@ -6372,7 +6338,7 @@
       <argument>,</argument>
     </service>
     <service id="twig.runtime_loader" class="Twig\RuntimeLoader\ContainerRuntimeLoader">
-      <argument type="service" id=".service_locator.Nsv4T6i"/>
+      <argument type="service" id=".service_locator.hVWZWKZ"/>
     </service>
     <service id="twig.error_renderer.html" class="Symfony\Bridge\Twig\ErrorRenderer\TwigErrorRenderer">
       <argument type="service" id="twig"/>
@@ -6518,44 +6484,6 @@
       <argument type="service" id="web_profiler.csp.handler"/>
       <argument type="service" id="data_collector.dump" on-invalid="ignore"/>
     </service>
-    <service id="stimulus.helper" class="Symfony\UX\StimulusBundle\Helper\StimulusHelper">
-      <argument type="service" id="twig" on-invalid="null"/>
-    </service>
-    <service id="stimulus.twig_extension" class="Symfony\UX\StimulusBundle\Twig\StimulusTwigExtension">
-      <tag name="twig.extension" priority="-10"/>
-      <argument type="service" id="stimulus.helper"/>
-    </service>
-    <service id="stimulus.asset_mapper.ux_package_reader" class="Symfony\UX\StimulusBundle\Ux\UxPackageReader">
-      <argument>C:\Users\Administrateur\Arcadia</argument>
-    </service>
-    <service id="stimulus.ux_controllers_twig_extension" class="Symfony\UX\StimulusBundle\Twig\UxControllersTwigExtension">
-      <tag name="twig.extension"/>
-    </service>
-    <service id="stimulus.ux_controllers_twig_runtime" class="Symfony\UX\StimulusBundle\Twig\UxControllersTwigRuntime">
-      <tag name="twig.runtime"/>
-      <argument type="service" id="stimulus.asset_mapper.controllers_map_generator"/>
-      <argument type="service" id="asset_mapper"/>
-      <argument type="service" id="stimulus.asset_mapper.ux_package_reader"/>
-      <argument>C:\Users\Administrateur\Arcadia</argument>
-    </service>
-    <service id="stimulus.asset_mapper.controllers_map_generator" class="Symfony\UX\StimulusBundle\AssetMapper\ControllersMapGenerator">
-      <argument type="service" id="asset_mapper"/>
-      <argument type="service" id="stimulus.asset_mapper.ux_package_reader"/>
-      <argument type="collection">
-        <argument>C:\Users\Administrateur\Arcadia/assets/controllers</argument>
-      </argument>
-      <argument>C:\Users\Administrateur\Arcadia/assets/controllers.json</argument>
-      <argument type="service" id="stimulus.asset_mapper.auto_import_locator" on-invalid="null"/>
-    </service>
-    <service id="stimulus.asset_mapper.auto_import_locator" class="Symfony\UX\StimulusBundle\AssetMapper\AutoImportLocator">
-      <argument type="service" id="asset_mapper.importmap.config_reader"/>
-      <argument type="service" id="asset_mapper"/>
-    </service>
-    <service id="stimulus.asset_mapper.loader_javascript_compiler" class="Symfony\UX\StimulusBundle\AssetMapper\StimulusLoaderJavaScriptCompiler">
-      <tag name="asset_mapper.compiler" priority="100"/>
-      <argument type="service" id="stimulus.asset_mapper.controllers_map_generator"/>
-      <argument>true</argument>
-    </service>
     <service id="turbo.id_accessor" class="Symfony\UX\Turbo\Broadcaster\IdAccessor">
       <argument type="service" id="property_accessor" on-invalid="null"/>
       <argument type="service" id="doctrine" on-invalid="null"/>
@@ -6654,7 +6582,7 @@
     <service id="security.firewall.map" class="Symfony\Bundle\SecurityBundle\Security\FirewallMap">
       <argument type="service" id=".service_locator.FJO08Z_"/>
       <argument type="iterator">
-        <argument key="security.firewall.map.context.main" type="service" id=".security.request_matcher.7PVOTKF"/>
+        <argument key="security.firewall.map.context.main">null</argument>
       </argument>
     </service>
     <service id="security.firewall.context" class="Symfony\Bundle\SecurityBundle\Security\FirewallContext" abstract="true">
@@ -7151,7 +7079,7 @@
     <service id="security.firewall.map.config.main" class="Symfony\Bundle\SecurityBundle\Security\FirewallConfig">
       <argument>main</argument>
       <argument>security.user_checker</argument>
-      <argument>.security.request_matcher.7PVOTKF</argument>
+      <argument>null</argument>
       <argument>true</argument>
       <argument>false</argument>
       <argument>security.user.provider.concrete.app_user_provider</argument>
@@ -7172,14 +7100,6 @@
         <argument key="target">/</argument>
         <argument key="clear_site_data" type="collection"/>
         <argument key="delete_cookies" type="collection"/>
-      </argument>
-    </service>
-    <service id=".security.request_matcher.z20BXDD" class="Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher">
-      <argument>^/()</argument>
-    </service>
-    <service id=".security.request_matcher.7PVOTKF" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
-      <argument type="collection">
-        <argument type="service" id=".security.request_matcher.z20BXDD"/>
       </argument>
     </service>
     <service id="security.listener.main.user_provider" class="Symfony\Component\Security\Http\EventListener\UserProviderListener">
@@ -7376,7 +7296,10 @@
         <argument>true</argument>
       </call>
       <call method="pushHandler">
-        <argument type="service" id="monolog.handler.null_internal"/>
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
       </call>
       <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
@@ -7400,6 +7323,27 @@
     </service>
     <service id="monolog.http_client" class="Symfony\Contracts\HttpClient\HttpClientInterface">
       <factory class="Symfony\Component\HttpClient\HttpClient" method="create"/>
+    </service>
+    <service id="monolog.processor.psr_log_message" class="Monolog\Processor\PsrLogMessageProcessor"/>
+    <service id="monolog.handler.main" class="Monolog\Handler\StreamHandler">
+      <tag name="kernel.reset" method="reset"/>
+      <argument>C:\Users\Administrateur\Arcadia\var\log/dev.log</argument>
+      <argument>debug</argument>
+      <argument>true</argument>
+      <argument>null</argument>
+      <argument>false</argument>
+      <call method="pushProcessor">
+        <argument type="service" id="monolog.processor.psr_log_message"/>
+      </call>
+    </service>
+    <service id="monolog.handler.console" class="Symfony\Bridge\Monolog\Handler\ConsoleHandler">
+      <tag name="kernel.reset" method="reset"/>
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.no_preload"/>
+      <argument>null</argument>
+      <argument>true</argument>
+      <argument type="collection"/>
+      <argument type="collection"/>
     </service>
     <service id="maker.file_manager" class="Symfony\Bundle\MakerBundle\FileManager">
       <argument type="service" id="filesystem"/>
@@ -7605,27 +7549,6 @@
       <argument type="service" id="maker.file_manager"/>
       <argument type="service" id="maker.generator"/>
     </service>
-    <service id="nelmio_cors.cors_listener" class="Nelmio\CorsBundle\EventListener\CorsListener">
-      <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="250"/>
-      <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse" priority="0"/>
-      <tag name="container.hot_path"/>
-      <tag name="container.hot_path"/>
-      <argument type="service" id="nelmio_cors.options_resolver"/>
-    </service>
-    <service id="nelmio_cors.options_resolver" class="Nelmio\CorsBundle\Options\Resolver">
-      <argument type="collection">
-        <argument type="service" id="nelmio_cors.options_provider.config"/>
-      </argument>
-    </service>
-    <service id="nelmio_cors.options_provider.config" class="Nelmio\CorsBundle\Options\ConfigProvider">
-      <tag name="nelmio_cors.options_provider" priority="-1"/>
-      <argument>%nelmio_cors.map%</argument>
-      <argument>%nelmio_cors.defaults%</argument>
-    </service>
-    <service id="nelmio_cors.cacheable_response_vary_listener" class="Nelmio\CorsBundle\EventListener\CacheableResponseVaryListener">
-      <tag name="kernel.event_listener" event="kernel.response" method="onResponse" priority="-10"/>
-      <tag name="container.hot_path"/>
-    </service>
     <service id="doctrine.fixtures_load_command" class="Doctrine\Bundle\FixturesBundle\Command\LoadDataFixturesDoctrineCommand">
       <tag name="console.command" command="doctrine:fixtures:load"/>
       <tag name="container.no_preload"/>
@@ -7778,9 +7701,6 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\AvisController" class="App\Controller\AvisController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\AvisController" class="App\Controller\AvisController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\AvisController" class="App\Controller\AvisController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\BaseController" class="App\Controller\BaseController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\BaseController" class="App\Controller\BaseController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\BaseController" class="App\Controller\BaseController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\DashboardController" class="App\Controller\DashboardController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\DashboardController" class="App\Controller\DashboardController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\DashboardController" class="App\Controller\DashboardController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -7863,16 +7783,12 @@
     <service id=".abstract.instanceof.App\Form\HabitatType" class="App\Form\HabitatType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\HoraireType" class="App\Form\HoraireType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\HoraireType" class="App\Form\HoraireType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\RapportVeterinaireType" class="App\Form\RapportVeterinaireType" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Form\RapportVeterinaireType" class="App\Form\RapportVeterinaireType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ServiceType" class="App\Form\ServiceType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\ServiceType" class="App\Form\ServiceType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\VeterinaireType" class="App\Form\VeterinaireType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\VeterinaireType" class="App\Form\VeterinaireType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\AdminRepository" class="App\Repository\AdminRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\AdminRepository" class="App\Repository\AdminRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\AnimalRepository" class="App\Repository\AnimalRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\AnimalRepository" class="App\Repository\AnimalRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\AvisRepository" class="App\Repository\AvisRepository" autowire="true" abstract="true"/>
@@ -8466,11 +8382,18 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.P.blNFL" method="withContext"/>
     </service>
-    <service id=".service_locator.P.blNFL.App\Controller\AnimalController::new()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.xCCZG38" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="imageUploadService" type="service_closure" id="App\Service\ImageUploadService"/>
+      </argument>
+    </service>
+    <service id=".service_locator.xCCZG38.App\Controller\AnimalController::new()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\AnimalController::new()"/>
       <argument>App\Controller\AnimalController::new()</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.P.blNFL" method="withContext"/>
+      <factory service=".service_locator.xCCZG38" method="withContext"/>
     </service>
     <service id=".service_locator.6QoW8jy" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -8558,18 +8481,6 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.u_VsSjD" method="withContext"/>
     </service>
-    <service id=".service_locator.Wc4srRP" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="horaireRepository" type="service_closure" id="App\Repository\HoraireRepository"/>
-      </argument>
-    </service>
-    <service id=".service_locator.Wc4srRP.App\Controller\BaseController::getCommonData()" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\BaseController::getCommonData()"/>
-      <argument>App\Controller\BaseController::getCommonData()</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.Wc4srRP" method="withContext"/>
-    </service>
     <service id=".service_locator.P.blNFL.App\Controller\EmployeeController::new()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\EmployeeController::new()"/>
       <argument>App\Controller\EmployeeController::new()</argument>
@@ -8631,13 +8542,6 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.nvY2WDd" method="withContext"/>
     </service>
-    <service id=".service_locator.xCCZG38" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-        <argument key="imageUploadService" type="service_closure" id="App\Service\ImageUploadService"/>
-      </argument>
-    </service>
     <service id=".service_locator.xCCZG38.App\Controller\HabitatController::new()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\HabitatController::new()"/>
       <argument>App\Controller\HabitatController::new()</argument>
@@ -8670,6 +8574,12 @@
       <argument>App\Controller\HabitatController::delete()</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O38RXnT" method="withContext"/>
+    </service>
+    <service id=".service_locator.Wc4srRP" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="horaireRepository" type="service_closure" id="App\Repository\HoraireRepository"/>
+      </argument>
     </service>
     <service id=".service_locator.Wc4srRP.App\Controller\HoraireController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\HoraireController::index()"/>
@@ -8730,18 +8640,6 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.M1tMNMd" method="withContext"/>
     </service>
-    <service id=".service_locator.yrnANkn" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="mailerService" type="service_closure" id="App\Service\MailerService"/>
-      </argument>
-    </service>
-    <service id=".service_locator.yrnANkn.App\Controller\PagesController::contact()" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\PagesController::contact()"/>
-      <argument>App\Controller\PagesController::contact()</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.yrnANkn" method="withContext"/>
-    </service>
     <service id=".service_locator.O5x8RWD" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8755,31 +8653,26 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O5x8RWD" method="withContext"/>
     </service>
-    <service id=".service_locator.JKWArK." class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.HplWhsb" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="animalRepository" type="service_closure" id="App\Repository\AnimalRepository"/>
         <argument key="habitatRepository" type="service_closure" id="App\Repository\HabitatRepository"/>
         <argument key="veterinaireRepository" type="service_closure" id="App\Repository\VeterinaireRepository"/>
+        <argument key="predisService" type="service_closure" id="App\Service\PredisService"/>
       </argument>
     </service>
-    <service id=".service_locator.JKWArK..App\Controller\PagesController::animalVisiteur()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.HplWhsb.App\Controller\PagesController::animalVisiteur()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\PagesController::animalVisiteur()"/>
       <argument>App\Controller\PagesController::animalVisiteur()</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.JKWArK." method="withContext"/>
+      <factory service=".service_locator.HplWhsb" method="withContext"/>
     </service>
-    <service id=".service_locator.PuhjwKK" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="serviceRepository" type="service_closure" id="App\Repository\ServiceRepository"/>
-      </argument>
-    </service>
-    <service id=".service_locator.PuhjwKK.App\Controller\PagesController::serviceVisiteur()" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\PagesController::serviceVisiteur()"/>
-      <argument>App\Controller\PagesController::serviceVisiteur()</argument>
+    <service id=".service_locator.6QoW8jy.App\Controller\PagesController::incrementClick()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\PagesController::incrementClick()"/>
+      <argument>App\Controller\PagesController::incrementClick()</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.PuhjwKK" method="withContext"/>
+      <factory service=".service_locator.6QoW8jy" method="withContext"/>
     </service>
     <service id=".service_locator.mXDaS5b" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -8897,7 +8790,7 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.P.blNFL" method="withContext"/>
     </service>
-    <service id=".service_locator.2HFWJXb" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.lzctaKh" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.4wc4Ag1.kernel::registerContainerConfiguration()"/>
@@ -8905,7 +8798,7 @@
         <argument key="App\Controller\AdminUtilisateurController::createAdmin" type="service_closure" id=".service_locator.r_XOrDH.App\Controller\AdminUtilisateurController::createAdmin()"/>
         <argument key="App\Controller\AdminUtilisateurController::success" type="service_closure" id=".service_locator.P.blNFL.App\Controller\AdminUtilisateurController::success()"/>
         <argument key="App\Controller\AnimalController::index" type="service_closure" id=".service_locator.P.blNFL.App\Controller\AnimalController::index()"/>
-        <argument key="App\Controller\AnimalController::new" type="service_closure" id=".service_locator.P.blNFL.App\Controller\AnimalController::new()"/>
+        <argument key="App\Controller\AnimalController::new" type="service_closure" id=".service_locator.xCCZG38.App\Controller\AnimalController::new()"/>
         <argument key="App\Controller\AnimalController::show" type="service_closure" id=".service_locator.6QoW8jy.App\Controller\AnimalController::show()"/>
         <argument key="App\Controller\AnimalController::edit" type="service_closure" id=".service_locator.gJtCKO8.App\Controller\AnimalController::edit()"/>
         <argument key="App\Controller\AnimalController::delete" type="service_closure" id=".service_locator.gJtCKO8.App\Controller\AnimalController::delete()"/>
@@ -8915,7 +8808,6 @@
         <argument key="App\Controller\AvisController::edit" type="service_closure" id=".service_locator.u_VsSjD.App\Controller\AvisController::edit()"/>
         <argument key="App\Controller\AvisController::delete" type="service_closure" id=".service_locator.u_VsSjD.App\Controller\AvisController::delete()"/>
         <argument key="App\Controller\AvisController::validate" type="service_closure" id=".service_locator.u_VsSjD.App\Controller\AvisController::validate()"/>
-        <argument key="App\Controller\BaseController::getCommonData" type="service_closure" id=".service_locator.Wc4srRP.App\Controller\BaseController::getCommonData()"/>
         <argument key="App\Controller\EmployeeController::new" type="service_closure" id=".service_locator.P.blNFL.App\Controller\EmployeeController::new()"/>
         <argument key="App\Controller\EmployeeController::show" type="service_closure" id=".service_locator.uez5N1E.App\Controller\EmployeeController::show()"/>
         <argument key="App\Controller\EmployeeController::edit" type="service_closure" id=".service_locator.CCBhVhT.App\Controller\EmployeeController::edit()"/>
@@ -8931,10 +8823,9 @@
         <argument key="App\Controller\HoraireController::edit" type="service_closure" id=".service_locator.y0yu8rK.App\Controller\HoraireController::edit()"/>
         <argument key="App\Controller\HoraireController::delete" type="service_closure" id=".service_locator.y0yu8rK.App\Controller\HoraireController::delete()"/>
         <argument key="App\Controller\PagesController::accueil" type="service_closure" id=".service_locator.M1tMNMd.App\Controller\PagesController::accueil()"/>
-        <argument key="App\Controller\PagesController::contact" type="service_closure" id=".service_locator.yrnANkn.App\Controller\PagesController::contact()"/>
         <argument key="App\Controller\PagesController::habitatVisiteur" type="service_closure" id=".service_locator.O5x8RWD.App\Controller\PagesController::habitatVisiteur()"/>
-        <argument key="App\Controller\PagesController::animalVisiteur" type="service_closure" id=".service_locator.JKWArK..App\Controller\PagesController::animalVisiteur()"/>
-        <argument key="App\Controller\PagesController::serviceVisiteur" type="service_closure" id=".service_locator.PuhjwKK.App\Controller\PagesController::serviceVisiteur()"/>
+        <argument key="App\Controller\PagesController::animalVisiteur" type="service_closure" id=".service_locator.HplWhsb.App\Controller\PagesController::animalVisiteur()"/>
+        <argument key="App\Controller\PagesController::incrementClick" type="service_closure" id=".service_locator.6QoW8jy.App\Controller\PagesController::incrementClick()"/>
         <argument key="App\Controller\SecurityController::login" type="service_closure" id=".service_locator.mXDaS5b.App\Controller\SecurityController::login()"/>
         <argument key="App\Controller\ServiceController::show" type="service_closure" id=".service_locator.HQ6Z48r.App\Controller\ServiceController::show()"/>
         <argument key="App\Controller\ServiceController::edit" type="service_closure" id=".service_locator.HQ6Z48r.App\Controller\ServiceController::edit()"/>
@@ -8952,7 +8843,7 @@
         <argument key="App\Controller\AdminUtilisateurController:createAdmin" type="service_closure" id=".service_locator.r_XOrDH.App\Controller\AdminUtilisateurController::createAdmin()"/>
         <argument key="App\Controller\AdminUtilisateurController:success" type="service_closure" id=".service_locator.P.blNFL.App\Controller\AdminUtilisateurController::success()"/>
         <argument key="App\Controller\AnimalController:index" type="service_closure" id=".service_locator.P.blNFL.App\Controller\AnimalController::index()"/>
-        <argument key="App\Controller\AnimalController:new" type="service_closure" id=".service_locator.P.blNFL.App\Controller\AnimalController::new()"/>
+        <argument key="App\Controller\AnimalController:new" type="service_closure" id=".service_locator.xCCZG38.App\Controller\AnimalController::new()"/>
         <argument key="App\Controller\AnimalController:show" type="service_closure" id=".service_locator.6QoW8jy.App\Controller\AnimalController::show()"/>
         <argument key="App\Controller\AnimalController:edit" type="service_closure" id=".service_locator.gJtCKO8.App\Controller\AnimalController::edit()"/>
         <argument key="App\Controller\AnimalController:delete" type="service_closure" id=".service_locator.gJtCKO8.App\Controller\AnimalController::delete()"/>
@@ -8962,7 +8853,6 @@
         <argument key="App\Controller\AvisController:edit" type="service_closure" id=".service_locator.u_VsSjD.App\Controller\AvisController::edit()"/>
         <argument key="App\Controller\AvisController:delete" type="service_closure" id=".service_locator.u_VsSjD.App\Controller\AvisController::delete()"/>
         <argument key="App\Controller\AvisController:validate" type="service_closure" id=".service_locator.u_VsSjD.App\Controller\AvisController::validate()"/>
-        <argument key="App\Controller\BaseController:getCommonData" type="service_closure" id=".service_locator.Wc4srRP.App\Controller\BaseController::getCommonData()"/>
         <argument key="App\Controller\EmployeeController:new" type="service_closure" id=".service_locator.P.blNFL.App\Controller\EmployeeController::new()"/>
         <argument key="App\Controller\EmployeeController:show" type="service_closure" id=".service_locator.uez5N1E.App\Controller\EmployeeController::show()"/>
         <argument key="App\Controller\EmployeeController:edit" type="service_closure" id=".service_locator.CCBhVhT.App\Controller\EmployeeController::edit()"/>
@@ -8978,10 +8868,9 @@
         <argument key="App\Controller\HoraireController:edit" type="service_closure" id=".service_locator.y0yu8rK.App\Controller\HoraireController::edit()"/>
         <argument key="App\Controller\HoraireController:delete" type="service_closure" id=".service_locator.y0yu8rK.App\Controller\HoraireController::delete()"/>
         <argument key="App\Controller\PagesController:accueil" type="service_closure" id=".service_locator.M1tMNMd.App\Controller\PagesController::accueil()"/>
-        <argument key="App\Controller\PagesController:contact" type="service_closure" id=".service_locator.yrnANkn.App\Controller\PagesController::contact()"/>
         <argument key="App\Controller\PagesController:habitatVisiteur" type="service_closure" id=".service_locator.O5x8RWD.App\Controller\PagesController::habitatVisiteur()"/>
-        <argument key="App\Controller\PagesController:animalVisiteur" type="service_closure" id=".service_locator.JKWArK..App\Controller\PagesController::animalVisiteur()"/>
-        <argument key="App\Controller\PagesController:serviceVisiteur" type="service_closure" id=".service_locator.PuhjwKK.App\Controller\PagesController::serviceVisiteur()"/>
+        <argument key="App\Controller\PagesController:animalVisiteur" type="service_closure" id=".service_locator.HplWhsb.App\Controller\PagesController::animalVisiteur()"/>
+        <argument key="App\Controller\PagesController:incrementClick" type="service_closure" id=".service_locator.6QoW8jy.App\Controller\PagesController::incrementClick()"/>
         <argument key="App\Controller\SecurityController:login" type="service_closure" id=".service_locator.mXDaS5b.App\Controller\SecurityController::login()"/>
         <argument key="App\Controller\ServiceController:show" type="service_closure" id=".service_locator.HQ6Z48r.App\Controller\ServiceController::show()"/>
         <argument key="App\Controller\ServiceController:edit" type="service_closure" id=".service_locator.HQ6Z48r.App\Controller\ServiceController::edit()"/>
@@ -9153,7 +9042,7 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.iLMHmKx" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.RUGNveU" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\AdminType" type="service_closure" id="App\Form\AdminType"/>
@@ -9164,7 +9053,6 @@
         <argument key="App\Form\EmployeeType" type="service_closure" id="App\Form\EmployeeType"/>
         <argument key="App\Form\HabitatType" type="service_closure" id="App\Form\HabitatType"/>
         <argument key="App\Form\HoraireType" type="service_closure" id="App\Form\HoraireType"/>
-        <argument key="App\Form\RapportVeterinaireType" type="service_closure" id="App\Form\RapportVeterinaireType"/>
         <argument key="App\Form\RegistrationFormType" type="service_closure" id="App\Form\RegistrationFormType"/>
         <argument key="App\Form\ServiceType" type="service_closure" id="App\Form\ServiceType"/>
         <argument key="App\Form\VeterinaireType" type="service_closure" id="App\Form\VeterinaireType"/>
@@ -9293,10 +9181,9 @@
         <argument key="turbo.doctrine.event_listener" type="service_closure" id="turbo.doctrine.event_listener"/>
       </argument>
     </service>
-    <service id=".service_locator.LdQyU49" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Ap5YJ7H" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="App\Repository\AdminRepository" type="service_closure" id="App\Repository\AdminRepository"/>
         <argument key="App\Repository\AnimalRepository" type="service_closure" id="App\Repository\AnimalRepository"/>
         <argument key="App\Repository\AvisRepository" type="service_closure" id="App\Repository\AvisRepository"/>
         <argument key="App\Repository\CommentaireRepository" type="service_closure" id="App\Repository\CommentaireRepository"/>
@@ -9323,6 +9210,11 @@
       <tag name="container.decorator" id="doctrine.orm.default_metadata_driver" inner=".doctrine.orm.default_metadata_driver.inner"/>
       <argument type="service" id=".doctrine.orm.default_metadata_driver.inner"/>
       <argument type="service" id=".service_locator.BxSdgVt"/>
+    </service>
+    <service id="doctrine.dbal.default_schema_asset_filter_manager" class="Doctrine\Bundle\DoctrineBundle\Dbal\SchemaAssetsFilterManager">
+      <argument type="collection">
+        <argument type="service" id="doctrine_migrations.schema_filter_listener"/>
+      </argument>
     </service>
     <service id="doctrine.dbal.logging_middleware.default" class="Doctrine\DBAL\Logging\Middleware">
       <tag name="monolog.logger" channel="doctrine"/>
@@ -9376,63 +9268,87 @@
     <service id="monolog.logger.request" class="Monolog\Logger">
       <argument>request</argument>
       <call method="pushHandler">
-        <argument type="service" id="monolog.handler.null_internal"/>
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
       </call>
       <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.console" class="Monolog\Logger">
       <argument>console</argument>
       <call method="pushHandler">
-        <argument type="service" id="monolog.handler.null_internal"/>
+        <argument type="service" id="monolog.handler.main"/>
       </call>
       <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.messenger" class="Monolog\Logger">
       <argument>messenger</argument>
       <call method="pushHandler">
-        <argument type="service" id="monolog.handler.null_internal"/>
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
       </call>
       <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.cache" class="Monolog\Logger">
       <argument>cache</argument>
       <call method="pushHandler">
-        <argument type="service" id="monolog.handler.null_internal"/>
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
       </call>
       <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.asset_mapper" class="Monolog\Logger">
       <argument>asset_mapper</argument>
       <call method="pushHandler">
-        <argument type="service" id="monolog.handler.null_internal"/>
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
       </call>
       <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.http_client" class="Monolog\Logger">
       <argument>http_client</argument>
       <call method="pushHandler">
-        <argument type="service" id="monolog.handler.null_internal"/>
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
       </call>
       <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.mailer" class="Monolog\Logger">
       <argument>mailer</argument>
       <call method="pushHandler">
-        <argument type="service" id="monolog.handler.null_internal"/>
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
       </call>
       <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.translation" class="Monolog\Logger">
       <argument>translation</argument>
       <call method="pushHandler">
-        <argument type="service" id="monolog.handler.null_internal"/>
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
       </call>
       <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.php" class="Monolog\Logger">
       <argument>php</argument>
       <call method="pushHandler">
-        <argument type="service" id="monolog.handler.null_internal"/>
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
       </call>
       <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
@@ -9446,42 +9362,67 @@
     <service id="monolog.logger.router" class="Monolog\Logger">
       <argument>router</argument>
       <call method="pushHandler">
-        <argument type="service" id="monolog.handler.null_internal"/>
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
       </call>
       <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.profiler" class="Monolog\Logger">
       <argument>profiler</argument>
       <call method="pushHandler">
-        <argument type="service" id="monolog.handler.null_internal"/>
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
       </call>
       <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.doctrine" class="Monolog\Logger">
       <argument>doctrine</argument>
       <call method="pushHandler">
-        <argument type="service" id="monolog.handler.null_internal"/>
+        <argument type="service" id="monolog.handler.main"/>
       </call>
       <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.debug" class="Monolog\Logger">
       <argument>debug</argument>
       <call method="pushHandler">
-        <argument type="service" id="monolog.handler.null_internal"/>
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
       </call>
       <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.security" class="Monolog\Logger">
       <argument>security</argument>
       <call method="pushHandler">
-        <argument type="service" id="monolog.handler.null_internal"/>
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
       </call>
       <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
     <service id="monolog.logger.snc_redis" class="Monolog\Logger">
       <argument>snc_redis</argument>
       <call method="pushHandler">
-        <argument type="service" id="monolog.handler.null_internal"/>
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
+      </call>
+      <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
+    </service>
+    <service id="monolog.logger.deprecation" class="Monolog\Logger" public="true">
+      <argument>deprecation</argument>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
       </call>
       <configurator service="debug.debug_logger_configurator" method="pushDebugLogger"/>
     </service>
@@ -9533,12 +9474,6 @@
     <service id=".service_locator.QaaoWjx.App\Controller\AvisController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\AvisController"/>
       <argument>App\Controller\AvisController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.QaaoWjx" method="withContext"/>
-    </service>
-    <service id=".service_locator.QaaoWjx.App\Controller\BaseController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\BaseController"/>
-      <argument>App\Controller\BaseController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.QaaoWjx" method="withContext"/>
     </service>
@@ -9808,7 +9743,6 @@
           <argument>App\Controller\AdminUtilisateurController</argument>
           <argument>App\Controller\AnimalController</argument>
           <argument>App\Controller\AvisController</argument>
-          <argument>App\Controller\BaseController</argument>
           <argument>App\Controller\DashboardController</argument>
           <argument>App\Controller\EmployeeController</argument>
           <argument>App\Controller\HabitatController</argument>
@@ -11092,7 +11026,7 @@
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
-    <service id=".service_locator.Nsv4T6i" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.hVWZWKZ" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="Symfony\Bridge\Twig\Extension\CsrfRuntime" type="service_closure" id="twig.runtime.security_csrf"/>
@@ -11100,7 +11034,6 @@
         <argument key="Symfony\Bridge\Twig\Extension\SerializerRuntime" type="service_closure" id="twig.runtime.serializer"/>
         <argument key="Symfony\Component\Form\FormRenderer" type="service_closure" id="twig.form.renderer"/>
         <argument key="Symfony\Bridge\Twig\Extension\ImportMapRuntime" type="service_closure" id="twig.runtime.importmap"/>
-        <argument key="Symfony\UX\StimulusBundle\Twig\UxControllersTwigRuntime" type="service_closure" id="stimulus.ux_controllers_twig_runtime"/>
       </argument>
     </service>
     <service id="Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface" alias="parameter_bag"/>
@@ -11247,7 +11180,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.2HFWJXb"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.lzctaKh"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -11269,6 +11202,7 @@
     <service id="Psr\Log\LoggerInterface $securityLogger" alias="monolog.logger.security"/>
     <service id=".Psr\Log\LoggerInterface $snc_redisLogger" alias="monolog.logger.snc_redis"/>
     <service id="Psr\Log\LoggerInterface $sncRedisLogger" alias="monolog.logger.snc_redis"/>
+    <service id="Psr\Log\LoggerInterface $deprecationLogger" alias="monolog.logger.deprecation"/>
     <service id=".service_locator.xqODiDp" alias="messenger.receiver_locator"/>
     <service id=".service_locator.kVuTj7R" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.hUPzsWO" alias=".service_locator.ea.H0ae"/>
@@ -11293,26 +11227,24 @@
     <service id=".service_locator.diNoEIK" alias=".service_locator.4wc4Ag1"/>
     <service id=".service_locator.5jQ6XPE" alias=".service_locator.r_XOrDH"/>
     <service id=".service_locator.4KsIGyf" alias=".service_locator.P.blNFL"/>
+    <service id=".service_locator.CxrlgDU" alias=".service_locator.xCCZG38"/>
     <service id=".service_locator.EZ9bSSJ" alias=".service_locator.6QoW8jy"/>
     <service id=".service_locator.DUEBkuj" alias=".service_locator.gJtCKO8"/>
     <service id=".service_locator.tuCRaS5" alias=".service_locator.NikESHS"/>
     <service id=".service_locator.tl0Txck" alias=".service_locator.4DoHv36"/>
     <service id=".service_locator.sLM53n1" alias=".service_locator.u_VsSjD"/>
-    <service id=".service_locator.qNr5tjr" alias=".service_locator.Wc4srRP"/>
     <service id=".service_locator.WLy977s" alias=".service_locator.uez5N1E"/>
     <service id=".service_locator.sPurL3r" alias=".service_locator.CCBhVhT"/>
     <service id=".service_locator.s0mTIkg" alias=".service_locator.rKMHrg5"/>
     <service id=".service_locator.XoGdWV0" alias=".service_locator.nvY2WDd"/>
-    <service id=".service_locator.CxrlgDU" alias=".service_locator.xCCZG38"/>
     <service id=".service_locator.PRZ2Sx1" alias=".service_locator.zbNU4Fi"/>
     <service id=".service_locator.wLz9zD1" alias=".service_locator.O38RXnT"/>
+    <service id=".service_locator.qNr5tjr" alias=".service_locator.Wc4srRP"/>
     <service id=".service_locator.JSHkHlT" alias=".service_locator.BGMSzel"/>
     <service id=".service_locator.Oq7IfYK" alias=".service_locator.y0yu8rK"/>
     <service id=".service_locator.N2zfAud" alias=".service_locator.M1tMNMd"/>
-    <service id=".service_locator.BUov7AK" alias=".service_locator.yrnANkn"/>
     <service id=".service_locator.m8yEyiY" alias=".service_locator.O5x8RWD"/>
-    <service id=".service_locator.Y7NW8I." alias=".service_locator.JKWArK."/>
-    <service id=".service_locator.XmOAYGv" alias=".service_locator.PuhjwKK"/>
+    <service id=".service_locator.9RpNYkw" alias=".service_locator.HplWhsb"/>
     <service id=".service_locator...2Ndi3" alias=".service_locator.mXDaS5b"/>
     <service id=".service_locator.qPCyw9l" alias=".service_locator.HQ6Z48r"/>
     <service id=".service_locator.CKuCekY" alias=".service_locator..V3RrT8"/>

@@ -1,8 +1,3 @@
 framework:
-<<<<<<< HEAD
-  mailer:
-    dsn: '%env(MAILER_DSN)%'
-=======
     mailer:
         dsn: '%env(MAILER_DSN)%'
->>>>>>> 82979460f8a084802515ce4ce31cbaac6128233c

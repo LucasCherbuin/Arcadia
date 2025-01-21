@@ -1,7 +1,6 @@
 /* Encapsulation avec la classe parent .consultation-page */
 .consultation-page {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,7 +29,7 @@
     display: flex;
     justify-content: space-between;
     padding: 15px;
-    background-color: #2a6e8e;
+    background-color: green;
     color: #ffffff;
     font-weight: bold;
     font-size: 16px;

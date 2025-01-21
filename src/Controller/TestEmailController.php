@@ -3,17 +3,19 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 class TestEmailController extends AbstractController
 {
     #[Route('/test-mailtrap', name: 'test_mailtrap')]
-    public function testMailtrap(MailerInterface $mailer)
+    public function testMailtrap(MailerInterface $mailer): Response
     {
         $email = (new Email())
-            ->from('zooarcadiareponse@gmail.com')
+            ->from('arcadiazoo@outlook.fr')
             ->to('lucas.cherbuin@gmail.com') // Remplacez par un email générique
             ->subject('Test Email')
             ->text('This is a test email sent via Mailtrap.');
