@@ -1,15 +1,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-
-    # Redirige les requêtes vers l'index si le fichier ou le dossier n'existe pas
+    # Si le fichier demandé n'existe pas
     RewriteCond %{REQUEST_FILENAME} !-f
+    # Si le dossier demandé n'existe pas
     RewriteCond %{REQUEST_FILENAME} !-d
+    # Redirige toutes les requêtes vers index.php
     RewriteRule ^ index.php [L]
-</IfModule>
-
-<IfModule !mod_rewrite.c>
-    # Si mod_rewrite n'est pas disponible, affiche un message d'erreur
-    <IfModule mod_alias.c>
-        Redirect 404 /
-    </IfModule>
 </IfModule>

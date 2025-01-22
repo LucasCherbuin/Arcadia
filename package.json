@@ -2,21 +2,16 @@
     "name": "mon-projet",
     "version": "1.0.0",
     "scripts": {
-      "dev": "vite",
-      "build": "vite build",
-      "preview": "vite preview",
-      "start": "serve -s dist"
-    },
-    "dependencies": {
-      "vite": "^4.0.0"
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "start": "serve -s dist"
     },
     "devDependencies": {
-      "sass": "^1.0.0"
+        "sass": "^1.0.0"
     },
     "engines": {
-      "node": "18.x",
-      "npm": "10.x"
+        "node": "18.x",
+        "npm": "10.x"
     }
-
-  }
-  
+}

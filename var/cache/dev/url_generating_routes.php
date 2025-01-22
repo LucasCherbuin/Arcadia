@@ -17,7 +17,7 @@ return [
     '_profiler_router' => [['token'], ['_controller' => 'web_profiler.controller.router::panelAction'], [], [['text', '/router'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::body'], [], [['text', '/exception'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
-    'app_accueil' => [[], ['_controller' => 'App\\Controller\\PagesController::accueil'], [], [['text', '/']], [], [], []],
+    'app_accueil' => [[], ['_controller' => 'App\\Controller\\PagesController::accueil'], [], [['text', '/accueil']], [], [], []],
     'HeaderFooter' => [[], ['_controller' => 'App\\Controller\\HeaderFooterController::HeaderFooter'], [], [['text', '/HeaderFooter']], [], [], []],
     'app_contact' => [[], ['_controller' => 'App\\Controller\\PagesController::contact'], [], [['text', '/contact']], [], [], []],
     'app_habitat_visiteur' => [[], ['_controller' => 'App\\Controller\\PagesController::habitatVisiteur'], [], [['text', '/habitatVisiteur']], [], [], []],
