@@ -2,9 +2,6 @@
     "name": "mon-projet",
     "version": "1.0.0",
     "scripts": {
-        "dev": "vite",
-        "build": "vite build",
-        "preview": "vite preview",
         "start": "serve -s dist"
     },
     "devDependencies": {
