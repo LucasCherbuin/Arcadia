@@ -5,7 +5,7 @@
       "dev": "vite",
       "build": "vite build",
       "preview": "vite preview",
-      "start": "nf start"
+      "start": "serve -s dist"
     },
     "dependencies": {
       "vite": "^4.0.0"
