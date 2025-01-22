@@ -5348,7 +5348,7 @@
     </service>
     <service id="doctrine.dbal.default_connection" class="Doctrine\DBAL\Connection" public="true">
       <argument type="collection">
-        <argument key="url">%env(DATABASE_URL)%</argument>
+        <argument key="url">%env(resolve:DATABASE_URL)%</argument>
         <argument key="use_savepoints">true</argument>
         <argument key="driver">pdo_mysql</argument>
         <argument key="idle_connection_ttl">600</argument>
