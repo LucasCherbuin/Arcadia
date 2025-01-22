@@ -99,10 +99,9 @@
             "importmap:install": "symfony-cmd"
         },
         "post-install-cmd": [
-            "Symfony\\Component\\Dotenv\\Dotenv::populate(['APP_ENV' => 'prod'])",
-            "composer dump-autoload --optimize",
-            "php bin/console cache:clear"
-        ],
+        "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+        "Symfony\\Component\\Dotenv\\Dotenv::populate"
+    ],
         "post-update-cmd": [
             "@auto-scripts"
         ]

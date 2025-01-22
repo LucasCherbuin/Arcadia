@@ -112,12 +112,16 @@
     <parameter key="fragment.renderer.hinclude.global_template">null</parameter>
     <parameter key="fragment.path">/_fragment</parameter>
     <parameter key="kernel.secret">%env(APP_SECRET)%</parameter>
-    <parameter key="kernel.http_method_override">false</parameter>
+    <parameter key="kernel.http_method_override">true</parameter>
     <parameter key="kernel.trust_x_sendfile_type_header">false</parameter>
-    <parameter key="kernel.trusted_hosts" type="collection"/>
+    <parameter key="kernel.trusted_hosts" type="collection">
+      <parameter>%env(TRUSTED_HOSTS)%</parameter>
+    </parameter>
     <parameter key="kernel.default_locale">en</parameter>
     <parameter key="kernel.enabled_locales" type="collection"/>
     <parameter key="kernel.error_controller">error_controller</parameter>
+    <parameter key="kernel.trusted_proxies">%env(TRUSTED_PROXIES)%</parameter>
+    <parameter key="kernel.trusted_headers">26</parameter>
     <parameter key="debug.file_link_format">%env(default::SYMFONY_IDE)%</parameter>
     <parameter key="asset.request_context.base_path">null</parameter>
     <parameter key="asset.request_context.secure">null</parameter>
@@ -769,6 +773,11 @@
       <argument>null</argument>
       <argument type="collection">
         <argument key="debug">true</argument>
+      </argument>
+      <argument type="service">
+        <service class="void">
+          <factory class="Symfony\Component\HttpFoundation\Request" method="enableHttpMethodParameterOverride"/>
+        </service>
       </argument>
     </service>
     <service id="http_cache.store" class="Symfony\Component\HttpKernel\HttpCache\Store">
@@ -9750,8 +9759,10 @@
       <argument type="service" id="asset_mapper_compiler"/>
       <argument>C:\Users\Administrateur\Arcadia/assets/vendor</argument>
     </service>
-    <service id="asset_mapper.asset_package.inner" class="Symfony\Component\Asset\PathPackage">
-      <argument></argument>
+    <service id="asset_mapper.asset_package.inner" class="Symfony\Component\Asset\UrlPackage">
+      <argument type="collection">
+        <argument>C:\Users\Administrateur\Arcadia/public</argument>
+      </argument>
       <argument type="service" id="assets.empty_version_strategy"/>
       <argument type="service" id="assets.context"/>
     </service>
