@@ -1,12 +1,11 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  root: 'public', // Définit 'public' comme dossier racine
+  root: 'public', // Spécifie que la racine du projet est le dossier public
   build: {
-    outDir: '../dist', // Place les fichiers générés dans le dossier "dist" à la racine
-    emptyOutDir: true, // Nettoie le dossier de sortie avant chaque build
+    outDir: '../public', // Dossier de sortie des fichiers
     rollupOptions: {
-      input: 'public/index.html', // Chemin relatif au fichier d'entrée HTML
+      input: 'index.php', // Fichier d'entrée
     },
   },
 });
