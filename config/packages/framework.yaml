@@ -1,4 +1,7 @@
 framework:
+    http_method_override: true
+    trusted_proxies: '%env(TRUSTED_PROXIES)%'
+    trusted_hosts: '%env(TRUSTED_HOSTS)%'
     secret: '%env(APP_SECRET)%'
     csrf_protection: true
     session:
@@ -15,3 +18,5 @@ framework:
             app.cache:
                 adapter: cache.adapter.redis
                 default_lifetime: 3600
+    assets:
+        base_urls: ['%kernel.project_dir%/public']
