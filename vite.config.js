@@ -1,8 +1,11 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  root: 'assets',
-  build: {
-    outDir: '../public/build', // Dossier de sortie
+    root: 'public',
+    build: {
+      outDir: '../public/', // Dossier de sortie
+      rollupOptions: {
+        input: 'index.html', // fichier d'entrée
+    },
   },
 });
