@@ -1,5 +1,6 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    RewriteBase /public/
     # Si le fichier demandé n'existe pas
     RewriteCond %{REQUEST_FILENAME} !-f
     # Si le dossier demandé n'existe pas
