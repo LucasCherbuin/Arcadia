@@ -2,11 +2,18 @@
     "name": "mon-projet",
     "version": "1.0.0",
     "scripts": {
+<<<<<<< HEAD
         "start": "serve -s dist"
     },
     "devDependencies": {
         "sass": "^1.0.0"
     },
+=======
+
+      "start": "serve -s dist"
+    },
+
+>>>>>>> 890f33a (correction)
     "engines": {
         "node": "18.x",
         "npm": "10.x"
