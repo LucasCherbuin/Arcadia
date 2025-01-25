@@ -27,7 +27,7 @@ class AvisController extends AbstractController
     }
 
 
-    // Création d'une nouvelle entité
+    //soumission des formulaires par un visiteur
     #[Route('/new', name: 'app_avis_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -60,28 +60,9 @@ class AvisController extends AbstractController
         ]);
     }
 
-    // Modifier une entité
-    #[Route('/{id}/edit', name: 'app_avis_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Avis $avis, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(AvisType::class, $avis);
-        $form->handleRequest($request);
+    
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Avis modifié avec succès.');
-
-            return $this->redirectToRoute('avis_index');
-        }
-
-        return $this->render('employee/avis/edit.html.twig', [
-            'form' => $form->createView(),
-            'avis' => $avis,
-        ]);
-    }
-
-    // Supprimer une entité
+    // Suppression de l'entité par l'employé.e sur son menu
     #[Route('/{id}/delete', name: 'app_avis_delete', methods: ['POST'])]
     public function delete(Request $request, Avis $avis, EntityManagerInterface $entityManager): Response
     {

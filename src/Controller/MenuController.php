@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MenuController extends AbstractController
+
+// menu de l'adminisitaratieur
 {
     #[Route('/admin', name: 'admin_menu')]
     public function admin(): Response
@@ -25,6 +27,7 @@ class MenuController extends AbstractController
         ]);
     }
 
+    // menu de l'employe.e
     #[Route('/employee', name: 'employee_menu')]
     public function employee(): Response
     {
@@ -42,6 +45,8 @@ class MenuController extends AbstractController
         ]);
     }
 
+    //menu du vétérinaire
+    
     #[Route('/veterinaire', name: 'veterinaire_menu')]
     public function veterinaire(): Response
     {

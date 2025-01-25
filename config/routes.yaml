@@ -1,6 +1,6 @@
 # Route pour l'accueil
 app_accueil:
-  path: /accueil
+  path: /
   controller: App\Controller\PagesController::accueil
   methods: [GET, POST]
 

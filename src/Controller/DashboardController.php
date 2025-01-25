@@ -38,6 +38,8 @@ class DashboardController extends AbstractController
         $this->predisService = $predisService;
     }
 
+
+    //dashboard pour la consultation des animeaux
     #[Route('/admin/consultation', name: 'app_consultation')]
     public function consultation(): Response
     {
@@ -68,6 +70,7 @@ class DashboardController extends AbstractController
     }
 
 
+    //dashboard des animaux et leurs aliementaion pour le vétérinaire
 
     #[Route('/veterinaire/dashboardAnimal', name: 'app_dashboard_animal')]
     public function dashboardAnimal(): Response
@@ -93,6 +96,7 @@ class DashboardController extends AbstractController
         ]);
     }
 
+    // Dashboard pour les rapports du vétérianire pour l'admin
     #[Route('/admin/compteRendu', name: 'app_compte_rendu_veterinaire')]
     public function compteRendu(): Response
     {

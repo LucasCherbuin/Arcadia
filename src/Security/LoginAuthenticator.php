@@ -80,8 +80,6 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         return new RedirectResponse($this->router->generate('veterinaire_menu'));
     }
 
-    // Redirection par défaut si aucun rôle spécifique
-    return new RedirectResponse($this->router->generate('app_accueil'));
 }
 
 

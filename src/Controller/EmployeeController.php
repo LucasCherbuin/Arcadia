@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EmployeeController extends AbstractController
 {
 
-    // Création d'un nouvel employé
+    // Création d'une fiche de repas par l'employe.e
     #[Route('/new', name: 'app_employeeRepas_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -35,48 +35,5 @@ class EmployeeController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-    // Affichage d'un employé
-    #[Route('/{id}', name: 'app_employeeRepas_show', methods: ['GET'])]
-    public function show(Employee $employee): Response
-    {
-        return $this->render('employee/employeeRepas/show.html.twig', [
-            'employee' => $employee,
-        ]);
-    }
-
-    // Modification d'un employé
-    #[Route('/{id}/edit', name: 'app_employeeRepas_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(EmployeeType::class, $employee);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Employé mis à jour avec succès.');
-
-            return $this->redirectToRoute('app_employeRepas_index');
-        }
-
-        return $this->render('employee/employeeRepas/edit.html.twig', [
-            'form' => $form->createView(),
-            'employee' => $employee,
-        ]);
-    }
-
-    // Suppression d'un employé
-    #[Route('/{id}/delete', name: 'app_employeeRepas_delete', methods: ['POST'])]
-    public function delete(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $employee->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($employee);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Employé supprimé avec succès.');
-        }
-
-        return $this->redirectToRoute('app_employeeRepas_index');
-    }
+ 
 }

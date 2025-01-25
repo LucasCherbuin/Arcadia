@@ -3,6 +3,8 @@ namespace App\Service;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+//service pour uploader une image pour les entités spécifié
+
 class ImageUploadService
 {
     private array $directories;

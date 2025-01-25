@@ -41,7 +41,8 @@ class PagesController extends AbstractController
         $this->predisService = $predisService;
     }
 
-    #[Route('/accueil', name: 'app_accueil', methods: ['GET', 'POST'])]
+    //page d'accueil
+    #[Route('/', name: 'app_accueil', methods: ['GET', 'POST'])]
     public function accueil(
         EntityManagerInterface $entityManager,
         AnimalRepository $animalRepository,
@@ -116,6 +117,8 @@ class PagesController extends AbstractController
         ]);
     }
 
+    //page visiteur sur les habitats disponibles
+
     #[Route('/habitatVisiteur', name: 'app_habitat_visiteur', methods: ['GET'])]
     public function habitatVisiteur(HabitatRepository $habitatRepository, AnimalRepository $animalRepository): Response
     {
@@ -164,6 +167,8 @@ class PagesController extends AbstractController
             'animals' => $preparedAnimals,
         ]);
     }
+
+    //Animaux résident dans l'habitat
 
     #[Route('/habitatVisiteur/{id}/animal', name: 'app_animal_visiteur', methods: ['GET'])]
     public function animalVisiteur(
@@ -219,6 +224,8 @@ class PagesController extends AbstractController
         ]);
     }
 
+    //incrémnentation d'un animal pour le dashboard du nombre de consultations
+
     #[Route('/animal/click/{id}', name: 'animal_click', methods: ['POST'])]
     public function incrementClick(Animal $animal): JsonResponse
     {
@@ -234,6 +241,8 @@ class PagesController extends AbstractController
         return new JsonResponse(['clicks' => $clicks]);
     }
 
+
+    // page des services
     #[Route('/serviceVisiteur', name: 'app_service_visiteur', methods: ['GET'])]
     public function serviceVisiteur(ServiceRepository $serviceRepository): Response
     {
@@ -250,6 +259,8 @@ class PagesController extends AbstractController
         ]);
     }
 
+    //formulaire de demande de contact
+    
     #[Route('/contact', name: 'app_contact', methods: ['GET', 'POST'])]
     public function contact(Request $request, MailerService $mailerService): Response
     {

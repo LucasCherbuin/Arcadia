@@ -16,7 +16,7 @@ use App\Service\ImageUploadService;
 #[Route(path: 'admin/habitat')]
 class HabitatController extends AbstractController
 {
-    // Index des entités
+    // Index des habitats disponibles
     #[Route('/', name: 'app_habitat_index', methods: ['GET'])]
     public function index(HabitatRepository $habitatRepository): Response
     {
@@ -27,7 +27,7 @@ class HabitatController extends AbstractController
         ]);
     }
 
-    // Affiche une entité
+    // Affiche un habitat
     #[Route('/{id}', name: 'app_habitat_show', methods: ['GET'])]
     public function show(Habitat $habitat): Response
     {

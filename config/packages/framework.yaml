@@ -19,7 +19,7 @@ framework:
                 adapter: cache.adapter.redis
                 default_lifetime: 3600
     assets:
-        base_urls: ['%kernel.project_dir%/public/styles']
+        base_path: '/styles'
 
     asset_mapper:
         paths:

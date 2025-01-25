@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+//controller gèrant le header et footer du site
 class HeaderFooterController extends AbstractController
 {
     private array $globalHoraires = [];

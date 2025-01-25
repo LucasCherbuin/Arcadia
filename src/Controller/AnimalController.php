@@ -26,7 +26,7 @@ class AnimalController extends AbstractController
         $this->imageUploadService = $imageUploadService;
     }
 
-
+    //menu CRUD animal
     #[Route(path: '', name: 'app_animal_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -37,6 +37,7 @@ class AnimalController extends AbstractController
         ]);
     }
 
+    //ajout d'un nouvel animal
     #[Route(path: '/new', name: 'app_animal_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, ImageUploadService $imageUploadService): Response
     {
@@ -101,6 +102,7 @@ class AnimalController extends AbstractController
         ]);
     }
 
+    //modification des propriétés de l'animal
     #[Route(path: '/{id}/edit', name: 'app_animal_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Animal $animal, EntityManagerInterface $entityManager): Response
     {
@@ -120,6 +122,7 @@ class AnimalController extends AbstractController
         ]);
     }
 
+    //suppression de l'animal
     #[Route(path: '/{id}/delete', name: 'app_animal_delete', methods: ['POST'])]
     public function delete(Request $request, Animal $animal, EntityManagerInterface $entityManager): Response
     {

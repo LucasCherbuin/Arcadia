@@ -20,7 +20,7 @@ class UtilisateurController extends AbstractController
 {
     private $entityManager;
 
-    // Constructeur pour injecter les dépendances
+
     public function __construct(EntityManagerInterface $entityManager, private MailerInterface $mailer)
     {
         $this->entityManager = $entityManager;
@@ -36,9 +36,6 @@ class UtilisateurController extends AbstractController
             'utilisateurs' => $utilisateurs,
         ]);
     }
-
-    // Ajouter un nouvel utilisateur
-    // ...
 
 // Ajouter un nouvel utilisateur
 #[Route('/new', name: 'app_utilisateur_new', methods: ['GET', 'POST'])]
@@ -79,9 +76,6 @@ public function new(Request $request, UserPasswordHasherInterface $passwordHashe
         'form' => $form->createView(),
     ]);
 }
-
-
-// ...
 
 
     // Afficher les détails d'un utilisateur

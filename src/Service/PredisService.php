@@ -1,5 +1,7 @@
 <?php
 
+//service de la base de donnée nosql pour le stockage des consultations incrémentées d'un animal
+
 namespace App\Service;
 
 use Predis\Client as Redis;

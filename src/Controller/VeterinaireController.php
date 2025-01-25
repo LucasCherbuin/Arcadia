@@ -74,19 +74,6 @@ class VeterinaireController extends AbstractController
         ]);
     }
 
-    // Supprimer un vétérinaire
-    #[Route('/{id}', name: 'app_veterinaire_delete', methods: ['DELETE'])]
-    public function delete(Request $request, Veterinaire $veterinaire): Response
-    {
-        if ($request->isXMLHttpRequest()) {
-            $this->entityManager->remove($veterinaire);
-            $this->entityManager->flush();
-
-            return $this->render('veterinaire/RapportVeterinaire/delete.html.twig', [
-                'message' => 'Vétérinaire supprimé avec succès.',
-            ]);
-        }
-    }
 
     // Ajouter un commentaire
     #[Route('/commentaire', name: 'app_commentaire_new')]

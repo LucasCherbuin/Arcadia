@@ -6,6 +6,8 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
 
+
+//service pour la gestion des informations relatif aux envoye d'email
 class MailerService
 {
     private MailerInterface $mailer;

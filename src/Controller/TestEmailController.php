@@ -9,6 +9,8 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
+//controller de test pour les échanges d'e-mail sur le site
+
 class TestEmailController extends AbstractController
 {
     #[Route('/test-mailtrap', name: 'test_mailtrap')]
@@ -16,7 +18,7 @@ class TestEmailController extends AbstractController
     {
         $email = (new Email())
             ->from('arcadiazoo@outlook.fr')
-            ->to('lucas.cherbuin@gmail.com') // Remplacez par un email générique
+            ->to('lucas.cherbuin@gmail.com') 
             ->subject('Test Email')
             ->text('This is a test email sent via Mailtrap.');
 

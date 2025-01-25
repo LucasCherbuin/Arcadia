@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('admin/horaire')]
 class HoraireController extends AbstractController
 {
-    // Index des entités Horaire
+    // Index des  Horaires
     #[Route('/', name: 'app_horaire_index', methods: ['GET'])]
     public function index(HoraireRepository $horaireRepository): Response
     {
