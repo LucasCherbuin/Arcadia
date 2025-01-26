@@ -16,7 +16,7 @@ if (!\class_exists(App_KernelDevDebugContainer::class, false)) {
 
 return new \ContainerTfVrnoZ\App_KernelDevDebugContainer([
     'container.build_hash' => 'TfVrnoZ',
-    'container.build_id' => '29a4977b',
-    'container.build_time' => 1737841008,
+    'container.build_id' => 'fad462be',
+    'container.build_time' => 1737885819,
     'container.runtime_mode' => \in_array(\PHP_SAPI, ['cli', 'phpdbg', 'embed'], true) ? 'web=0' : 'web=1',
 ], __DIR__.\DIRECTORY_SEPARATOR.'ContainerTfVrnoZ');
