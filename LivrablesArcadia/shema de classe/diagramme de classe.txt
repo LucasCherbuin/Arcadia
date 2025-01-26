@@ -1,0 +1,128 @@
+@startuml
+class Admin {
+int Id
+string email
+
+string password
+}
+
+Admin *-- Animal: Action crud
+Admin *-- Habitat: Action crud
+Admin *-- Role: Action crud
+Admin *-- Service: Action crud
+Admin *-- Utilisateur: Action crud
+Admin *-- ConsultationAnimal: Lire statistiques
+Admin *-- Veterinaire: Lire compte rendu/action crud
+
+class Animal {
+int id
+race_id
+habitat_id
+image_id
+veterinaire_id
+string prenom
+string etat
+}
+
+Animal "1" *-- "1" Race : Race de l'animal
+Animal "n" *-- "1" Habitat : Habitation de l'animal
+Animal "1" *-- "n" Image : Photo/s
+Animal "n" *-- "1" Veterinaire : Rapport santé
+
+
+class Avis {
+int id
+string pseudo
+string commentaire
+Boolean Isvisible
+}
+
+class Commentaire {
+int id
+string commentaire
+habitat_id
+utilisateur_id 
+}
+
+Commentaire "n" *-- "1" Habitat : habitat a commenter
+Commentaire "n" *-- "1" Utilisateur : utilisateur qui a commenté
+
+class ConsultationAnimal{
+int id
+string prenom
+int nombreClique
+}
+
+
+class Employee {
+int id
+animal_id
+string nourriture
+int quantite
+Utilisateur_id
+}
+
+Employee *-- Service : Modification
+Employee *-- Avis : Valide ou non un avis
+Employee "1" *-- "1" Role : métier
+Employee "1" *-- "1" Utilisateur : Utilisateur qui a rempli le rapport
+
+class Habitat {
+int id
+string nom
+string description
+Image_id
+}
+
+Employee *-- Service : Action crud
+
+Habitat "1" *-- "n" Image : photo/s de l'habitation
+
+class Horaire {
+int id
+DateTimeInterface ouvertureHeure
+DateTimeInterface fermetureHeure
+String jourSemaine
+}
+
+class Image {
+int id
+Blob ImageData
+}
+
+class Race {
+int id
+string label
+}
+
+class Role {
+int id
+array label
+}
+
+class Service {
+int id
+string nom
+string description
+image id
+}
+
+Service "1" *-- "n" Image : photo/s du service
+class Utilisateur {
+int id
+role_id
+string email
+string password
+}
+
+Utilisateur "1" *-- "1" Role : Grade de l'utilisateur
+
+class Veterinaire {
+int id
+animal_id
+DateTimeInterface date
+string detail
+}
+
+Veterinaire "n" *-- "n" Animal : Animaux à éxaminé
+@enduml

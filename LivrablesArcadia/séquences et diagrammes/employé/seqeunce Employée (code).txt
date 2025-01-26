@@ -1,0 +1,65 @@
+@startuml
+participant Espace
+participant Client
+participant Serveur
+participant Api
+participant Database
+
+' Scénario 1: Connexion de l'utilisateur
+Espace -> Client: Connexion
+Client -> Serveur: Vérification utilisateur
+Serveur -> Database: Utilisateur existant
+Database --> Serveur: Validation des données
+Serveur --> Client: Connexion
+Client --> Espace: Affiche l'espace de travail
+
+' Scénario 2: Afficher les animaux
+Espace -> Client: Choix espace animal
+Client -> Api: Récupération des informations
+Api --> Database: Demande informations
+Database --> Api: Envoie des informations
+Api --> Client: Renvoie les animaux
+Client --> Espace: Affiche les animaux
+
+' Scénario 3: Afficher le dashboard Animals
+Espace -> Client: Choix dashboard Animals
+Client -> Api: Récupération des informations
+Api --> Database: Demande informations
+Database --> Api: Envoie des informations
+Api --> Client: Renvoie le dashboard Animals
+Client --> Espace: Affiche le dashboard Animals
+
+' Scénario 4: Modifier un service
+Espace -> Client: Modification du service
+Client -> Serveur: Envoie de la modification
+Serveur -> Database: Validation
+Database --> Serveur: Confirmation
+Serveur --> Client: Affiche le statut
+Client --> Espace: Confirmation visuelle
+
+' Scénario 5: Enregistrer un repas pour un animal
+Espace -> Client: Choisit un animal
+Client -> Serveur: Remplit les informations du repas
+Serveur --> Database: Envoie du rapport
+Database --> Serveur: Confirmation
+Serveur --> Client: Envoie de confirmation
+Client --> Espace: Affiche confirmation d'envoi
+
+' Scénario 6: Gérer les avis des utilisateurs
+Espace -> Api: Récupère les avis
+Api -> Database: Demande les avis
+Database --> Api: Renvoie les avis
+Api --> Espace: Affiche les avis
+Espace -> Client: Sélection d'un avis
+Client -> Serveur: Information du choix
+Serveur -> Database: Envoie l'avis avec une valeur TRUE/FALSE
+Database --> Serveur: Confirmation
+Serveur --> Client: Renvoie le statut
+Client --> Espace: Affiche confirmation
+
+' Scénario 7: Déconnexion
+Espace -> Client: Déconnexion
+Client -> Serveur: Demande de déconnexion
+Serveur --> Client: Session terminée/redirection login
+Client --> Espace: Affiche page du login
+@enduml

@@ -1,0 +1,73 @@
+@startuml
+left to right direction
+
+:Visiteur: as fc
+rectangle Page_visiteurs {
+  usecase (accueil) as UC1
+   (habitat) as UC2  
+  (Service) as UC3
+  (Contact) as UC4
+  UC2 --> (animal)
+}
+
+fc --> UC1
+fc --> UC2
+fc --> UC3
+fc --> UC4
+
+:Admin: as fc2
+rectangle Page_Admin {
+  usecase (CrudAnimal) as UC5
+  (CrudHabitat) as UC6  
+  (CrudService) as UC7
+  (CrudHoraire) as UC8
+  (CrudUtilisateur) as UC9
+  (Dashboard RapportVeterinaire) as UC10
+  (Dashboard Consultation) as UC11
+}
+
+fc2 --> UC5
+fc2 --> UC6
+fc2 --> UC7
+fc2 --> UC8
+fc2 --> UC9
+fc2 --> UC10
+fc2 --> UC11
+
+:Employee: as fc3
+rectangle Page_Employee {
+  usecase (avisValidation) as UC12
+  (Modification Service) as UC13  
+  (Fiche Repas) as UC14
+
+}
+
+fc3 --> UC12
+fc3 --> UC13
+fc3 --> UC14
+
+:Veterinaire: as fc4
+rectangle Page_Veterinaire {
+  usecase (Commentaire Habitat) as UC15
+  (dashboard Repas) as UC16  
+  (rapport Veterinaire) as UC17
+
+}
+
+fc4 --> UC15
+fc4 --> UC16
+fc4 --> UC17
+
+UC17 --> "redaction d'un rapport"  UC10 
+UC14 --> "redaction d'une fiche" UC16
+UC1 --> "ecriture d'un avis à valider" UC12
+UC12 --> "validation d'un avis à afficher" UC1
+UC13 --> "modification de l'entité service" UC3
+UC5 --> "affichage d'un animal" (animal)
+UC6 --> "affichage d'un habitat" UC2
+UC7 --> "affichage d'un service" UC3
+UC8 --> "affichage des horaires sur la page" Page_visiteurs
+UC9 --> "Création d'un utilisateur Employee" fc3 
+UC9 --> "Création d'un utilisateur Veterinaire" fc4
+(animal) --> "acrémentation à chaque consultation d'un animal" UC11
+UC15 --> "opinion sur le commentaire" UC10

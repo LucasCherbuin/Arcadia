@@ -1,0 +1,71 @@
+@startuml
+
+participant Administrateur
+participant Espace
+participant Client
+participant Serveur
+participant Api
+participant Database
+
+Administrateur -> Espace: accès a l'espace
+Espace -> Client : Connextion
+Client -> Serveur: Vérification utilisateur
+Serveur -> Database: Utilisateur existant
+Database --> Serveur: Validation des données
+Serveur --> Client: Connexion
+Client --> Espace: Affiche l'espace de travail
+
+Administrateur -> Client: Choix dashboard Habitations
+Client -> Api: Récupération des informations
+Api --> Database: Demande informations
+Database --> Api: envoye des informations
+Api --> Client: Renvoye le dashboard Habitations
+Client --> Espace: Affiche le dashboard Habitations
+Espace --> Administrateur: retour menu principal
+
+
+Administrateur -> Client: Choix dashboard Consulations Animaux
+Client -> Api: Récupération des informations
+Api --> Database: Demande informations
+Database --> Api: envoye des informations
+Api --> Client: Renvoye le dashboard Consultations Animaux
+Client --> Espace: Affiche le dashboard Consultations Animaux
+Espace --> Administrateur: retour menu principal
+
+
+Administrateur -> Espace: Choix menu Animal
+Espace -> Client: Ecriture du rapport 
+Client -> Serveur: envoye du rapport
+Database --> Serveur: Validation
+Serveur --> Client: Affiche le statut
+Client --> Espace: Confirmation visuel
+Espace --> Administrateur: retour menu principal
+
+Administrateur -> Espace: Choix d'un menu Crud
+Espace -> Client: Recherche les rapports 
+Client -> Serveur: enovoie les infos selon un filtre
+Serveur --> Database : Demande des données accumulées
+Database -> Serveur: envoye de données
+Api --> Api: Génération Rapport
+Api --> Serveur: Rapport généré
+Serveur --> Client : Réponse positif
+Client --> Espace : Réponse visuel
+Espace --> Administrateur : retour menu principal
+
+Administrateur -> Espace: Choix du dashboard rapport
+Espace -> Client: action Crud
+Client -> Serveur: Envoye des données 
+Serveur -> Api: Insertion
+Api -> Database: envoye de données
+Database --> Api: Confirmation Insertion
+Api --> Serveur: Confirmation
+Serveur --> Client : Réponse positif
+Client --> Espace : Réponse visuel
+Espace --> Administrateur : retour menu principal
+
+Administrateur -> Client: déconnexion
+Client -> Serveur: Demande de déconnexion
+Serveur --> Client: Session terminée/redirection login
+Client --> Administrateur: Affiche page du login
+
+@enduml

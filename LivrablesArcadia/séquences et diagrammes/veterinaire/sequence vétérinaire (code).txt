@@ -1,0 +1,59 @@
+@startuml
+participant Veterinaire
+participant Espace
+participant Client
+participant Serveur
+participant Api
+participant Database
+
+Veterinaire -> Espace: accès a l'espace
+Espace -> Client : Connextion
+Client -> Serveur: Vérification utilisateur
+Serveur -> Database: Utilisateur existant
+Database --> Serveur: Validation des données
+Serveur --> Client: Connexion
+Client --> Espace: Affiche l'espace de travail
+
+Veterinaire -> Client: Choix dashboard Habitations
+Client -> Api: Récupération des informations
+Api --> Database: Demande informations
+Database --> Api: envoye des informations
+Api --> Client: Renvoye le dashboard Habitations
+Client --> Espace: Affiche le dashboard Habitations
+Espace --> Veterinaire: retour menu principal
+
+
+Veterinaire -> Client: Choix dashboard Animals
+Client -> Api: Récupération des informations
+Api --> Database: Demande informations
+Database --> Api: envoye des informations
+Api --> Client: Renvoye le dashboard Animals
+Client --> Espace: Affiche le dashboard Animals
+Espace --> Veterinaire: retour menu principal
+
+
+Veterinaire -> Espace: Choix menu Animal
+Espace -> Client: Ecriture du rapport 
+Client -> Serveur: envoye du rapport
+Database --> Serveur: Validation
+Serveur --> Client: Affiche le statut
+Client --> Espace: Confirmation visuel
+Espace --> Veterinaire: retour menu principal
+
+Veterinaire -> Espace: Choix menu commentaire
+Espace -> Client: Choix de l'habitat et commenataire
+Client -> Serveur: Envoye du commentaire
+Serveur -> Api: Insertion
+Api -> Database: envoye de données
+Database --> Api: Confirmation Insertion
+Api --> Serveur: Confirmation
+Serveur --> Client : Réponse positif
+Client --> Espace : Réponse visuel
+Espace --> Veterinaire : retour menu principal
+
+Veterinaire -> Client: déconnexion
+Client -> Serveur: Demande de déconnexion
+Serveur --> Client: Session terminée/redirection login
+Client --> Veterinaire: Affiche page du login
+
+@enduml

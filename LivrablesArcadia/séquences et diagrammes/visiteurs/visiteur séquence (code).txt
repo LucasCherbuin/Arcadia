@@ -1,0 +1,37 @@
+@startuml
+
+participant Visiteur
+participant Site
+participant Habitat
+participant Animal
+participant InformationsAnimal
+participant Avis
+participant Services
+participant Contact
+participant Serveur
+participant Database
+
+Visiteur -> Site: accès a l'application
+
+Site -> Habitat: Selection espace habitat
+Habitat -> Database: récupère les données des habitats
+Database --> Habitat: retourne les habitations disponibles
+Habitat -> Animal: Affiche les animaux
+Animal -> Database: Recherche détail animal et son rapport
+Database -> Animal: Retourne l'animal et ses informations
+
+Animal -> InformationsAnimal: Affiche les informations de l'animal
+InformationsAnimal -> Database: acréement le niveau de consultation de l'animal de 1
+
+Visiteur -> Avis: Selection espace avis
+Avis -> Serveur: enregistre l'avis 
+Serveur -> Database: envoye avis pour confirmation
+Serveur -> Avis: envoye confirmation d'envoye
+
+Visiteur -> Contact: Selection espace Contact
+Contact -> Serveur: Envoye un email
+Serveur -> Contact: Confirmation de l'envoye
+
+Visiteur -> Services : Selction espace Services
+
+@enduml
