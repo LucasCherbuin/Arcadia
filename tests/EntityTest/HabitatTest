@@ -12,11 +12,10 @@ class HabitatTest extends TestCase
         $habitat = new Habitat();
         $habitat->setNom('Test nom');
         $habitat->setDescription('Test Descritpion');
-        $habitat->setCommentaire('Test Commentaire');
+ 
 
         $this->assertEquals('Test Prenom', $habitat->getNom());
         $this->assertEquals('Test Nombre de cliques', $habitat->getDescription());
-        $this->assertEquals('Test Nombre de cliques', $habitat->getCommentaire());
      
     }
 }

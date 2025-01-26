@@ -3,5 +3,5 @@ snc_redis:
         default:
             type: 'phpredis'
             alias: 'client'
-            dsn: '%env(REDIS_URL)%'
+            dsn: '%env(UPSTASH_REDIS_REST_URL)%'
 

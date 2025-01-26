@@ -6,7 +6,7 @@ framework:
     csrf_protection: true
     session:
         handler_id: snc_redis.session.handler
-        save_path: '%env(REDIS_URL)%'
+        save_path: '%env(Environment variable not found: "UPSTASH_REDIS_REST_URL")%'
     profiler:
         only_exceptions: false
         enabled: true

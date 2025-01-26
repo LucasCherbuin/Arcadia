@@ -146,7 +146,7 @@
       <parameter key="cookie_samesite">lax</parameter>
       <parameter key="gc_probability">1</parameter>
     </parameter>
-    <parameter key="session.save_path">%env(REDIS_URL)%</parameter>
+    <parameter key="session.save_path">%env(Environment variable not found: "UPSTASH_REDIS_REST_URL")%</parameter>
     <parameter key="session.metadata.update_threshold">0</parameter>
     <parameter key="form.type_extension.csrf.enabled">true</parameter>
     <parameter key="form.type_extension.csrf.field_name">_token</parameter>
@@ -660,7 +660,7 @@
       <argument type="service" id="snc_redis.client"/>
     </service>
     <service id="Predis\Client" class="Predis\Client" autowire="true" autoconfigure="true">
-      <argument>%env(REDIS_DSN)%</argument>
+      <argument>%env(UPSTASH_REDIS_REST_URL)%</argument>
     </service>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="argument_resolver.backed_enum_resolver" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\BackedEnumValueResolver">
@@ -4132,7 +4132,7 @@
     <service id="session.handler.native_file" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler">
       <argument type="service">
         <service class="Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler">
-          <argument>%env(REDIS_URL)%</argument>
+          <argument>%env(Environment variable not found: "UPSTASH_REDIS_REST_URL")%</argument>
         </service>
       </argument>
     </service>
@@ -7701,7 +7701,7 @@
       <tag name="snc_redis.client" alias="client"/>
       <argument>Redis</argument>
       <argument type="collection">
-        <argument>%env(REDIS_URL)%</argument>
+        <argument>%env(UPSTASH_REDIS_REST_URL)%</argument>
       </argument>
       <argument type="collection">
         <argument key="connection_async">false</argument>

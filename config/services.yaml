@@ -48,7 +48,7 @@ services:
     Predis\Client:
         class: Predis\Client
         arguments:
-            - '%env(REDIS_DSN)%'
+            - '%env(UPSTASH_REDIS_REST_URL)%'
 
     # Définition du service PredisService
     App\Service\PredisService:
