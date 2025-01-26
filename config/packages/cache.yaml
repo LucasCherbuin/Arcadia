@@ -3,5 +3,5 @@ framework:
         pools:
             app.cache.redis:
                 adapter: cache.redis
-                dsn: '%env(REDIS_DSN)%'
+                provider: '%env(UPSTASH_REDIS_REST_URL)%'
                 default_lifetime: 3600
