@@ -822,6 +822,7 @@
         <argument key="debug.stopwatch" type="service" id="debug.stopwatch" on-invalid="ignore_uninitialized"/>
         <argument key="debug.event_dispatcher" type="service" id="debug.event_dispatcher" on-invalid="ignore_uninitialized"/>
         <argument key="debug.log_processor" type="service" id="debug.log_processor" on-invalid="ignore_uninitialized"/>
+        <argument key="app.cache.redis" type="service" id="app.cache.redis" on-invalid="ignore_uninitialized"/>
         <argument key="app.cache" type="service" id="app.cache" on-invalid="ignore_uninitialized"/>
         <argument key="session_listener" type="service" id="session_listener" on-invalid="ignore_uninitialized"/>
         <argument key="form.choice_list_factory.cached" type="service" id="form.choice_list_factory.cached" on-invalid="ignore_uninitialized"/>
@@ -883,6 +884,9 @@
           <argument>reset</argument>
         </argument>
         <argument key="debug.log_processor" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="app.cache.redis" type="collection">
           <argument>reset</argument>
         </argument>
         <argument key="app.cache" type="collection">
@@ -1111,6 +1115,7 @@
         <argument>cache.property_info</argument>
         <argument>cache.asset_mapper</argument>
         <argument>cache.messenger.restart_workers_signal</argument>
+        <argument>app.cache.redis</argument>
         <argument>app.cache</argument>
         <argument>cache.validator_expression_language</argument>
         <argument>cache.doctrine.orm.default.result</argument>
@@ -1140,7 +1145,7 @@
     <service id="console.command.cache_pool_invalidate_tags" class="Symfony\Bundle\FrameworkBundle\Command\CachePoolInvalidateTagsCommand">
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
-      <argument type="service" id=".service_locator.B.MVCtv"/>
+      <argument type="service" id=".service_locator.ulWZyFC"/>
       <call method="setName">
         <argument>cache:pool:invalidate-tags</argument>
       </call>
@@ -1160,6 +1165,7 @@
         <argument>cache.property_info</argument>
         <argument>cache.asset_mapper</argument>
         <argument>cache.messenger.restart_workers_signal</argument>
+        <argument>app.cache.redis</argument>
         <argument>app.cache</argument>
         <argument>cache.validator_expression_language</argument>
         <argument>cache.doctrine.orm.default.result</argument>
@@ -1186,6 +1192,7 @@
         <argument>cache.property_info</argument>
         <argument>cache.asset_mapper</argument>
         <argument>cache.messenger.restart_workers_signal</argument>
+        <argument>app.cache.redis</argument>
         <argument>app.cache</argument>
         <argument>cache.validator_expression_language</argument>
         <argument>cache.doctrine.orm.default.result</argument>
@@ -1903,6 +1910,7 @@
       <argument type="collection">
         <argument key="cache.app" type="service" id="cache.app" on-invalid="ignore_uninitialized"/>
         <argument key="cache.messenger.restart_workers_signal" type="service" id="cache.messenger.restart_workers_signal" on-invalid="ignore_uninitialized"/>
+        <argument key="app.cache.redis" type="service" id="app.cache.redis" on-invalid="ignore_uninitialized"/>
         <argument key="app.cache" type="service" id="app.cache" on-invalid="ignore_uninitialized"/>
       </argument>
     </service>
@@ -1931,6 +1939,7 @@
         <argument key="cache.property_info" type="service" id="cache.property_info" on-invalid="ignore_uninitialized"/>
         <argument key="cache.asset_mapper" type="service" id="cache.asset_mapper" on-invalid="ignore_uninitialized"/>
         <argument key="cache.messenger.restart_workers_signal" type="service" id="cache.messenger.restart_workers_signal" on-invalid="ignore_uninitialized"/>
+        <argument key="app.cache.redis" type="service" id="app.cache.redis" on-invalid="ignore_uninitialized"/>
         <argument key="app.cache" type="service" id="app.cache" on-invalid="ignore_uninitialized"/>
         <argument key="cache.validator_expression_language" type="service" id="cache.validator_expression_language" on-invalid="ignore_uninitialized"/>
         <argument key="cache.doctrine.orm.default.result" type="service" id="cache.doctrine.orm.default.result" on-invalid="ignore_uninitialized"/>
@@ -4054,6 +4063,15 @@
         <argument key="lazy">true</argument>
       </argument>
     </service>
+    <service id=".app.cache.redis.taggable" class="Symfony\Component\Cache\Adapter\TagAwareAdapter">
+      <tag name="cache.taggable" pool="app.cache.redis"/>
+      <argument type="service" id="app.cache.redis"/>
+    </service>
+    <service id="app.cache.redis" class="Symfony\Component\Cache\Adapter\TraceableAdapter">
+      <tag name="cache.pool" provider="%env(UPSTASH_REDIS_REST_URL)%" default_lifetime="3600"/>
+      <tag name="kernel.reset" method="reset"/>
+      <argument type="service" id="app.cache.redis.recorder_inner"/>
+    </service>
     <service id=".app.cache.taggable" class="Symfony\Component\Cache\Adapter\TagAwareAdapter">
       <tag name="cache.taggable" pool="app.cache"/>
       <argument type="service" id="app.cache"/>
@@ -5083,6 +5101,10 @@
       <call method="addInstance">
         <argument>cache.messenger.restart_workers_signal</argument>
         <argument type="service" id="cache.messenger.restart_workers_signal"/>
+      </call>
+      <call method="addInstance">
+        <argument>app.cache.redis</argument>
+        <argument type="service" id="app.cache.redis"/>
       </call>
       <call method="addInstance">
         <argument>app.cache</argument>
@@ -7846,6 +7868,12 @@
         <argument key="urlencode" type="service_closure" id="container.env_var_processor"/>
       </argument>
     </service>
+    <service id=".cache_connection.ISsgk7W" class="Symfony\Component\Cache\Adapter\AbstractAdapter" constructor="createConnection">
+      <argument>%env(UPSTASH_REDIS_REST_URL)%</argument>
+      <argument type="collection">
+        <argument key="lazy">true</argument>
+      </argument>
+    </service>
     <service id="debug.security.event_dispatcher.main" class="Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher">
       <tag name="security.event_dispatcher.main">event_dispatcher.dispatcher</tag>
       <tag name="monolog.logger" channel="event"/>
@@ -9598,10 +9626,11 @@
       <tag name="container.service_locator"/>
       <argument type="collection"/>
     </service>
-    <service id=".service_locator.B.MVCtv" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.ulWZyFC" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="cache.app" type="service_closure" id="cache.app.taggable"/>
+        <argument key="app.cache.redis" type="service_closure" id=".app.cache.redis.taggable"/>
         <argument key="app.cache" type="service_closure" id=".app.cache.taggable"/>
       </argument>
     </service>
@@ -10946,6 +10975,15 @@
         <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       </call>
     </service>
+    <service id="app.cache.redis.recorder_inner" class="Symfony\Component\Cache\Adapter\RedisAdapter">
+      <argument type="service" id=".cache_connection.ISsgk7W"/>
+      <argument>iN8C2yXnhn</argument>
+      <argument>3600</argument>
+      <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
+      <call method="setLogger">
+        <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
+      </call>
+    </service>
     <service id="app.cache.recorder_inner" class="Symfony\Component\Cache\Adapter\RedisAdapter">
       <argument type="service" id=".cache_connection.hdInMNi"/>
       <argument>owUBAAPzau</argument>
@@ -11072,6 +11110,12 @@
     <service id="cache.default_redis_provider" alias=".cache_connection.hdInMNi"/>
     <service id="cache.default_memcached_provider" alias=".cache_connection.8kvDmRs"/>
     <service id="cache.default_doctrine_dbal_provider" alias="doctrine.dbal.default_connection"/>
+    <service id=".Symfony\Contracts\Cache\TagAwareCacheInterface $app.cache.redis" alias=".app.cache.redis.taggable"/>
+    <service id="Symfony\Contracts\Cache\TagAwareCacheInterface $appCacheRedis" alias=".app.cache.redis.taggable"/>
+    <service id=".Symfony\Contracts\Cache\CacheInterface $app.cache.redis" alias="app.cache.redis"/>
+    <service id="Symfony\Contracts\Cache\CacheInterface $appCacheRedis" alias="app.cache.redis"/>
+    <service id=".Psr\Cache\CacheItemPoolInterface $app.cache.redis" alias="app.cache.redis"/>
+    <service id="Psr\Cache\CacheItemPoolInterface $appCacheRedis" alias="app.cache.redis"/>
     <service id=".Symfony\Contracts\Cache\TagAwareCacheInterface $app.cache" alias=".app.cache.taggable"/>
     <service id="Symfony\Contracts\Cache\TagAwareCacheInterface $appCache" alias=".app.cache.taggable"/>
     <service id=".Symfony\Contracts\Cache\CacheInterface $app.cache" alias="app.cache"/>

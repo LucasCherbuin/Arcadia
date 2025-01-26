@@ -26,6 +26,7 @@
         "snc/redis-bundle": "*",
         "symfony/asset": "7.1.*",
         "symfony/asset-mapper": "7.1.*",
+        "symfony/cache": "7.1.*",
         "symfony/console": "7.1.*",
         "symfony/doctrine-messenger": "7.1.*",
         "symfony/dotenv": "7.1.*",
