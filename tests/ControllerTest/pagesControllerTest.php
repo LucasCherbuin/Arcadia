@@ -2,59 +2,69 @@
 
 namespace App\Tests\Controller;
 
-use App\Controller\PagesController;
-use App\Entity\Animal;
-use App\Repository\AnimalRepository;
-use App\Repository\HabitatRepository;
-use App\Repository\ServiceRepository;
-use App\Repository\AvisRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use Twig\Environment;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class PagesControllerTest extends TestCase
+class PagesControllerTest extends WebTestCase
 {
-    public function testAccueil(): void
+    public function testAccueilPage()
     {
-        // Simuler les dépendances
-        $entityManager = $this->createMock(EntityManagerInterface::class);
-        $normalizer = $this->createMock(NormalizerInterface::class);
+        $client = static::createClient();
 
-        $animalRepository = $this->createMock(AnimalRepository::class);
-        $habitatRepository = $this->createMock(HabitatRepository::class);
-        $serviceRepository = $this->createMock(ServiceRepository::class);
-        $avisRepository = $this->createMock(AvisRepository::class);
+        // Accéder à la page d'accueil
+        $crawler = $client->request('GET', '/');
 
-        // Simuler les données renvoyées par les repositories
-        $animalRepository->method('findAll')->willReturn([
-            (new Animal())->setPrenom('Léo')->setId(1), // Simule un animal
+        // Vérifier que la réponse est correcte
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('h1', 'Bienvenue au Zoo d\'Arcadia'); // Exemple d'élément attendu
+    }
+
+    public function testHabitatVisiteurPage()
+    {
+        $client = static::createClient();
+
+        // Accéder à la page des habitats
+        $crawler = $client->request('GET', '/habitatVisiteur');
+
+        // Vérifier que la réponse est correcte
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorExists('.habitat-card'); // Vérifie qu'il y a des cartes d'habitat
+    }
+
+    public function testIncrementClick()
+    {
+        $client = static::createClient();
+
+        // Simuler un clic sur un animal avec l'ID 1
+        $client->request('POST', '/animal/click/1');
+
+        // Vérifier la réponse JSON
+        $this->assertResponseIsSuccessful();
+        $this->assertJson($client->getResponse()->getContent());
+
+        $responseData = json_decode($client->getResponse()->getContent(), true);
+        $this->assertArrayHasKey('clicks', $responseData); // Vérifier que la clé "clicks" existe
+    }
+
+    public function testContactFormSubmission()
+    {
+        $client = static::createClient();
+
+        // Accéder à la page de contact
+        $crawler = $client->request('GET', '/contact');
+
+        // Soumettre le formulaire
+        $form = $crawler->selectButton('Envoyer')->form([
+            'contact[email]' => 'test@example.com',
+            'contact[Titre]' => 'Demande de test',
+            'contact[votre_demande]' => 'Ceci est une demande de test.',
         ]);
-        $habitatRepository->method('findAll')->willReturn([]);
-        $serviceRepository->method('findAll')->willReturn([]);
-        $avisRepository->method('findAll')->willReturn([]);
+        $client->submit($form);
 
-        // Instancier le contrôleur
-        $controller = new PagesController($entityManager, $normalizer);
+        // Vérifier la redirection après la soumission
+        $this->assertResponseRedirects('/contact');
 
-        // Simuler la requête
-        $request = new Request();
-
-        // Appeler la méthode et récupérer la réponse
-        $response = $controller->accueil(
-            $entityManager,
-            $animalRepository,
-            $habitatRepository,
-            $serviceRepository,
-            $avisRepository,
-            $request
-        );
-
-        // Assertions sur la réponse
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertStringContainsString('Léo', $response->getContent());
+        // Suivre la redirection et vérifier le message flash
+        $client->followRedirect();
+        $this->assertSelectorTextContains('.flash-success', 'Votre demande a été envoyée avec succès.');
     }
 }

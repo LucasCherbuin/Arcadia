@@ -72,7 +72,7 @@ class utilisateurControllerTest extends WebTestCase
                ->setPassword('mdp');
 
         $role = new Role();
-        $role->setLabel('employee');
+        $role->setRole('employee');
 
         $entityManager->persist($utilisateur);
         $entityManager->flush();

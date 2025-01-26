@@ -23,7 +23,7 @@ class HabitatFixtures extends Fixture
             $habitat = (new Habitat())
                 ->setNom($faker->word())
                 ->setDescription($faker->paragraph())
-                ->setCommentaire($faker->sentence())
+                ->addCommentaire($faker->string())
                 ->setImage($image);
 
             $manager->persist($habitat);

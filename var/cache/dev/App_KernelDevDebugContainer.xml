@@ -512,12 +512,6 @@
     <service id="App\DataFixtures\AvisFixtures" class="App\DataFixtures\AvisFixtures" autowire="true" autoconfigure="true">
       <tag name="doctrine.fixture.orm"/>
     </service>
-    <service id="App\DataFixtures\ConsultationAnimalFixtures" class="App\DataFixtures\ConsultationAnimalFixtures" autowire="true" autoconfigure="true">
-      <tag name="container.error" message="The autoloader expected class &quot;App\DataFixtures\ConsultationAnimalFixtures&quot; to be defined in file &quot;C:\Users\Administrateur\Arcadia\vendor\composer/../../src\DataFixtures\ConsultationAnimalFixtures.php&quot;. The file was found but the class was not in it, the class name or namespace probably has a typo."/>
-    </service>
-    <service id="App\DataFixtures\ConsultationFixtures" class="App\DataFixtures\ConsultationFixtures" autowire="true" autoconfigure="true">
-      <tag name="doctrine.fixture.orm"/>
-    </service>
     <service id="App\DataFixtures\DataFixture" class="App\DataFixtures\DataFixture" autowire="true" autoconfigure="true">
       <tag name="doctrine.fixture.orm"/>
     </service>
@@ -2209,11 +2203,6 @@
       </call>
       <factory class="Symfony\Component\HttpClient\HttpClient" method="create"/>
     </service>
-    <service id="psr18.http_client" class="Symfony\Component\HttpClient\Psr18Client">
-      <argument type="service" id=".debug.http_client"/>
-      <argument>null</argument>
-      <argument>null</argument>
-    </service>
     <service id="http_client.abstract_retry_strategy" class="Symfony\Component\HttpClient\Retry\GenericRetryStrategy" abstract="true">
       <argument type="abstract">http codes</argument>
       <argument type="abstract">delay ms</argument>
@@ -2299,6 +2288,12 @@
       <argument type="service" id="monolog.logger.mailer" on-invalid="ignore"/>
     </service>
     <service id="mailer.transport_factory.gmail" class="Symfony\Component\Mailer\Bridge\Google\Transport\GmailTransportFactory">
+      <tag name="mailer.transport_factory"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument type="service" id=".debug.http_client" on-invalid="ignore"/>
+      <argument type="service" id="monolog.logger.mailer" on-invalid="ignore"/>
+    </service>
+    <service id="mailer.transport_factory.mailjet" class="Symfony\Component\Mailer\Bridge\Mailjet\Transport\MailjetTransportFactory">
       <tag name="mailer.transport_factory"/>
       <argument type="service" id="debug.event_dispatcher"/>
       <argument type="service" id=".debug.http_client" on-invalid="ignore"/>
@@ -7592,10 +7587,6 @@
             <argument key="groups" type="collection"/>
           </argument>
           <argument type="collection">
-            <argument key="fixture" type="service" id="App\DataFixtures\ConsultationFixtures"/>
-            <argument key="groups" type="collection"/>
-          </argument>
-          <argument type="collection">
             <argument key="fixture" type="service" id="App\DataFixtures\DataFixture"/>
             <argument key="groups" type="collection"/>
           </argument>
@@ -7757,8 +7748,6 @@
     <service id=".abstract.instanceof.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\AvisFixtures" class="App\DataFixtures\AvisFixtures" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\DataFixtures\AvisFixtures" class="App\DataFixtures\AvisFixtures" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\ConsultationFixtures" class="App\DataFixtures\ConsultationFixtures" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\DataFixtures\ConsultationFixtures" class="App\DataFixtures\ConsultationFixtures" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\DataFixture" class="App\DataFixtures\DataFixture" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\DataFixtures\DataFixture" class="App\DataFixtures\DataFixture" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\EmployeeFixtures" class="App\DataFixtures\EmployeeFixtures" autowire="true" abstract="true"/>
@@ -11042,7 +11031,6 @@
     <service id="asset_mapper.http_client" alias=".debug.http_client"/>
     <service id="Symfony\Component\AssetMapper\ImportMap\ImportMapManager" alias="asset_mapper.importmap.manager"/>
     <service id="Symfony\Contracts\HttpClient\HttpClientInterface" alias=".debug.http_client"/>
-    <service id="Psr\Http\Client\ClientInterface" alias="psr18.http_client"/>
     <service id="mailer" alias="mailer.mailer"/>
     <service id="Symfony\Component\Mailer\MailerInterface" alias="mailer.mailer"/>
     <service id="Symfony\Component\Mailer\Transport\TransportInterface" alias="mailer.default_transport"/>

@@ -22,7 +22,7 @@ class habitatControllerTest extends WebTestCase
     public function testGetArticles()
     {
         $client = static::createClient();
-        $client->request('GET', '/api/habitat');
+        $client->request('GET', '/habitat');
 
         // Vérifiez que le code de statut HTTP est OK (200)
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
@@ -69,13 +69,12 @@ class habitatControllerTest extends WebTestCase
 
         // Créer un article temporaire pour le test
         $habitat = new Habitat();
-        $habitat->setnom('nom habitat')
-               ->setDescription('habitat description')
-               ->setCommentaire('commentaire');
+        $habitat->setnom('nom habitat');
+        $habitat->setDescription('habitat description');
+
 
         $habitat->setNom('nom');
         $habitat->setDescription('description');
-        $habitat->setCommentaire('commentaire');
 
         $entityManager->persist($habitat);
         $entityManager->flush();
@@ -91,7 +90,6 @@ class habitatControllerTest extends WebTestCase
                 'id' => $habitat->getId(),
                 'nom' => $habitat->getNom(),
                 'description' => $habitat->getDescription(),
-                'commentaire' => $habitat->getCommentaire(),
             ]),
             $client->getResponse()->getContent()
         );
