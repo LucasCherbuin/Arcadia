@@ -1,3 +1,7 @@
 framework:
     cache:
-        app: 'redis://%env(REDIS_URL)%'
+        pools:
+            app.cache.redis:
+                adapter: cache.redis
+                dsn: '%env(REDIS_DSN)%'
+                default_lifetime: 3600
