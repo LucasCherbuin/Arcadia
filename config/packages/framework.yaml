@@ -7,13 +7,13 @@ framework:
     session:
         handler_id: snc_redis.session.handler
         cookie_lifetime: 3600
-        save_path: 'redis://%env(REDIS_URL)%' 
+        save_path: '%env(REDIS_URL)%'  # Utilisation de Redis via l'URL de l'environnement
     profiler:
         only_exceptions: false
-        enabled: true
+        enabled: false  # Désactiver en production
     cache:
-        default_redis_provider: '%env(REDIS_URL)%'  # Utilisation de Redis pour le cache
         app: cache.adapter.redis
+        default_redis_provider: '%env(REDIS_URL)%'  # Utilisation de Redis pour le cache
         system: cache.adapter.system
         pools:
             app.cache:
@@ -21,7 +21,6 @@ framework:
                 default_lifetime: 3600
     assets:
         base_path: '/styles'
-
     asset_mapper:
         paths:
             - '%kernel.project_dir%/public/styles'

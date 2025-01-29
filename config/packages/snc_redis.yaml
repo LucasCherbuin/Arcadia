@@ -1,11 +1,9 @@
 snc_redis:
     clients:
-        default:
-            type: predis 
-            alias: redis
-            dsn: "%env(REDIS_URL)%"
-
-    monolog:
-        client: redis
-        formatter: 'monolog.formatter.json'
-        key: 'monolog:logs'
+        redis:
+            type: 'predis'  # Utilisation de Predis
+            alias: default
+            dsn: '%env(REDIS_URL)%'  # Utilisation de l'URL de l'environnement
+            options:
+                connection_timeout: 5  # Timeout pour la connexion
+                read_write_timeout: 5  # Timeout pour la lecture/écriture
