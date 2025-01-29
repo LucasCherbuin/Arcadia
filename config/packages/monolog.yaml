@@ -53,16 +53,3 @@ when@prod:
                 channels: [deprecation]
                 path: php://stderr
                 formatter: monolog.formatter.json
-            redis:
-                type: service
-                id: snc_redis.monolog.handler  # Use Redis handler service
-
-snc_redis:
-    clients:
-        default:
-            alias: 'redis'
-            dsn: '%env(REDIS_URL)%'
-    monolog:
-        client: 'snc_redis.client.default'
-        formatter: 'snc_redis.formatter'
-        key: 'monolog:logs'

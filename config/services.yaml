@@ -3,6 +3,7 @@ parameters:
     habitats_images_directory: '%env(HABITATS_IMAGES_DIRECTORY)%'
     services_images_directory: '%env(SERVICES_IMAGES_DIRECTORY)%'
     consultation_json_file_path: '%kernel.project_dir%/data/consultations.json'
+
 services:
     _defaults:
         autowire: true      # Active l'autowiring pour toutes les classes
@@ -37,18 +38,8 @@ services:
                 habitats: '%habitats_images_directory%'
                 services: '%services_images_directory%'
 
-
-    # Configuration pour Redis (si vous utilisez snc/redis-bundle, ne le redéfinissez pas ici)
-    services:
-    snc_redis.session.handler:
-        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler
-        arguments:
-            - '%env(REDIS_URL)%'
-
-
     # Client Redis (avec DSN)
     Predis\Client:
-        class: Predis\Client
         arguments:
             - '%env(REDIS_URL)%'
 
@@ -56,11 +47,13 @@ services:
     App\Service\PredisService:
         arguments:
             $redis: '@Predis\Client'
-            
+
+    # Service pour gérer les sessions Redis
+    session.handler.redis:
+        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler
+        arguments:
+            - '@Predis\Client'
 
     App\Service\MailerService:
         arguments:
             $mailer: '@mailer.mailer' # Injecte le MailerInterface automatiquement
-
-
-            
