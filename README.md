@@ -17,7 +17,7 @@ Site web servant de vitrine pour le zoo Arcadia, offrant également des espaces 
 6. Structure du projet
 
 7. Contributions
-   
+
 8. Auteur
 
 # 1. Aperçu du projet #

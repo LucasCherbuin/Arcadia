@@ -1,7 +1,11 @@
 snc_redis:
     clients:
         default:
-            type: 'phpredis'
-            alias: 'client'
-            dsn: '%env(UPSTASH_REDIS_REST_URL)%'
+            type: predis 
+            alias: redis
+            dsn: "%env(REDIS_URL)%"
 
+    monolog:
+        client: redis
+        formatter: 'monolog.formatter.json'
+        key: 'monolog:logs'

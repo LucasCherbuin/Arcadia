@@ -4051,8 +4051,8 @@
       <tag name="container.hot_path"/>
       <argument type="service" id="web_link.http_header_serializer"/>
     </service>
-    <service id=".cache_connection.hdInMNi" class="Symfony\Component\Cache\Adapter\AbstractAdapter" constructor="createConnection">
-      <argument>redis://127.0.0.1:6379</argument>
+    <service id=".cache_connection.ISsgk7W" class="Symfony\Component\Cache\Adapter\AbstractAdapter" constructor="createConnection">
+      <argument>%env(UPSTASH_REDIS_REST_URL)%</argument>
       <argument type="collection">
         <argument key="lazy">true</argument>
       </argument>
@@ -4685,7 +4685,9 @@
       <argument type="tagged_iterator" tag="messenger.transport_factory"/>
     </service>
     <service id="messenger.transport.amqp.factory" class="Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpTransportFactory"/>
-    <service id="messenger.transport.redis.factory" class="Symfony\Component\Messenger\Bridge\Redis\Transport\RedisTransportFactory"/>
+    <service id="messenger.transport.redis.factory" class="Symfony\Component\Messenger\Bridge\Redis\Transport\RedisTransportFactory">
+      <tag name="messenger.transport_factory"/>
+    </service>
     <service id="messenger.transport.sync.factory" class="Symfony\Component\Messenger\Transport\Sync\SyncTransportFactory">
       <tag name="messenger.transport_factory"/>
       <argument type="service" id="messenger.routable_message_bus"/>
@@ -7868,12 +7870,6 @@
         <argument key="urlencode" type="service_closure" id="container.env_var_processor"/>
       </argument>
     </service>
-    <service id=".cache_connection.ISsgk7W" class="Symfony\Component\Cache\Adapter\AbstractAdapter" constructor="createConnection">
-      <argument>%env(UPSTASH_REDIS_REST_URL)%</argument>
-      <argument type="collection">
-        <argument key="lazy">true</argument>
-      </argument>
-    </service>
     <service id="debug.security.event_dispatcher.main" class="Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher">
       <tag name="security.event_dispatcher.main">event_dispatcher.dispatcher</tag>
       <tag name="monolog.logger" channel="event"/>
@@ -10918,7 +10914,7 @@
       </argument>
     </service>
     <service id="cache.app.recorder_inner" class="Symfony\Component\Cache\Adapter\RedisAdapter">
-      <argument type="service" id=".cache_connection.hdInMNi"/>
+      <argument type="service" id=".cache_connection.ISsgk7W"/>
       <argument>waMgOsIK2A</argument>
       <argument>0</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
@@ -10967,7 +10963,7 @@
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.messenger.restart_workers_signal.recorder_inner" class="Symfony\Component\Cache\Adapter\RedisAdapter">
-      <argument type="service" id=".cache_connection.hdInMNi"/>
+      <argument type="service" id=".cache_connection.ISsgk7W"/>
       <argument>mt5me20tmj</argument>
       <argument>0</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
@@ -10985,7 +10981,7 @@
       </call>
     </service>
     <service id="app.cache.recorder_inner" class="Symfony\Component\Cache\Adapter\RedisAdapter">
-      <argument type="service" id=".cache_connection.hdInMNi"/>
+      <argument type="service" id=".cache_connection.ISsgk7W"/>
       <argument>owUBAAPzau</argument>
       <argument>3600</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
@@ -11107,7 +11103,7 @@
     <service id="Symfony\Component\PropertyInfo\PropertyReadInfoExtractorInterface" alias="property_info.reflection_extractor"/>
     <service id="Symfony\Component\PropertyInfo\PropertyWriteInfoExtractorInterface" alias="property_info.reflection_extractor"/>
     <service id="Symfony\Component\WebLink\HttpHeaderSerializer" alias="web_link.http_header_serializer"/>
-    <service id="cache.default_redis_provider" alias=".cache_connection.hdInMNi"/>
+    <service id="cache.default_redis_provider" alias=".cache_connection.ISsgk7W"/>
     <service id="cache.default_memcached_provider" alias=".cache_connection.8kvDmRs"/>
     <service id="cache.default_doctrine_dbal_provider" alias="doctrine.dbal.default_connection"/>
     <service id=".Symfony\Contracts\Cache\TagAwareCacheInterface $app.cache.redis" alias=".app.cache.redis.taggable"/>

@@ -39,16 +39,19 @@ services:
 
 
     # Configuration pour Redis (si vous utilisez snc/redis-bundle, ne le redéfinissez pas ici)
-    snc_redis.session.handler:
-        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler
+    services:
+    snc_redis.monolog.handler:
+        class: Snc\RedisBundle\Monolog\Handler\RedisHandler
         arguments:
-            - '@snc_redis.client'  # Le client Redis configuré
+            - '@snc_redis.client.default'  # Le client Redis que nous avons configuré
+            - 'monolog:logs'  # La clé Redis pour stocker les logs
+
 
     # Client Redis (avec DSN)
     Predis\Client:
         class: Predis\Client
         arguments:
-            - '%env(UPSTASH_REDIS_REST_URL)%'
+            - '%env(REDIS_URL)%'
 
     # Définition du service PredisService
     App\Service\PredisService:
