@@ -4,5 +4,5 @@ framework:
             redis:
                 adapter: cache.adapter.redis
                 default_lifetime: 3600
-                provider: 'redis://%env(REDIS_URL)%'
+                provider: 'redis://%env(UPSTASH_REDIS_URL)%'
                 # Vous pouvez également ajouter d'autres options ici comme `prefix` ou `timeout`
