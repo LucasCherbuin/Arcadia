@@ -1,8 +1,8 @@
 {% extends 'headerFooter.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="styles/card.css">
-    <link rel="stylesheet" href="styles/headerFooter.css">
+    <link rel="stylesheet" href="/styles/card.css">
+    <link rel="stylesheet" href="/styles/headerFooter.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -26,7 +26,7 @@
         {% for service in services %}
             <div class="card">
                 {% if service.image is not null %}
-                    <img src="{{ asset('uploads/services/' ~ service.image.path) }}" alt="{{ service.nom }}">
+                    <img src="{{ '/uploads/services/' ~ service.image.path }}" alt="{{ service.nom }}">
                 {% endif %}
                 <div class="card-info">
                     <h3>{{ service.nom }}</h3>

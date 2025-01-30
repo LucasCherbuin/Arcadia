@@ -13,11 +13,6 @@ class MenuController extends AbstractController
     #[Route('/admin', name: 'admin_menu')]
     public function admin(): Response
     {
-        // Vérification des rôles de l'utilisateur connecté
-        $user = $this->getUser();
-        dump($user); // Affiche l'utilisateur
-        dump($user ? $user->getRoles() : 'Utilisateur non connecté'); // Affiche les rôles de l'utilisateur
-
         if (!$this->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException('Accès interdit');
         }

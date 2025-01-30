@@ -16,8 +16,8 @@
 {% block body %}
 
     {% for habitat in habitats %}
-        <div class="accordion-item closed" id="habitat-{{ habitat.id }}" data-bg="{{ asset ('uploads/habitats/' ~ habitat.image) }}">
-            <div class="accordion-header" onclick="toggleAccordion({{ habitat.id }})">
+        <div class="accordion-item closed" id="habitat-{{ loop.index }}" data-bg="{{('uploads/habitats/' ~ habitat.image ) }}">
+            <div class="accordion-header" onclick="toggleAccordion({{ loop.index }})">
                 <span>{{ habitat.nom }}</span>
             </div>
             <div class="accordion-body">

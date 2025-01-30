@@ -210,7 +210,7 @@ class PagesController extends AbstractController
                 'prenom' => $animal->getPrenom(),
                 'race' => $animal->getRace() ? $animal->getRace()->getLabel() : 'Inconnue',
                 'habitat' => $animal->getHabitat()->getNom(),
-                'image' => $animal->getImage() ? $animal->getImage()->getPath() : 'default_image.jpg',
+                'image' => $animal->getImage() ? $animal->getImage()->getPath() : null,
                 'veterinaires' => $preparedVeterinaires,
                 'clicks' => $clicks,  // Ajouter le nombre de clics à l'animal
                 'animal_click_route' => $this->generateUrl('animal_click', ['id' => $animal->getId()]),  // Générer dynamiquement l'URL

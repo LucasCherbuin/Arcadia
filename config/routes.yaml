@@ -316,12 +316,12 @@ app_admin_success:
   controller: App\Controller\AdminUtilisateurController::success
 
 app_serviceEmployee_index:
-  path: employee/serviceEdit
+  path: /employee/serviceEdit
   controller: App\Controller\ServiceController::indexEmployee
   methods: [GET]
 
 app_serviceEmployee_edit:
-  path: employee/serviceEdit/{id}/edit
+  path: /employee/serviceIndex/{id}/edit
   controller: App\Controller\ServiceController::editEmployee
   requirements:
     id: '\d+'

@@ -36,7 +36,7 @@ class ServiceController extends AbstractController
         ]);
     }
 
-    #[Route(path: 'employee/serviceEdit', name: 'app_serviceEmployee_index', methods: ['GET'])]
+    #[Route(path: '/employee/serviceIndex', name: 'app_serviceEmployee_index', methods: ['GET'])]
     public function indexEmployee(): Response
     {
         $services = $this->entityManager->getRepository(Service::class)->findAll();
@@ -124,7 +124,7 @@ class ServiceController extends AbstractController
         ]);
     }
 
-    #[Route(path: 'Employee/serviceEdit/{id}/edit', name: 'app_service_edit', methods: ['GET', 'POST'])]
+    #[Route(path: '/employee/serviceIndex/{id}/edit', name: 'app_serviceEmployee_edit', methods: ['GET', 'POST'])]
     
     public function editEmployee(Request $request, Service $service): Response
     {

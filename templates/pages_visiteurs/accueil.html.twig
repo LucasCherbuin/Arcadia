@@ -30,7 +30,7 @@
                     {% for animal in animals %}
                         <div class="carousel-item {% if loop.first %}active{% endif %}">
                             {% if animal.image %}
-                                <img src="{{ asset('uploads/animaux/' ~ animal.image) }}" alt="Image de {{ animal.prenom }}" class="d-block w-100">
+                                <img src="{{ ('uploads/animaux/' ~ animal.image) }}" alt="Image de {{ animal.prenom }}" class="d-block w-100">
                             {% endif %}
                             <div class="carousel-caption">
                             </div>
@@ -59,7 +59,7 @@
                     {% for habitat in habitats %}
                         <div class="carousel-item {% if loop.first %}active{% endif %}">
                             {% if habitat.image %}
-                                <img src="{{ asset('uploads/habitats/' ~ habitat.image) }}" alt="{{ habitat.nom }}" class="d-block w-100">
+                                <img src="{{ ('uploads/habitats/' ~ habitat.image) }}" alt="{{ habitat.nom }}" class="d-block w-100">
                             {% endif %}
                             <div class="carousel-caption">
                             </div>
@@ -91,7 +91,7 @@
                     {% for service in services %}
                         <div class="carousel-item {% if loop.first %}active{% endif %}">
                             {% if service.image %}
-                                <img src="{{ asset('uploads/services/' ~ service.image) }}" alt="{{ service.nom }}" class="d-block w-100">
+                                <img src="{{ ('uploads/services/' ~ service.image) }}" alt="{{ service.nom }}" class="d-block w-100">
                             {% endif %}
                             <div class="carousel-caption">
                         </div>

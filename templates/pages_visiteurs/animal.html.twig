@@ -14,68 +14,64 @@
 {% endblock %}
 
 {% block body %}
-  
-            {% for animal in animals %}
-    <div class="accordion-item closed" id="animal-{{ animal.id }}" 
-         data-bg="{{ asset('uploads/animaux/' ~ animal.image) }}">
-        <div class="accordion-header" onclick="toggleAnimalAccordion({{ animal.id }})">
-            <span>{{ animal.prenom }}</span>
+    {% for animal in animals %}
+        <div class="accordion-item closed" id="animal-{{ loop.index }}" data-bg="{{ '/uploads/animaux/' ~ animal.image }}"
+>
+            <div class="accordion-header" onclick="toggleAnimalAccordion({{ loop.index }})">
+                <span>{{ animal.prenom }}</span>
+            </div>
+            <div class="accordion-body">
+                <div class="description ">
+                    <p><strong>Prénom :</strong> <br>{{ animal.prenom }}</p>
+                    <p><strong>Race :</strong> <br>{{ animal.race }}</p>
+                    <p><strong>Habitat :</strong> <br>{{ animal.habitat }}</p>
+                    <p><strong>Vétérinaire :</strong></p>
+                    
+                    {% for veterinaire in animal.veterinaires %}
+                        {{ veterinaire.email|split('@')[0]|replace({'_': ' ', '.': ' '})|capitalize }}<br>
+                        <br><strong>Détail :</strong> <br>{{ veterinaire.details }} 
+                    {% endfor %}
+                </div>
+            </div>
         </div>
-        <div class="accordion-body">
-            <div class="description ">
-            <p><strong>Prénom :</strong> <br>{{ animal.prenom }}</p>
-            <p><strong>Race :</strong> <br>{{ animal.race }}</p>
-            <p><strong>Habitat :</strong> <br>{{ animal.habitat }}</p>
-            <p><strong>Vétérinaire :</strong></p>
-            
-                {% for veterinaire in animal.veterinaires %}
-                    {{ veterinaire.email|split('@')[0]|replace({'_': ' ', '.': ' '})|capitalize }}<br>
-                    <br><strong>Détail :</strong> <br>{{ veterinaire.details }} 
-                {% endfor %}
-        </div>
-    </div>
-{% endfor %}
-
-        </div>
-    </div>
+    {% endfor %}
 
     <script>
-    function toggleAnimalAccordion(id) {
-        const item = document.getElementById(`animal-${id}`);
-        const body = item.querySelector('.accordion-body');
-        const isOpen = item.classList.contains('open');
-        const bgUrl = item.getAttribute('data-bg');
+        function toggleAnimalAccordion(id) {
+            const item = document.getElementById(`animal-${id}`);
+            const body = item.querySelector('.accordion-body');
+            const isOpen = body.style.display === 'block'; // Vérifie si l'accordéon est ouvert
+            const bgUrl = item.getAttribute('data-bg'); // Récupère l'URL de fond
 
-        // Fermer tous les autres items
-        document.querySelectorAll('.accordion-item').forEach(el => {
-            el.classList.remove('open');
-            el.classList.add('closed');
-            el.querySelector('.accordion-body').style.display = 'none';
-        });
+            // Ferme tous les autres items
+            document.querySelectorAll('.accordion-item').forEach(el => {
+                const elBody = el.querySelector('.accordion-body');
+                elBody.style.display = 'none'; // Cache le corps de l'élément
+                el.style.backgroundImage = ''; // Enlève l'image de fond
+                el.classList.remove('open');
+                el.classList.add('closed');
+            });
 
-        if (!isOpen) {
-            item.classList.remove('closed');
-            item.classList.add('open');
-            item.style.backgroundImage = `url(${bgUrl})`; // Appliquer le background
-            body.style.display = 'block';
+            if (!isOpen) {
+                body.style.display = 'block'; // Affiche le corps de l'élément
+                item.style.backgroundImage = `url(${bgUrl})`; // Applique l'image de fond
 
-            // Envoi de la requête POST pour incrémenter les clics
-            fetch(`/animal/click/${id}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log('Réponse:', data);
-                    if (data.clicks !== undefined) {
-                        document.getElementById(`click-count-${id}`).textContent = data.clicks;
-                    }
+                // Envoi de la requête POST pour incrémenter les clics
+                fetch(`/animal/click/${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                 })
-                .catch((error) => console.error('Erreur:', error));
-
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log('Réponse:', data);
+                        if (data.clicks !== undefined) {
+                            document.getElementById(`click-count-${id}`).textContent = data.clicks; // Mettez à jour le compteur de clics si disponible
+                        }
+                    })
+                    .catch((error) => console.error('Erreur:', error));
+            }
         }
-    }
     </script>
 {% endblock %}
