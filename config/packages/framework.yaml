@@ -8,8 +8,8 @@ framework:
         handler_id: 'session.handler.redis'
         save_path: '%env(UPSTASH_REDIS_URL)%'  # Utilisation de Redis via l'URL de l'environnement
     profiler:
-        only_exceptions: false
-        enabled: false  # Désactiver en production
+        enabled: true
+        collect: true
     cache:
         app: cache.adapter.redis
         default_redis_provider: '%env(UPSTASH_REDIS_URL)%'  # Utilisation de Redis pour le cache

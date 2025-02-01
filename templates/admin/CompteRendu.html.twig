@@ -33,10 +33,10 @@
                         <td>{{ veterinaire.animal.prenom }}</td>
                         <td>{{ veterinaire.date }}</td>
                         <td>
-                            <button class="rapport-button" data-target="#rapport-veterinaire-1" onclick="toggleReport(this)">
+                            <button class="rapport-button" data-target="#rapport-veterinaire-{{ veterinaire.id }}" onclick="toggleReport(this)">
                                 Rapport ▼
                             </button>
-                            <div class="rapport-content d-none" id="rapport-veterinaire-1">
+                            <div class="rapport-content d-none" id="rapport-veterinaire-{{ veterinaire.id }}">
                                 <p>{{ veterinaire.detail }}</p>
                                 <span>{{ veterinaire.utilisateur.email }}</span>
                             </div>

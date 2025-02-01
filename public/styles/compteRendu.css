@@ -102,6 +102,7 @@ h1 {
     border-radius: 5px;
     font-size: 0.9em;
     text-align: left;
+    transition: all 0.3s ease-in-out;
 }
 
 .rapport-content.visible {
@@ -115,6 +116,14 @@ h1 {
 .rapport-content span {
     font-weight: bold;
     color: #757575;
+}
+
+.rapport-content.open {
+    display: table-row;
+}
+
+.rapport-content:not(.d-none) {
+    display: table-row;
 }
 
 @media (max-width: 768px) {
