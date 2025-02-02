@@ -12,6 +12,7 @@
     transition: all 0.3s ease; /* Animation douce au survol */
     color: #008000; /* Couleur de l'icône */
     font-size: 24px; /* Taille de l'icône */
+    font-family: 'Jersey 10', sans-serif;
 }
 
 /* Effet au survol */

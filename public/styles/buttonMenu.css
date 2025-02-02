@@ -13,6 +13,9 @@
     background-color: white;
 }
 
+body {
+    font-family: 'Jersey 10', sans-serif;
+}
 @media (max-width: 768px) {
     .consultation-header, .consultation-item {
         font-size: 14px;
