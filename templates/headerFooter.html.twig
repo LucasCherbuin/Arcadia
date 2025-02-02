@@ -33,9 +33,16 @@
                     <li><a href="{{ path('app_habitat_visiteur') }}" class="text-light">Habitats</a></li>
                     <li>
                         {% if app.user %}
-                            <a href="{{ path('app_logout') }}" style="color: red;" class="text-light">Déconnexion</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('admin_menu') }}" class="text-light">Menu Administrateur</a>
+                            {% elseif is_granted('ROLE_EMPLOYEE') %}
+                                <a href="{{ path('employee_menu') }}" class="text-light">Menu Employé</a>
+                            {% elseif is_granted('ROLE_VETERINAIRE') %}
+                                <a href="{{ path('veterinaire_menu') }}" class="text-light">Menu Vétérinaire</a>
+                            {% endif %}
+                            <a href="{{ path('app_logout') }}" class="text-light" style="color: red;">Déconnexion</a>
                         {% else %}
-                            <a href="{{ path('app_login') }}" style="color: blue;" class="text-light">Connexion</a>
+                            <a href="{{ path('app_login') }}" class="text-light" style="color: blue;">Connexion</a>
                         {% endif %}
                     </li>
                     <li><a href="{{ path('app_contact') }}" class="text-light">Contact</a></li>
