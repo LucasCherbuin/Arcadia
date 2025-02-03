@@ -27,7 +27,7 @@
         {% for service in services %}
             <div class="card">
                 {% if service.image is not null %}
-                    <img src="{{ '/uploads/services/' ~ service.image.path }}" alt="{{ service.nom }}">
+                    <img src="{{ '/uploads/services/' ~ service.image.path}}" alt="{{ service.nom }}">
                 {% endif %}
                 <div class="card-info">
                     <h3>{{ service.nom }}</h3>

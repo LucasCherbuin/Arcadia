@@ -78,15 +78,6 @@ public function new(Request $request, UserPasswordHasherInterface $passwordHashe
 }
 
 
-    // Afficher les détails d'un utilisateur
-    #[Route('/{id}', name: 'app_utilisateur_show', methods: ['GET'])]
-    public function show(Utilisateur $utilisateur): Response
-    {
-        return $this->render('admin/utilisateur/show.html.twig', [
-            'utilisateur' => $utilisateur,
-        ]);
-    }
-
     // Modifier un utilisateur
     #[Route('/{id}/edit', name: 'app_utilisateur_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Utilisateur $utilisateur, UserPasswordHasherInterface $passwordHasher): Response

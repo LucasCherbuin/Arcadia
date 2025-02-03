@@ -40,6 +40,6 @@ class ImageUploadService
         }
 
         // Retourner le chemin relatif pour la base de données
-        return "uploads/{$type}/{$fileName}";
+        return "{$fileName}";
     }
 }

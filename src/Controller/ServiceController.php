@@ -88,14 +88,6 @@ class ServiceController extends AbstractController
         ]);
     }
 
-    // Affichage d'un service
-    #[Route(path: '/{id}', name: 'app_service_show', methods: ['GET'])]
-    public function show(Service $service): Response
-    {
-        return $this->render('admin/service/show.html.twig', [
-            'service' => $service,
-        ]);
-    }
 
     // Modification d'un service
     #[Route(path: '/{id}/edit', name: 'app_service_edit', methods: ['GET', 'POST'])]

@@ -47,14 +47,6 @@ class HoraireController extends AbstractController
         ]);
     }
 
-    // Affichage d'un horaire spécifique
-    #[Route('/{id}', name: 'horaire_show', methods: ['GET'])]
-    public function show(Horaire $horaire): Response
-    {
-        return $this->render('admin/horaire/show.html.twig', [
-            'horaire' => $horaire,
-        ]);
-    }
 
     // Modification d'un horaire
     #[Route('/{id}/edit', name: 'horaire_edit', methods: ['GET', 'POST'])]

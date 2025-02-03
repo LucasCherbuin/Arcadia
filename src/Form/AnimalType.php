@@ -6,7 +6,6 @@ use App\Entity\Animal;
 use App\Entity\Race;
 use App\Entity\Habitat;
 use Symfony\Component\Form\AbstractType;
-
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -52,12 +51,12 @@ class AnimalType extends AbstractType
             ])
             ->add('image', FileType::class, [
                 'label' => 'Image de l\'animal',
-                'required' => false,
-                'mapped' => false, 
+                'required' => false, // Le champ image est optionnel
+                'mapped' => false, // Nous le gérons séparément dans le contrôleur
                 'attr' => [
                     'class' => 'form-control form-floating',
-                    'accept' => 'image/png, image/jpeg'  // Types d'images acceptés
-                ]
+                    'accept' => 'image/png, image/jpeg', // Types d'images acceptés
+                ],
             ]);
     }
 

@@ -1,7 +1,7 @@
 parameters:
-    animaux_images_directory: '%env(ANIMAUX_IMAGES_DIRECTORY)%'
-    habitats_images_directory: '%env(HABITATS_IMAGES_DIRECTORY)%'
-    services_images_directory: '%env(SERVICES_IMAGES_DIRECTORY)%'
+    animaux_images_directory: '%env(resolve:ANIMAUX_IMAGES_DIRECTORY)%'
+    habitats_images_directory: '%env(resolve:HABITATS_IMAGES_DIRECTORY)%'
+    services_images_directory: '%env(resolve:SERVICES_IMAGES_DIRECTORY)%'
     consultation_json_file_path: '%kernel.project_dir%/data/consultations.json'
 
 services:

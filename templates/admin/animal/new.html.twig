@@ -12,48 +12,35 @@
 {% endblock %}
 
 {% block body %}
-{{ form_start(form) }}
+    {{ form_start(form, {'enctype': 'multipart/form-data'}) }}
 
-        <form method="POST" enctype="multipart/form-data">
-            <!-- Champ prénom (Animal) -->
-            <div class="form-floating mb-3">
-                {{ form_row(form.prenom) }}
-            </div>
+        <!-- Champ prénom (Animal) -->
+        <div class="form-floating mb-3">
+            {{ form_row(form.prenom) }}
+        </div>
 
-            <!-- Champ race (Animal) -->
-            <div class="form-floating mb-3">
-                {{ form_row(form.race) }}
-            </div>
+        <!-- Champ race (Animal) -->
+        <div class="form-floating mb-3">
+            {{ form_row(form.race) }}
+        </div>
 
-            <!-- Champ nouvelle race (si applicable) -->
-            <div class="form-floating mb-3">
-                {{ form_row(form.nouvelleRace) }}
-            </div>
+        <!-- Champ nouvelle race (si applicable) -->
+        <div class="form-floating mb-3">
+            {{ form_row(form.nouvelleRace) }}
+        </div>
 
-            <!-- Champ habitat -->
-            <div class="form-floating mb-3">
-                {{ form_row(form.habitat) }}
-            </div>
+        <!-- Champ habitat -->
+        <div class="form-floating mb-3">
+            {{ form_row(form.habitat) }}
+        </div>
 
-            <!-- Champ image de l'animal -->
-            <div class="form-floating mb-3">
-                {{ form_row(form.image) }}
-            </div>
+        <!-- Champ image de l'animal -->
+        <div class="form-floating mb-3">
+            {{ form_row(form.image) }}
+        </div>
 
-            <button type="submit" class="btn btn-primary w-100">Envoyer</button>
-            <a href="{{ path('app_utilisateur_index') }}" class="btn btn-secondary">Retour</a>
-        </form>
-    </div>
+        <button type="submit" class="btn btn-primary w-100">Envoyer</button>
+        <a href="{{ path('app_utilisateur_index') }}" class="btn btn-secondary">Retour</a>
+
     {{ form_end(form) }}
-</div>
-
-
-<!-- Messages flash -->
-{% for message in app.flashes('success') %}
-    <div class="alert alert-success mt-3">{{ message }}</div>
-{% endfor %}
-
-{% for message in app.flashes('error') %}
-    <div class="alert alert-danger mt-3">{{ message }}</div>
-{% endfor %}
 {% endblock %}

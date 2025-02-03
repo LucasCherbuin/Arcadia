@@ -16,8 +16,7 @@
 {% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-            <form method="POST" enctype="multipart/form-data">
+    {{ form_start(form, {'enctype': 'multipart/form-data'}) }}
                 <div class="form-floating mb-3">
                     {{ form_row(form.nom) }}
                 </div>
@@ -33,8 +32,6 @@
                 <button type="submit" class="btn btn-primary w-100">Envoyer</button>
 
                 <a href="{{ path('app_utilisateur_index') }}" class="btn btn-secondary">Retour</a>
-            </form>
-        </div>
-        {{ form_end(form) }}
+    {{ form_end(form) }}
     </div>
 {% endblock %}

@@ -27,14 +27,6 @@ class HabitatController extends AbstractController
         ]);
     }
 
-    // Affiche un habitat
-    #[Route('/{id}', name: 'app_habitat_show', methods: ['GET'])]
-    public function show(Habitat $habitat): Response
-    {
-        return $this->render('admin/habitat/show.html.twig', [
-            'habitat' => $habitat,
-        ]);
-    }
 
     // Création d'un nouvel habitat
     #[Route('/new', name: 'app_habitat_new', methods: ['GET', 'POST'])]
