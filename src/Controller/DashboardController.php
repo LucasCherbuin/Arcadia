@@ -57,7 +57,7 @@ class DashboardController extends AbstractController
 
         foreach ($animals as $animal) {
             $key = "animal:click:{$animal->getId()}";
-            $clicks = $this->predisService->getClick($key) ?: 0;
+            $clicks = is_numeric($this->predisService->getClick($key)) ? $this->predisService->getClick($key) : 0;
 
             $consultations[] = [
                 'id' => $animal->getId(),

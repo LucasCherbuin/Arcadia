@@ -26,10 +26,7 @@ class MenuController extends AbstractController
     #[Route('/employee', name: 'employee_menu')]
     public function employee(): Response
     {
-        // Vérification de l'utilisateur et des rôles
-        $user = $this->getUser();
-        dump($user);
-        dump($user ? $user->getRoles() : 'Utilisateur non connecté');
+
 
         if (!$this->isGranted('ROLE_EMPLOYEE')) {
             throw $this->createAccessDeniedException('Accès interdit');
@@ -45,10 +42,7 @@ class MenuController extends AbstractController
     #[Route('/veterinaire', name: 'veterinaire_menu')]
     public function veterinaire(): Response
     {
-        // Vérification de l'utilisateur et des rôles
-        $user = $this->getUser();
-        dump($user);
-        dump($user ? $user->getRoles() : 'Utilisateur non connecté');
+
 
         if (!$this->isGranted('ROLE_VETERINAIRE')) {
             throw $this->createAccessDeniedException('Accès interdit');

@@ -16,8 +16,7 @@
 
 {% block body %}
     {% for animal in animals %}
-        <div class="accordion-item closed" id="animal-{{ loop.index }}" data-bg="{{ '/uploads/animaux/' ~ animal.image }}"
->
+        <div class="accordion-item closed" id="animal-{{ loop.index }}" data-bg="{{ '/uploads/animaux/' ~ animal.image }}">
             <div class="accordion-header" onclick="toggleAnimalAccordion({{ loop.index }})">
                 <span>{{ animal.prenom }}</span>
             </div>

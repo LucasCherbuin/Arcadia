@@ -23,7 +23,7 @@
                     </div>
                     <ul class="consultation-list">
                         {% for consultation in preparedConsultation %}
-                            <li class="consultation-item">
+                            <li class="consultation-item" data-animal-id="{{ consultation.id }}">
                                 <span class="animal-name">{{ consultation.prenom }}</span>
                                 <span class="consultation-count">{{ consultation.clique }}</span>
                             </li>
@@ -35,16 +35,29 @@
     </div>
 
 
-
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const clicks = {{ preparedConsultation|json_encode|raw }};
-        clicks.forEach(function (animal) {
-            const element = document.getElementById(`click-count-${animal.id}`);
-            if (element) {
-                element.textContent = animal.clique;
+    document.addEventListener('DOMContentLoaded', async function () {
+        try {
+            const elements = document.querySelectorAll('.consultation-item');
+            
+            for (const element of elements) {
+                const animalId = element.dataset.animalId; // Assurez-vous que chaque <li> a un attribut data-animal-id
+                const countElement = element.querySelector('.consultation-count');
+
+                if (animalId && countElement) {
+                    const response = await fetch(`/animal/click/${animalId}`, { method: 'POST' });
+                    const data = await response.json();
+
+                    if (data.clicks !== undefined) {
+                        countElement.textContent = data.clicks;
+                    }
+                }
             }
-        });
+        } catch (error) {
+            console.error('Erreur lors de la récupération des clics:', error);
+        }
     });
-    </script>
+</script>
+
+
 {% endblock %}
