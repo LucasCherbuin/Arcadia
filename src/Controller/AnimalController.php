@@ -96,12 +96,48 @@ class AnimalController extends AbstractController
 
     //modification des propriétés de l'animal
     #[Route(path: '/{id}/edit', name: 'app_animal_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Animal $animal, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Animal $animal, EntityManagerInterface $entityManager, ImageUploadService $imageUploadService): Response
     {
         $form = $this->createForm(AnimalType::class, $animal);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Vérification de l'image modifiée
+            $imageFile = $form->get('image')->getData();
+
+            if ($imageFile) {
+                // Supprimer l'ancienne image si elle existe
+                $oldImage = $animal->getImage();
+                if ($oldImage) {
+                    $imagePath = $oldImage->getPath();
+                    $fullPath = $this->getParameter('uploads_directory') . '/' . $imagePath;
+
+                    // Vérifier si l'image existe et la supprimer du dossier
+                    if (file_exists($fullPath)) {
+                        unlink($fullPath);
+                    }
+
+                    // Supprimer l'entité Image de la base de données
+                    $entityManager->remove($oldImage);
+                }
+
+                try {
+                    // Télécharger la nouvelle image et récupérer le chemin relatif
+                    $filePath = $imageUploadService->upload($imageFile, 'animaux');
+                    
+                    // Créer une nouvelle entité Image
+                    $image = new Image();
+                    $image->setPath($filePath);
+                    $entityManager->persist($image);
+                    
+                    // Associer la nouvelle image à l'animal
+                    $animal->setImage($image);
+                } catch (\RuntimeException $e) {
+                    $this->addFlash('error', 'Erreur lors du téléchargement de l\'image');
+                }
+            }
+
+            // Sauvegarder les modifications de l'animal (image incluse)
             $entityManager->flush();
 
             $this->addFlash('success', 'Animal modifié avec succès !');

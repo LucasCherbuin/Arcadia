@@ -162,31 +162,25 @@ app_employeeRepas_new:
 
 # Routes pour les habitats
 app_habitat_index:
-  path: admin/habitat
+  path: /admin/habitat
   controller: App\Controller\HabitatController::index
   methods: [GET]
 
-app_habitat_show:
-  path: admin/habitat/{id}
-  controller: App\Controller\HabitatController::show
-  requirements:
-    id: '\d+'
-  methods: [GET]
 
 app_habitat_new:
-  path: admin/habitat/new
+  path: /admin/habitat/new
   controller: App\Controller\HabitatController::new
   methods: [GET, POST]
 
 app_habitat_edit:
-  path: admin/habitat/{id}/edit
+  path: /admin/habitat/{id}/edit
   controller: App\Controller\HabitatController::edit
   requirements:
     id: '\d+'
   methods: [GET, POST]
 
 app_habitat_delete:
-  path: admin/habitat/{id}/delete
+  path: /admin/habitat/{id}/delete
   controller: App\Controller\HabitatController::delete
   requirements:
     id: '\d+'

@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
+    {{ form_start(form, {'enctype': 'multipart/form-data'}) }}
         {{ form_widget(form) }}
         <button type="submit" class="btn btn-primary">Mettre à jour</button>
     {{ form_end(form) }}
