@@ -136,7 +136,7 @@ class ServiceController extends AbstractController
             return $this->redirectToRoute('app_service_index');
         }
 
-        return $this->render('Employee/serviceEdit/edit.html.twig', [
+        return $this->render('employee/serviceEdit/edit.html.twig', [
             'form' => $form->createView(),
             'service' => $service,
         ]);
