@@ -4,15 +4,14 @@ body {
     background-color: #f9f9f9;
     margin: 0;
     padding: 0;
-    font-family: 'Jersey 10', sans-serif;
 }
 
-ul {
+.card-avis-container {
     list-style-type: none;
     padding: 0;
 }
 
-li {
+.card-avis {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 50px;

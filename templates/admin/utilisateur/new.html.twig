@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
+    {{ form_start(form, {'enctype': 'multipart/form-data'}) }}
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="w-100" style="max-width: 500px;">
             <form method="POST" action="{{ path('app_utilisateur_new') }}">

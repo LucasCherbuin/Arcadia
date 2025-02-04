@@ -33,6 +33,24 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
         $this->getEntityManager()->flush();
     }
 
+    // App\Repository\UtilisateurRepository.php
+
+// App\Repository\UtilisateurRepository.php
+
+public function findByRole(string $role): array
+{
+    return $this->createQueryBuilder('u')
+        ->innerJoin('u.role', 'r') // Rejoins la relation 'roles' de l'entité 'Utilisateur'
+        ->andWhere('r.role = :role') // Assure-toi que 'r.role' est bien la propriété qui contient le rôle dans l'entité 'Role'
+        ->setParameter('role', $role) // Associe le paramètre à la variable $role
+        ->getQuery()
+        ->getResult();
+}
+
+
+
+
+
     //    /**
     //     * @return Utilisateur[] Returns an array of Utilisateur objects
     //     */

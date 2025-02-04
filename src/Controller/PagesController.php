@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Avis;
 use App\Form\AvisType;
 use App\Entity\Animal;
-
 use App\Form\ContactType;
 use App\Repository\AnimalRepository;
 use App\Repository\HabitatRepository;
@@ -29,11 +28,15 @@ class PagesController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
     private NormalizerInterface $normalizer;
-
     private MailerInterface $mailer;
     private PredisService $predisService;
     
-    public function __construct(EntityManagerInterface $entityManager, NormalizerInterface $normalizer, MailerInterface $mailer, PredisService $predisService)
+    public function __construct(
+        EntityManagerInterface $entityManager, 
+        NormalizerInterface $normalizer, 
+        MailerInterface $mailer, 
+        PredisService $predisService
+    )
     {
         $this->entityManager = $entityManager;
         $this->normalizer = $normalizer;
@@ -41,10 +44,9 @@ class PagesController extends AbstractController
         $this->predisService = $predisService;
     }
 
-    //page d'accueil
+    // Page d'accueil
     #[Route('/', name: 'app_accueil', methods: ['GET', 'POST'])]
     public function accueil(
-        EntityManagerInterface $entityManager,
         AnimalRepository $animalRepository,
         HabitatRepository $habitatRepository,
         ServiceRepository $serviceRepository,
@@ -83,7 +85,7 @@ class PagesController extends AbstractController
             'id' => $avis->getId(),
             'pseudo' => $avis->getPseudo(),
             'commentaire' => $avis->getCommentaire(),
-            'is_visible' => $avis->getisVisible(),
+            'is_visible' => $avis->getIsVisible(),
         ], array_filter($avis, fn($avis) => $avis->getIsVisible() === true));
 
         // Gestion du formulaire d'avis
@@ -117,8 +119,7 @@ class PagesController extends AbstractController
         ]);
     }
 
-    //page visiteur sur les habitats disponibles
-
+    // Page des habitats pour les visiteurs
     #[Route('/habitatVisiteur', name: 'app_habitat_visiteur', methods: ['GET'])]
     public function habitatVisiteur(HabitatRepository $habitatRepository, AnimalRepository $animalRepository): Response
     {
@@ -168,8 +169,7 @@ class PagesController extends AbstractController
         ]);
     }
 
-    //Animaux résident dans l'habitat
-
+    // Page des animaux dans un habitat spécifique
     #[Route('/habitatVisiteur/{id}/animal', name: 'app_animal_visiteur', methods: ['GET'])]
     public function animalVisiteur(
         AnimalRepository $animalRepository,
@@ -224,8 +224,7 @@ class PagesController extends AbstractController
         ]);
     }
 
-    //incrémnentation d'un animal pour le dashboard du nombre de consultations
-
+    // Incrémentation du nombre de clics pour le dashboard
     #[Route('/animal/click/{id}', name: 'animal_click', methods: ['POST'])]
     public function incrementClick(Animal $animal): JsonResponse
     {
@@ -234,15 +233,10 @@ class PagesController extends AbstractController
         // Utilisez le service Predis pour incrémenter le compteur de clics dans Redis
         $clicks = $this->predisService->incrementClick($key);
 
-        // Mettre à jour le nombre de clics dans la base de données (si nécessaire)
-        // $animal->setClickCount($clicks);
-        // $this->entityManager->flush();
-
         return new JsonResponse(['clicks' => $clicks]);
     }
 
-
-    // page des services
+    // Page des services pour les visiteurs
     #[Route('/serviceVisiteur', name: 'app_service_visiteur', methods: ['GET'])]
     public function serviceVisiteur(ServiceRepository $serviceRepository): Response
     {
@@ -259,40 +253,40 @@ class PagesController extends AbstractController
         ]);
     }
 
-    //formulaire de demande de contact
-    
-    #[Route('/contact', name: 'app_contact', methods: ['GET', 'POST'])]
-    public function contact(Request $request, MailerService $mailerService): Response
-    {
+    // Formulaire de demande de contact
+    #[Route('/contact', name: 'app_contact')]
+    public function contact(
+        Request $request,
+        MailerService $mailerService,
+        UtilisateurRepository $utilisateurRepository
+    ): Response {
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+            $senderEmail = (string) $data['email'];
 
-            try {
-                $mailerService->sendEmail(
-                    $data['email'],
-                    'arcadiazoo@outlook.fr',
-                    $data['Titre'],
-                    textBody: $data['votre_demande']
-                );
+            // Récupération des employés ayant le rôle "ROLE_EMPLOYEE"
+            $employees = $utilisateurRepository->findByRole('ROLE_EMPLOYEE');
 
-                $mailerService->sendEmail(
-                    'arcadiazoo@outlook.fr',
-                    $data['email'],
-                    'Confirmation de votre demande de contact',
-                    htmlBody: "<p>Madame, Monsieur,</p>
-                            <p>Votre demande concernant : <strong>{$data['Titre']}</strong> a bien été envoyée.</p>
-                            <p>Nous vous remercions de nous avoir contacté. Notre équipe reviendra vers vous dès que possible.</p>
-                            <p>Cordialement,<br>L'équipe du Zoo d'Arcadia</p>"
-                );
+            // Extraction des emails des employés
+            $employeeEmails = array_map(fn($user) => $user->getEmail(), $employees);
 
-                $this->addFlash('success', 'Votre demande a été envoyée avec succès.');
-            } catch (\Exception $e) {
-                $this->addFlash('error', 'Une erreur est survenue lors de l\'envoi de votre demande.');
+            if (empty($employeeEmails)) {
+                $this->addFlash('warning', 'Aucun employé n’est disponible pour recevoir votre message.');
+                return $this->redirectToRoute('app_contact');
             }
 
+            // Envoi de l'email
+            $mailerService->sendEmail(
+                $senderEmail,
+                implode(',', $employeeEmails), // Convertir le tableau en string
+                (string) $data['Titre'],
+                (string) $data['votre_demande']
+            );
+
+            $this->addFlash('success', 'Votre message a bien été envoyé aux employés.');
             return $this->redirectToRoute('app_contact');
         }
 

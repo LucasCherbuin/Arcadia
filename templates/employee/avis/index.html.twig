@@ -16,9 +16,9 @@
 {% endblock %}
 
 {% block body %}
-    <ul>
+    <ul class="card-avis-container">
         {% for avis in avisList %}
-            <li>
+            <li class="card-avis">
                 <p class="pseudo"><strong>Pseudo :</strong> {{ avis.pseudo }}</p>
                 <p class="commentaire"><strong>Commentaire :</strong> {{ avis.commentaire }}</p>
                 <div class="validation">

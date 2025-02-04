@@ -60,10 +60,10 @@ public function new(Request $request, UserPasswordHasherInterface $passwordHashe
         $emailPersonnel = $form->get('emailPersonnel')->getData();
         try {
             $mailerService->sendEmail(
-                'arcadiazoo@outlook.fr',
+                'admin@arcadia.fr',
                 $emailPersonnel,
                 'Votre compte Arcadia Zoo est prêt !',
-                '<p>Bonjour,</p><p>Votre compte sur Arcadia Zoo est maintenant prêt. Vous pouvez vous connecter avec l\'email associé à votre compte.</p>'
+                '<p>Bonjour,</p><p>Votre compte sur Arcadia Zoo est maintenant prêt et sera nomé <strong>{$form->getEmail()}</strong>.</p> . Vous pouvez vous connecter avec l\'email associé à votre compte.</p>'
             );
         } catch (\Exception $e) {
             $this->addFlash('error', 'Une erreur est survenue lors de l\'envoi de l\'email de confirmation.');

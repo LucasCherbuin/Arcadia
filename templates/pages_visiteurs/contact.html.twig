@@ -15,8 +15,7 @@
 {% endblock %}
 
 {% block body %}
-
-            <form method="POST">
+        {{ form_start(form, {'enctype': 'multipart/form-data'}) }}
                 <div class="form-floating mb-3">
                     {{ form_start(form) }}
                 </div>
@@ -31,8 +30,7 @@
                 </div>
                 {{ form_rest(form) }}
                 <button type="submit" class="btn btn-primary w-100">Envoyer</button>
-                {{ form_end(form) }}
-            </form>
+        {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}
