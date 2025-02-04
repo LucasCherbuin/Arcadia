@@ -162,7 +162,7 @@ app_employeeRepas_new:
 
 # Routes pour les habitats
 app_habitat_index:
-  path: /habitat
+  path: admin/habitat
   controller: App\Controller\HabitatController::index
   methods: [GET]
 
