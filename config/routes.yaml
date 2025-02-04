@@ -14,7 +14,6 @@ app_contact:
   controller: App\Controller\PagesController::contact
   methods: [GET, POST]
 
-
 # Routes pour les visiteurs
 app_habitat_visiteur:
   path: /habitatVisiteur
@@ -117,12 +116,6 @@ app_avis_index:
   controller: App\Controller\AvisController::index
   methods: [GET]
 
-app_avis_show:
-  path: /avis/{id}
-  controller: App\Controller\AvisController::show
-  requirements:
-    id: '\d+'
-  methods: [GET]
 
 app_avis_new:
   path: /avis/new
@@ -162,7 +155,7 @@ app_employeeRepas_new:
 
 # Routes pour les habitats
 app_habitat_index:
-  path: /admin/habitat
+  path: admin/habitat
   controller: App\Controller\HabitatController::index
   methods: [GET]
 

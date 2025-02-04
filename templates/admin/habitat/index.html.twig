@@ -25,7 +25,7 @@
     <div class="cards-container">
         {% for habitat in habitats %}
             <div class="card">
-                <img src="{{ ('uploads/habitats/' ~ habitat.image.path) }}" alt="Image de {{ habitat.nom }}">
+                <img src="{{ ('/uploads/habitats/' ~ habitat.image.path) }}" alt="Image de {{ habitat.nom }}">
                 <div class="card-info">
                     <span>Nom : {{ habitat.nom }}</span>
                 </div>

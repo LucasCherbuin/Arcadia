@@ -105,7 +105,7 @@ public function edit(Request $request, Service $service, EntityManagerInterface 
             $oldImage = $service->getImage();
             if ($oldImage) {
                 $imagePath = $oldImage->getPath();
-                $fullPath = $this->getParameter('uploads_directory') . '/' . $imagePath;
+                $fullPath = $this->getParameter('services_images_directory') . '/' . $imagePath;
 
                 // Vérifier si l'image existe et la supprimer du dossier
                 if (file_exists($fullPath)) {
@@ -161,7 +161,7 @@ public function edit(Request $request, Service $service, EntityManagerInterface 
                 $oldImage = $service->getImage();
                 if ($oldImage) {
                     $imagePath = $oldImage->getPath();
-                    $fullPath = $this->getParameter('uploads_directory') . '/' . $imagePath;
+                    $fullPath = $this->getParameter('services_images_directory') . '/' . $imagePath;
 
                     // Vérifier si l'image existe et la supprimer du dossier
                     if (file_exists($fullPath)) {
@@ -192,7 +192,7 @@ public function edit(Request $request, Service $service, EntityManagerInterface 
             $entityManager->flush();
 
             $this->addFlash('success', 'Service modifié avec succès !');
-            return $this->redirectToRoute('app_service_index');
+            return $this->redirectToRoute('app_serviceEmployee_index');
         }
 
         return $this->render('employee/serviceEdit/edit.html.twig', [

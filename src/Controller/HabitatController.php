@@ -17,7 +17,7 @@ use App\Service\ImageUploadService;
 class HabitatController extends AbstractController
 {
     // Index des habitats disponibles
-    #[Route('/', name: 'app_habitat_index', methods: ['GET'])]
+    #[Route('', name: 'app_habitat_index', methods: ['GET'])]
     public function index(HabitatRepository $habitatRepository): Response
     {
         $habitats = $habitatRepository->findAll();
@@ -82,22 +82,39 @@ class HabitatController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Vérification de l'image modifiée
             $imageFile = $form->get('image')->getData();
 
-            // Si un nouveau fichier est téléchargé
             if ($imageFile) {
-                // Définir le type d'upload, par exemple 'habitats'
-                $type = 'habitats';
-                
-                // Utiliser le service d'upload avec les deux arguments
-                $newFilename = $imageUploadService->upload($imageFile, $type);
-                
-                // Créer ou récupérer l'entité Image
-                $image = new Image();
-                $image->setPath($newFilename);
-            
-                // Associer la nouvelle image à l'habitat
-                $habitat->setImage($image);
+                // Supprimer l'ancienne image si elle existe
+                $oldImage = $habitat->getImage();
+                if ($oldImage) {
+                    $imagePath = $oldImage->getPath();
+                    $fullPath = $this->getParameter('habitats_images_directory') . '/' . $imagePath;
+    
+                    // Vérifier si l'image existe et la supprimer du dossier
+                    if (file_exists($fullPath)) {
+                        unlink($fullPath);
+                    }
+    
+                    // Supprimer l'entité Image de la base de données
+                    $entityManager->remove($oldImage);
+                }
+    
+                try {
+                    // Télécharger la nouvelle image et récupérer le chemin relatif
+                    $filePath = $imageUploadService->upload($imageFile, 'habitats');
+                    
+                    // Créer une nouvelle entité Image
+                    $image = new Image();
+                    $image->setPath($filePath);
+                    $entityManager->persist($image);
+                    
+                    // Associer la nouvelle image au service
+                    $habitat->setImage($image);
+                } catch (\RuntimeException $e) {
+                    $this->addFlash('error', 'Erreur lors du téléchargement de l\'image');
+                }
             }
             
 

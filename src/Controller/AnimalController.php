@@ -110,7 +110,7 @@ class AnimalController extends AbstractController
                 $oldImage = $animal->getImage();
                 if ($oldImage) {
                     $imagePath = $oldImage->getPath();
-                    $fullPath = $this->getParameter('uploads_directory') . '/' . $imagePath;
+                    $fullPath = $this->getParameter('animaux_images_directory') . '/' . $imagePath;
 
                     // Vérifier si l'image existe et la supprimer du dossier
                     if (file_exists($fullPath)) {
