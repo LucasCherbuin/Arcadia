@@ -14,13 +14,9 @@
 
 {% block body %}
 
-<div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="w-100" style="max-width: 500px;">
-    {{ form_start(form) }}
+{{ form_start(form) }}
         {{ form_widget(form) }}
         <button type="submit" class="btn btn-primary">Mettre à jour</button>
-    {{ form_end(form) }}
-        <a href="{{ path('app_service_index') }}" class="btn btn-secondary">Retour</a>
-        <div>
-</div>
+{{ form_end(form) }}
+
 {% endblock %}

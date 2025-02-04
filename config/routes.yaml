@@ -65,12 +65,6 @@ app_animal_index:
   controller: App\Controller\AnimalController::index
   methods: [GET]
 
-app_animal_show:
-  path: /admin/animal/{id}
-  controller: App\Controller\AnimalController::show
-  requirements:
-    id: '\d+'
-  methods: [GET]
 
 app_animal_new:
   path: /admin/animal/new
@@ -97,12 +91,6 @@ app_horaire_index:
   controller: App\Controller\HoraireController::index
   methods: [GET]
 
-app_horaire_show:
-  path: /admin/horaire/{id}
-  controller: App\Controller\HoraireController::show
-  requirements:
-    id: '\d+'
-  methods: [GET]
 
 app_horaire_new:
   path: /admin/horaire/new
@@ -210,12 +198,6 @@ app_service_index:
   controller: App\Controller\ServiceController::index
   methods: [GET]
 
-app_service_show:
-  path: admin/service/{id}
-  controller: App\Controller\ServiceController::show
-  requirements:
-    id: '\d+'
-  methods: [GET]
 
 app_service_new:
   path: admin/service/new
@@ -223,7 +205,7 @@ app_service_new:
   methods: [GET, POST]
 
 app_service_edit:
-  path: /service/{id}/edit
+  path: admin/service/{id}/edit
   controller: App\Controller\ServiceController::edit
   requirements:
     id: '\d+'
@@ -242,12 +224,6 @@ app_utilisateur_index:
   controller: App\Controller\UtilisateurController::index
   methods: [GET]
 
-app_utilisateur_show:
-  path: admin/utilisateur/{id}
-  controller: App\Controller\UtilisateurController::show
-  requirements:
-    id: '\d+'
-  methods: [GET]
 
 app_utilisateur_new:
   path: admin/utilisateur/new
@@ -270,12 +246,6 @@ app_utilisateur_delete:
 
   # Routes pour les employés
 
-app_veterinaire_show:
-  path: /veterinaire/RapportVeterinaire/{id}
-  controller: App\Controller\VeterinaireController::show
-  requirements:
-    id: '\d+'
-  methods: [GET]
 
 app_veterinaire_new:
   path: /veterinaire/RapportVeterinaire/new
