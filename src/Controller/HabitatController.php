@@ -133,16 +133,32 @@ class HabitatController extends AbstractController
     }
 
     // Suppression d'un habitat
+
     #[Route('/{id}/delete', name: 'app_habitat_delete', methods: ['POST'])]
-    public function delete(Request $request, Habitat $habitat, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $habitat->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($habitat);
-            $entityManager->flush();
+        public function delete(
+            Request $request,
+            Habitat $habitat,
+            EntityManagerInterface $entityManager,
+            ImageUploadService $imageUploadService
+        ): Response {
+            if ($this->isCsrfTokenValid('delete' . $habitat->getId(), $request->request->get('_token'))) {
+                // Récupérer le nom du fichier si l'image existe
+                $imageFile = $habitat->getImage()?->getPath(); 
 
-            $this->addFlash('success', 'Habitat supprimé avec succès.');
-        }
+                // Supprimer l'entité Habitat
+                $entityManager->remove($habitat);
+                $entityManager->flush();
 
-        return $this->redirectToRoute('app_habitat_index');
-    }
+                // Supprimer l'image physique si elle existe
+                if ($imageFile) {
+                    $imageUploadService->delete($imageFile, 'habitats');
+                }
+
+                $this->addFlash('success', 'Habitat supprimé avec succès.');
+            }
+
+            return $this->redirectToRoute('app_habitat_index');
+}
+
+
 }

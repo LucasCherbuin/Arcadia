@@ -42,4 +42,18 @@ class ImageUploadService
         // Retourner le chemin relatif pour la base de données
         return "{$fileName}";
     }
+
+    public function delete(string $fileName, string $type): void
+{
+    if (!isset($this->directories[$type])) {
+        throw new \InvalidArgumentException("Le type '$type' n'est pas valide.");
+    }
+
+    $filePath = $this->directories[$type] . '/' . $fileName;
+
+    if (file_exists($filePath)) {
+        unlink($filePath);
+    }
+}
+
 }

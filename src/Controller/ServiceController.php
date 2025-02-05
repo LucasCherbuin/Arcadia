@@ -204,11 +204,24 @@ public function edit(Request $request, Service $service, EntityManagerInterface 
 
     // Suppression d'un service
     #[Route(path: '/{id}/delete', name: 'app_service_delete', methods: ['POST'])]
-    public function delete(Request $request, Service $service): Response
-    {
+    public function delete(
+        Request $request,
+        Service $service,
+        EntityManagerInterface $entityManager,
+        ImageUploadService $imageUploadService
+    ): Response {
         if ($this->isCsrfTokenValid('delete' . $service->getId(), $request->request->get('_token'))) {
-            $this->entityManager->remove($service);
-            $this->entityManager->flush();
+            // Récupérer le nom du fichier si le service a une image associée
+            $imageName = $service->getImage()?->getPath(); // Adapte cette ligne selon ton entité Image
+
+            // Supprimer l'entité Service
+            $entityManager->remove($service);
+            $entityManager->flush();
+
+            // Supprimer l'image physique si elle existe
+            if ($imageName) {
+                $imageUploadService->delete($imageName, 'services');
+            }
 
             $this->addFlash('success', 'Service supprimé avec succès !');
         }

@@ -152,14 +152,28 @@ class AnimalController extends AbstractController
 
     //suppression de l'animal
     #[Route(path: '/{id}/delete', name: 'app_animal_delete', methods: ['POST'])]
-    public function delete(Request $request, Animal $animal, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $animal->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($animal);
-            $entityManager->flush();
-            $this->addFlash('success', 'Animal supprimé avec succès !');
-        }
+        public function delete(
+            Request $request,
+            Animal $animal,
+            EntityManagerInterface $entityManager,
+            ImageUploadService $imageUploadService
+        ): Response {
+            if ($this->isCsrfTokenValid('delete' . $animal->getId(), $request->request->get('_token'))) {
+                // Récupérer le nom du fichier si l'animal a une image associée
+                $imageFile = $animal->getImage()?->getPath(); // Adapte cette ligne selon ton entité Image
 
-        return $this->redirectToRoute('app_animal_index');
-    }
+                // Supprimer l'entité Animal
+                $entityManager->remove($animal);
+                $entityManager->flush();
+
+                // Supprimer l'image physique si elle existe
+                if ($imageFile) {
+                    $imageUploadService->delete($imageFile, 'animaux');
+                }
+
+                $this->addFlash('success', 'Animal supprimé avec succès !');
+            }
+
+            return $this->redirectToRoute('app_animal_index');
+        }
 }
