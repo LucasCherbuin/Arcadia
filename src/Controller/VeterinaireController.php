@@ -76,7 +76,7 @@ class VeterinaireController extends AbstractController
 
 
     // Ajouter un commentaire
-    #[Route('/commentaire', name: 'app_commentaire_new')]
+    #[Route('/Commentaire', name: 'app_commentaire_new')]
     public function commentaire(Request $request, EntityManagerInterface $entityManager): Response
     {
         $commentaire = new Commentaire();
@@ -116,7 +116,7 @@ class VeterinaireController extends AbstractController
             return $this->redirectToRoute('veterinaire_menu');
         }
 
-        return $this->render('veterinaire/commentaire/new.html.twig', [
+        return $this->render('veterinaire/Commentaire/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
