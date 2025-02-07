@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\AnimalRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
@@ -40,6 +42,16 @@ class Animal
     #[Groups(['animal:read'])]
     private ?Veterinaire $veterinaire = null;
 
+    #[ORM\ManyToMany(targetEntity: Employee::class, mappedBy: 'animals')]
+    #[Groups(['animal:read'])]
+    private Collection $employees;
+
+    public function __construct()
+    {
+        $this->employees = new ArrayCollection();
+    }
+
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -110,4 +122,12 @@ class Animal
         $this->veterinaire = $veterinaire;
         return $this;
     }
+
+    public function getEmployees(): Collection
+{
+    return $this->employees;
+}
+
+
+
 }

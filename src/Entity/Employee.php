@@ -20,6 +20,7 @@ class Employee
     #[ORM\ManyToMany(targetEntity: Animal::class, inversedBy: 'employees')]
     private Collection $animals;
 
+
     #[ORM\Column(length: 50)]
     #[Groups(['employee:read'])]
     private ?string $nourriture = null;
@@ -113,4 +114,5 @@ class Employee
 
         return $this;
     }
+
 }

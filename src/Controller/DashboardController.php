@@ -73,28 +73,50 @@ class DashboardController extends AbstractController
     //dashboard des animaux et leurs aliementaion pour le vétérinaire
 
     #[Route('/veterinaire/dashboardAnimal', name: 'app_dashboard_animal')]
-    public function dashboardAnimal(): Response
-    {
-        $animals = $this->animalRepository->findAll();
-        $employees = $this->employeeRepository->findAll();
+public function dashboardAnimal(): Response
+{
+    // Récupérer tous les animaux
+    $animals = $this->animalRepository->findAll();
 
-        $preparedAnimal = array_map(fn($animal) => [
+    // Préparer les animaux et les informations associées
+    $preparedAnimal = array_map(function($animal) {
+        // Initialiser une variable pour les informations des employés
+        $employeeInfo = [];
+
+        // Vérifier s'il y a des employés associés à cet animal
+        foreach ($animal->getEmployees() as $employee) {
+            // Vérifier si l'employé a un utilisateur
+            $utilisateurEmail = $employee->getUtilisateur() ? $employee->getUtilisateur()->getEmail() : 'Non attribué';
+
+            // Ajouter les informations de l'employé dans le tableau
+            $employeeInfo[] = [
+                'email' => $utilisateurEmail,
+                'nourriture' => $employee->getNourriture() ?? 'Non attribué',
+                'quantité' => $employee->getQuantite() ?? 'Non attribué',
+                'date' => $employee->getDate() ? $employee->getDate()->format('d/m/Y H:i') : 'Non attribué',
+            ];
+        }
+
+        // Retourner les données de l'animal avec les informations des employés
+        return [
             'prenom' => $animal->getPrenom() ?? 'Non spécifié',
-            'race' => $animal->getRace() ?? 'Non spécifiée',
-        ], $animals);
+            'etat' => $animal->getEtat() ?? 'Non spécifié',
+            'race' => $animal->getRace() ? $animal->getRace()->getLabel() : 'Non spécifiée',
+            'habitat' => $animal->getHabitat() ? $animal->getHabitat()->getNom() : 'Non spécifié',
+            'employees' => $employeeInfo, // Les informations des employés
+        ];
+    }, $animals);
 
-        $preparedEmployee = array_map(fn($employee) => [
-            'nourriture' => $employee->getNourriture() ?? 'Non spécifiée',
-            'quantite' => $employee->getQuantite() ?? 0,
-            'date' => $employee->getDate()?->format('d/m/Y') ?? 'Non définie',
-            'utilisateur' => $employee->getUtilisateur() ?? 'non spécifié',
-        ], $employees);
+    return $this->render('veterinaire/dashboardAnimal.html.twig', [
+        'preparedAnimal' => $preparedAnimal,
+    ]);
+}
 
-        return $this->render('veterinaire/dashboardAnimal.html.twig', [
-            'preparedAnimal' => $preparedAnimal,
-            'preparedEmployee' => $preparedEmployee,
-        ]);
-    }
+    
+
+
+    
+
 
     // Dashboard pour les rapports du vétérianire pour l'admin
     #[Route('/admin/compteRendu', name: 'app_compte_rendu_veterinaire')]
