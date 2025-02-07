@@ -36,7 +36,7 @@ class EmployeeType extends AbstractType
             ->add('quantite', NumberType::class, [
                 'label' => 'Quantité',
                 'attr' => [
-                    'placeholder' => 'Entrez la quantité',
+                    'placeholder' => 'Entrez la quantité en gramme',
                     'class' => 'form-control form-floating'  // Ajout de la classe form-floating
                 ]
             ])
