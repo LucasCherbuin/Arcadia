@@ -6,7 +6,7 @@ use App\Entity\Animal;
 use App\Entity\Veterinaire;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Utilisateur;
@@ -21,8 +21,8 @@ class VeterinaireType extends AbstractType
                 'widget' => 'single_text',
                 'attr' => ['class' => 'form-control form-floating'],
             ])
-            ->add('detail', TextareaType::class, [
-                'label' => 'Détail du rapport',
+            ->add('detail', TextType::class, [
+                'label' => 'Etat de santé',
                 'attr' => ['class' => 'form-control form-floating'],
             ])
             ->add('animal', EntityType::class, [
