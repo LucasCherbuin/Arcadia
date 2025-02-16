@@ -5,167 +5,193 @@ Site web servant de vitrine pour le zoo Arcadia, offrant également des espaces 
 ### Table des matières ###
 
 1. Aperçu du projet
-
 2. Mise en place de l'environnement de travail
-
 3. Technologies utilisées
-
 4. Installation
-
+    - Installation locale
+    - Installation avec Docker
 5. Utilisation
-
 6. Structure du projet
-
 7. Contributions
-
 8. Auteur
 
 # 1. Aperçu du projet #
 
 Le site web permet :
 
-Aux visiteurs : de consulter les animaux et habitats du zoo, et d'interagir avec le personnel via un formulaire de contact ou en laissant un avis.
+**Aux visiteurs** : de consulter les animaux et habitats du zoo, et d'interagir avec le personnel via un formulaire de contact ou en laissant un avis.
 
-Aux utilisateurs connectés (administrateurs, employés et vétérinaires) : de gérer leurs tâches spécifiques via des espaces dédiés.
+**Aux utilisateurs connectés (administrateurs, employés et vétérinaires)** : de gérer leurs tâches spécifiques via des espaces dédiés.
 
-Rôles des utilisateurs
+### Rôles des utilisateurs ###
 
-Admin : Gère les utilisateurs et les entités (CRUD), consulte des rapports vétérinaires et visualise des statistiques via un tableau de bord.
-
-Employé : Valide les avis des visiteurs, enregistre les repas des animaux et gère les services du zoo.
-
-Vétérinaire : Remplit des rapports sur les animaux, évalue les habitats, et consulte les données d'alimentation saisies par les employés.
+- **Admin** : Gère les utilisateurs et les entités (CRUD), consulte des rapports vétérinaires et visualise des statistiques via un tableau de bord.
+- **Employé** : Valide les avis des visiteurs, enregistre les repas des animaux et gère les services du zoo.
+- **Vétérinaire** : Remplit des rapports sur les animaux, évalue les habitats et consulte les données d'alimentation saisies par les employés.
 
 # 2. Mise en place de l'environnement de travail #
 
 L'environnement de travail a été configuré en tenant compte des besoins de développement local et collaboratif :
 
-XAMPP : Serveur local pour exécuter PHP et MySQL.
-
-Symfony CLI : Pour gérer et démarrer facilement le serveur Symfony.
-
-Composer : Pour la gestion des dépendances PHP.
-
-Node.js et npm : Pour inclure Bootstrap et gérer les dépendances front-end.
-
-Git : Pour la gestion du versionnement et la collaboration via GitHub.
-
-Visual Studio Code : IDE choisi pour sa flexibilité, ses extensions dédiées au développement PHP et front-end.
+- **XAMPP** : Serveur local pour exécuter PHP et MySQL.
+- **Symfony CLI** : Pour gérer et démarrer facilement le serveur Symfony.
+- **Composer** : Pour la gestion des dépendances PHP.
+- **Node.js et npm** : Pour inclure Bootstrap et gérer les dépendances front-end.
+- **Git** : Pour la gestion du versionnement et la collaboration via GitHub.
+- **Visual Studio Code** : IDE choisi pour sa flexibilité, ses extensions dédiées au développement PHP et front-end.
 
 Ces outils assurent un workflow fluide, de la configuration initiale à la maintenance du projet.
 
 # 3. Technologies utilisées #
 
-## Front-end ##
-Bootstrap :
-Framework open-source sous licence MIT, accessible gratuitement et compatible avec tout type de projet web. Bootstrap offre une bibliothèque de composants et de styles CSS préconçus, ce qui simplifie la création d'interfaces utilisateurs réactives et modernes. Il permet de gagner du temps dans le développement tout en garantissant une expérience utilisateur uniforme sur tous les appareils.
+### Front-end ###
+- **Bootstrap** : Framework CSS facilitant la conception d'interfaces réactives.
+- **CSS et JavaScript natifs** : Personnalisation supplémentaire des styles et interactivité.
 
-CSS et JavaScript natifs :
-Langages standard pris en charge par tous les navigateurs modernes sans restrictions de licence. Ces langages sont utilisés pour personnaliser d'avantage les styles et l'interactivité, complétant les fonctionnalités offertes par Bootstrap pour répondre à des besoins spécifiques.
+### Back-end ###
+- **Symfony 7.1 (PHP)** : Framework robuste pour la gestion du projet.
+- **Composer** : Gestionnaire de dépendances PHP.
 
-## Back-end ##
-Symfony 7.1 (PHP) :
-Framework open-source sous licence MIT, bien adapté aux projets commerciaux et non commerciaux. Symfony fournit une structure solide pour le développement back-end, avec des outils intégrés pour la sécurité, les bases de données, et la gestion des API. Il est également largement documenté et soutenu par une communauté active, ce qui facilite la résolution de problèmes.
+### Base de données ###
+- **MySQL** : Gestion des données relationnelles.
+- **MongoDB** : Stockage des consultations et données non relationnelles.
 
-Composer :
-Conditions d'utilisation : Gestionnaire de dépendances open-source pour PHP, sous licence MIT.
-Pourquoi ce choix : Composer simplifie l'installation et la mise à jour des bibliothèques nécessaires, garantissant ainsi la compatibilité et la cohérence des dépendances tout au long du projet.
+### Outils de développement ###
+- **XAMPP** : Environnement de serveur local.
+- **Git** : Gestion du code source.
+- **Figma** et **PlantUML** : Outils de conception et de documentation.
 
-Base de données
+# 4. Installation #
 
-MySQL :
+## **Installation locale** ##
 
-Système de gestion de bases de données open-source sous licence GPL (pour les usages communautaires) ou commerciale. MySQL est performant, fiable, et bien intégré avec Symfony. Il permet de gérer efficacement les relations complexes entre les données tout en offrant une compatibilité avec des outils tels que phpMyAdmin pour une administration simplifiée.
+1. **Cloner le projet** :
+   ```bash
+   git clone https://github.com/votre-repo/arcadia-zoo.git
+   cd arcadia-zoo
+   ```
 
-## Outils de développement ##
+2. **Installer les dépendances** :
+   ```bash
+   composer install
+   npm install
+   ```
 
-XAMPP :
+3. **Configurer la base de données (MySQL)** :
+   Modifier le fichier `.env` :
+   ```env
+   DATABASE_URL="mysql://root:root@127.0.0.1:3306/arcadia"
+   ```
+   Ensuite, exécuter :
+   ```bash
+   php bin/console doctrine:database:create
+   php bin/console doctrine:migrations:migrate
+   ```
 
-Conditions d'utilisation : Distribution gratuite comprenant Apache, PHP, et MySQL.
-Pourquoi ce choix : XAMPP fournit un environnement de serveur local facile à configurer, permettant de tester le site web en local avant son déploiement en production.
+4. **Démarrer le serveur** :
+   ```bash
+   symfony server:start
+   ```
 
-Git :
-Système de gestion de version open-source sous licence GPL.
-Git permet un suivi précis des modifications du code, favorise la collaboration entre développeurs, et facilite le déploiement grâce à une intégration fluide avec des plateformes comme GitHub.
+## **Installation avec Docker** ##
 
-## Outils de maquettage et conception ##
-Figma :
-Conditions d'utilisation : Application en ligne gratuite pour des projets de petite envergure, avec des abonnements payants pour des fonctionnalités avancées.
-Figma permet de créer des maquettes interactives, offrant une visualisation claire du design avant le développement, et favorisant la collaboration avec les parties prenantes.
+1. **Créer le fichier `docker-compose.yml`** :
 
-PlantUML :
-Outil open-source pour la création de diagrammes, compatible avec une utilisation locale ou en ligne. PlantUML est utilisé pour concevoir des diagrammes de séquence et d'architecture, facilitant ainsi la planification et la documentation des flux de données dans le projet.
+   ```yaml
+   version: '3.8'
+   
+   services:
+     app:
+       build:
+         context: .
+         dockerfile: Dockerfile
+       container_name: symfony_app
+       restart: unless-stopped
+       working_dir: /var/www
+       volumes:
+         - .:/var/www
+       depends_on:
+         - mysql
+         - mongodb
+       environment:
+         DATABASE_URL: mysql://root:root@mysql:3306/symfony?serverVersion=8.0
+         MONGODB_URL: mongodb://mongodb:27017
+       ports:
+         - "8000:8000"
 
-Configurer les variables d'environnement :
+     mysql:
+       image: mysql:8.0
+       container_name: symfony_mysql
+       restart: unless-stopped
+       environment:
+         MYSQL_ROOT_PASSWORD: root
+         MYSQL_DATABASE: symfony
+       ports:
+         - "3307:3306"
+       volumes:
+         - mysql_data:/var/lib/mysql
 
-Modifier le fichier .env de Symfony avec l'URL de la base de données locale.
+     mongodb:
+       image: mongo:6.0
+       container_name: symfony_mongodb
+       restart: unless-stopped
+       ports:
+         - "27017:27017"
+       volumes:
+         - mongodb_data:/data/db
+   
+   volumes:
+     mysql_data:
+     mongodb_data:
+   ```
 
-Lancer le serveur :
+2. **Lancer Docker** :
+   ```bash
+   docker-compose up -d
+   ```
 
-symfony server:start
+3. **Vérifier les conteneurs** :
+   ```bash
+   docker ps
+   ```
 
 # 5. Utilisation #
 
-En tant que visiteur
-
-Parcourir les pages vitrines du site.
-
-Soumettre un avis ou une demande de contact.
-
-En tant qu'administrateur
-
-Gérer les utilisateurs, les animaux, les habitats, les services et les horaires.
-
-Consulter les statistiques et rapports vétérinaires.
-
-En tant qu'employé
-
-Valider les avis des visiteurs.
-
-Enregistrer les repas des animaux.
-
-Modifier les services.
-
-En tant que vétérinaire
-
-Remplir des rapports sur les animaux.
-
-Évaluer l'état des habitats.
-
-Consulter les données d'alimentation.
+- **Visiteur** : Parcourir le site, soumettre un avis ou une demande de contact.
+- **Administrateur** : Gérer les utilisateurs, les animaux, les habitats et les services.
+- **Employé** : Valider les avis, enregistrer les repas et modifier les services.
+- **Vétérinaire** : Remplir des rapports, évaluer les habitats et consulter les données d'alimentation.
 
 # 6. Structure du projet #
 
+```
 Arcadia/
 │
 ├── config/           # Configuration des routes et services
 ├── src/              # Code source principal
 │   ├── Controller/   # Contrôleurs Symfony
 │   ├── Entity/       # Entités Doctrine
+│   ├── Document/     # Documents MongoDB
 │   ├── Form/         # Formulaires Symfony
 │   ├── Repository/   # Requêtes spécifiques à la base de données
-│   └── Twig/         # Templates Twig
+│   └── Twig/         # Extensions Twig
 ├── templates/        # Vues front-end
-│   ├── admin/        # Pages administratives
-│   ├── employee/     # Pages employé
-│   ├── veterinaire/  # Pages vétérinaire
-│   └── security/     # Pages de connexion et sécurité
-└── public/           # Fichiers accessibles publiquement
+├── public/           # Fichiers accessibles publiquement
+```
 
 # 7. Contributions #
 
 Pour contribuer :
 
-Forkez le dépôt.
-
-Clonez le fork localement.
-
-Créez une nouvelle branche pour vos modifications :
-
-git checkout -b feature/nomDeLaFonctionnalité
+1. Forker le dépôt.
+2. Cloner le fork localement.
+3. Créer une nouvelle branche :
+   ```bash
+   git checkout -b feature/nomDeLaFonctionnalité
+   ```
 
 # 8. Auteur #
 
-Lucas Cherbuin
+**Lucas Cherbuin**
 
 Contributeurs : Mentionnez-vous dans vos Pull Requests !
