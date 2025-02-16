@@ -3,6 +3,8 @@ parameters:
     habitats_images_directory: '%env(resolve:HABITATS_IMAGES_DIRECTORY)%'
     services_images_directory: '%env(resolve:SERVICES_IMAGES_DIRECTORY)%'
     consultation_json_file_path: '%kernel.project_dir%/data/consultations.json'
+    env(MONGODB_URL): ''
+    env(MONGODB_DB): ''
 
 services:
     _defaults:
@@ -38,21 +40,6 @@ services:
                 habitats: '%habitats_images_directory%'
                 services: '%services_images_directory%'
 
-    # Client Redis (avec DSN)
-    Predis\Client:
-        arguments:
-            - '%env(UPSTASH_REDIS_URL)%'
-
-    # Définition du service PredisService
-    App\Service\PredisService:
-        arguments:
-            $redis: '@Predis\Client'
-
-    # Service pour gérer les sessions Redis
-    session.handler.redis:
-        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler
-        arguments:
-            - '@Predis\Client'
 
     App\Service\MailerService:
         arguments:

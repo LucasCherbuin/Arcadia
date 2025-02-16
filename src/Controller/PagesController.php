@@ -15,7 +15,7 @@ use App\Repository\VeterinaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Mailer\MailerInterface;
-use App\Service\PredisService;
+use App\Service\MangoService;
 use App\Service\MailerService;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,19 +29,19 @@ class PagesController extends AbstractController
     private EntityManagerInterface $entityManager;
     private NormalizerInterface $normalizer;
     private MailerInterface $mailer;
-    private PredisService $predisService;
+    private MangoService $mangoService;
     
     public function __construct(
-        EntityManagerInterface $entityManager, 
-        NormalizerInterface $normalizer, 
-        MailerInterface $mailer, 
-        PredisService $predisService
+        EntityManagerInterface $entityManager,
+        NormalizerInterface $normalizer,
+        MailerInterface $mailer,
+        MangoService $mangoService
     )
     {
         $this->entityManager = $entityManager;
         $this->normalizer = $normalizer;
         $this->mailer = $mailer;
-        $this->predisService = $predisService;
+        $this->mangoService = $mangoService;
     }
 
     // Page d'accueil
@@ -175,7 +175,7 @@ class PagesController extends AbstractController
         AnimalRepository $animalRepository,
         HabitatRepository $habitatRepository,
         VeterinaireRepository $veterinaireRepository,
-        PredisService $predisService,  // Injection du service Predis
+        MangoService $mangoService,  // Injection du service Predis
         int $id
     ): Response {
         // Récupérer l'habitat par son ID
@@ -191,7 +191,7 @@ class PagesController extends AbstractController
         $animals = $animalRepository->findBy(['habitat' => $habitat]);
     
         // Préparer les données des animaux avec leurs vétérinaires et clics
-        $preparedAnimals = array_map(function ($animal) use ($veterinaireRepository, $predisService) {
+        $preparedAnimals = array_map(function ($animal) use ($veterinaireRepository, $mangoService) {
             // Récupérer les vétérinaires associés à cet animal
             $veterinaires = $veterinaireRepository->findBy(['animal' => $animal]);
     
@@ -203,7 +203,7 @@ class PagesController extends AbstractController
             ], $veterinaires);
     
             // Utiliser le service Predis pour obtenir le nombre de clics
-            $clicks = $predisService->getClick('animal:' . $animal->getId() . ':clicks');
+            $clicks = $mangoService->getClick('animal:' . $animal->getId() . ':clicks');
     
             return [
                 'id' => $animal->getId(),
@@ -231,7 +231,7 @@ class PagesController extends AbstractController
         $key = 'animal_click_' . $animal->getId(); // Génère une clé unique pour l'animal
 
         // Utilisez le service Predis pour incrémenter le compteur de clics dans Redis
-        $clicks = $this->predisService->incrementClick($key);
+        $clicks = $this->mangoService->incrementClick($key);
 
         return new JsonResponse(['clicks' => $clicks]);
     }

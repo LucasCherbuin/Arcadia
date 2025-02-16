@@ -8,7 +8,7 @@ use App\Repository\EmployeeRepository;
 use App\Repository\ConsultationRepository;
 use App\Repository\VeterinaireRepository;
 use App\Repository\CommentaireRepository;
-use App\Service\PredisService;
+use App\Service\MangoService;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -19,7 +19,7 @@ class DashboardControllerTest extends WebTestCase
     private $consultationRepositoryMock;
     private $veterinaireRepositoryMock;
     private $commentaireRepositoryMock;
-    private $predisServiceMock;
+    private $mangoServiceMock;
 
     protected function setUp(): void
     {
@@ -28,7 +28,7 @@ class DashboardControllerTest extends WebTestCase
         $this->consultationRepositoryMock = $this->createMock(ConsultationRepository::class);
         $this->veterinaireRepositoryMock = $this->createMock(VeterinaireRepository::class);
         $this->commentaireRepositoryMock = $this->createMock(CommentaireRepository::class);
-        $this->predisServiceMock = $this->createMock(PredisService::class);
+        $this->mangoServiceMock = $this->createMock(MangoService::class);
     }
 
     public function testConsultation(): void
@@ -38,7 +38,7 @@ class DashboardControllerTest extends WebTestCase
             ->method('findAll')
             ->willReturn([$animal]);
 
-        $this->predisServiceMock
+        $this->mangoServiceMock
             ->method('getClick')
             ->with('animal:click:1')
             ->willReturn(5);
@@ -49,7 +49,7 @@ class DashboardControllerTest extends WebTestCase
             $this->animalRepositoryMock,
             $this->employeeRepositoryMock,
             $this->commentaireRepositoryMock,
-            $this->predisServiceMock
+            $this->mangoServiceMock
         );
 
         $response = $controller->consultation();
@@ -82,7 +82,7 @@ class DashboardControllerTest extends WebTestCase
             $this->animalRepositoryMock,
             $this->employeeRepositoryMock,
             $this->commentaireRepositoryMock,
-            $this->predisServiceMock
+            $this->mangoServiceMock
         );
 
         $response = $controller->dashboardAnimal();
@@ -122,7 +122,7 @@ class DashboardControllerTest extends WebTestCase
             $this->animalRepositoryMock,
             $this->employeeRepositoryMock,
             $this->commentaireRepositoryMock,
-            $this->predisServiceMock
+            $this->mangoServiceMock
         );
 
         $response = $controller->compteRendu();

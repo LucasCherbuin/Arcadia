@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use App\Service\PredisService;
+use App\Service\MangoService;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\AnimalRepository;
 use App\Repository\EmployeeRepository;
@@ -20,7 +20,7 @@ class DashboardController extends AbstractController
     private AnimalRepository $animalRepository;
     private EmployeeRepository $employeeRepository;
     private CommentaireRepository $commentaireRepository;
-    private PredisService $predisService;
+    private MangoService $mangoService;
 
     public function __construct(
         VeterinaireRepository $veterinaireRepository,
@@ -28,14 +28,14 @@ class DashboardController extends AbstractController
         AnimalRepository $animalRepository,
         EmployeeRepository $employeeRepository,
         CommentaireRepository $commentaireRepository,
-        PredisService $predisService
+        MangoService $mangoService
     ) {
         $this->veterinaireRepository = $veterinaireRepository;
         $this->consultationRepository = $consultationRepository;
         $this->animalRepository = $animalRepository;
         $this->employeeRepository = $employeeRepository;
         $this->commentaireRepository = $commentaireRepository;
-        $this->predisService = $predisService;
+        $this->mangoService = $mangoService;
     }
 
 
@@ -57,7 +57,7 @@ class DashboardController extends AbstractController
 
         foreach ($animals as $animal) {
             $key = "animal:click:{$animal->getId()}";
-            $clicks = is_numeric($this->predisService->getClick($key)) ? $this->predisService->getClick($key) : 0;
+            $clicks = is_numeric($this->mangoService->getClick($key)) ? $this->mangoService->getClick($key) : 0;
 
             $consultations[] = [
                 'id' => $animal->getId(),
